@@ -1,8 +1,6 @@
-DROP TABLE IF EXISTS apply;
-DROP TABLE IF EXISTS company;
-DROP TABLE IF EXISTS student;
+/*
 
-CREATE TABLE IF NOT EXISTS student(
+    CREATE TABLE IF NOT EXISTS student(
     sid CHAR(6) NOT NULL,
     sname VARCHAR(50) character set utf8, -- for inserting ş I added character set utf 8
     bdate DATE,
@@ -52,3 +50,22 @@ INSERT INTO apply VALUES ('S101', 'C101'),
                          ('S103', 'C107'),
                          ('S104', 'C102'),
                          ('S104', 'C107');
+
+*/
+
+DROP TABLE IF EXISTS apply;
+DROP TABLE IF EXISTS company;
+DROP TABLE IF EXISTS student;
+
+DROP TABLE IF EXISTS Language;
+
+CREATE TABLE IF NOT EXISTS  Language(
+    languageName VARCHAR(50)
+);
+
+INSERT INTO Language VALUES
+('German'),
+('French'),
+('Turkish');
+
+
