@@ -5,7 +5,7 @@ const router = express.Router()
 const nativeSpeaker = require("./routes/nativeSpeaker")
 const learner = require("./routes/learner")
 const teacher = require("./routes/teacher")
-const connection = require("./db")
+//const connection = require("./db")
 
 
 const port = 3000
