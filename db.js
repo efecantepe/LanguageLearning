@@ -1,16 +1,19 @@
 
-const mysql= require('mysql')
-const port = 3307
-const connection = mysql.createConnection({
+const {Client} = require('pg')
+const port = 6543
+const connection = new Client({
 
     host: 'localhost',
     port: port,
-    user: "efe",
-    password: "password",
-    database: "project"
+    user: "postgres",
+    password: "supersecretpassword",
+    database: "app"
 
 })
 
-connection.connect()
+connection.connect(function(err) {
+    if(err) throw err;
+    console.log("Connected")
+})
 
 module.exports = connection
