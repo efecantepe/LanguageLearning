@@ -23,7 +23,7 @@ app.get('/', (req, res) => {
 async function doWork(){
 
     const res = await connection.query('Select * from language')
-    console.log(res)
+    console.log(res.rows)
 }
 
 doWork()
