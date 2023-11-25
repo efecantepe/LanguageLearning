@@ -3,9 +3,9 @@ let router = express.Router()
 
 router
     .route("/addRequest")
-    .post((req, res) =>{
+    .get((req, res) =>{
 
-        console.log("reqeusts learner ")
+        res.send("my calssjakhdas ")
 
 
     })

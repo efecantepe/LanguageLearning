@@ -10,15 +10,7 @@ const connection = require("./db")
 
 const port = 3000
 
-
-//console.log(connection.query)
-
-
-
 app.use(express.json())
-
-
-
 
 app.use("/nativeSpeaker", nativeSpeaker)
 app.use("/learner", learner)

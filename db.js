@@ -1,6 +1,6 @@
 
 const mysql= require('mysql')
-const port = 3000
+const port = 3307
 const connection = mysql.createConnection({
 
     host: 'localhost',
