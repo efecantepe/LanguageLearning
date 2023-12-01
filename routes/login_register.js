@@ -4,6 +4,7 @@ const express = require("express")
 const crypto = require('crypto')
 const connection = require('./../db')
 const { register } = require("module")
+const { log } = require("console")
 let router = express.Router()
 
 router
@@ -43,6 +44,19 @@ router
 
         res.sendStatus(200)
 
+    })
+
+router
+    .route("/login")
+    .get((req, res) => {
+        login(req.query).then( (respond) => {
+
+            if(respond === -1){
+                res.send("Something went wrong")
+            }
+
+            res.send(respond)
+        })
     })
 
 
@@ -98,4 +112,24 @@ function createHashedId(){
 
 module.exports = router
 
+async function login(user){
 
+    console.log(user)
+
+    try{
+
+    let sqlQuery = `SELECT * FROM ${user.user_type} WHERE username = ($1) AND "password" = ($2)`
+    let values = [user.username, user.password]
+
+    let respond = await connection.query(sqlQuery, values)
+
+    console.log(respond.rows)
+
+    return respond.rows
+
+    }
+    catch(e){
+        return -1
+    }
+
+}
