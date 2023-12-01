@@ -8,6 +8,7 @@
   },
 
   "scripts": {
-    "start": "docker compose up -d && nodemon app.js"
+    "startAll": "docker compose up -d && nodemon app.js",
+    "startServer" : "nodemon app.js"
   }
 }

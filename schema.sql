@@ -6,6 +6,11 @@ DROP TABLE IF EXISTS Learner;
 DROP TABLE IF EXISTS Teacher;
 DROP TABLE IF EXISTS Language;
 DROP TABLE IF EXISTS Level;
+DROP TABLE IF EXISTS Gender;
+
+CREATE TABLE IF NOT EXISTS Gender(
+    genderName VARCHAR(50) PRIMARY KEY
+);
 
 CREATE TABLE IF NOT EXISTS  Language(
     languageName VARCHAR(50) PRIMARY KEY
@@ -17,14 +22,25 @@ Create TABLE IF NOT EXISTS Level(
 );
 
 CREATE TABLE IF NOT EXISTS Learner(
-    learnerId VARCHAR(50) primary key ,
-    name VARCHAR(50)
+    learnerId VARCHAR(20) primary key ,
+    username VARCHAR(50) UNIQUE ,
+    learnerName VARCHAR(50),
+    surname VARCHAR(50),
+    gender VARCHAR(50),
+    email VARCHAR(345) UNIQUE,
+    "password" VARCHAR(50),
+    FOREIGN KEY (gender) references Gender(genderName)
 );
 
 CREATE TABLE IF NOT EXISTS Teacher(
-
-    teacherId varchar(50) PRIMARY KEY ,
-    teacherName varchar(50)
+    teacherId varchar(20) PRIMARY KEY,
+    username VARCHAR(50) ,
+    teacherName varchar(50),
+    surname VARCHAR(50),
+    gender VARCHAR(50),
+    email VARCHAR(345),
+    "password" VARCHAR(50),
+    FOREIGN KEY (gender) references Gender(genderName)
 );
 
 
@@ -78,9 +94,24 @@ CREATE TABLE IF NOT EXISTS homeworksInClass(
 
 
 INSERT INTO Language VALUES
-('German'),
-('French'),
-('Turkish');
+                    ('English'),
+                    ('French'),
+                    ('Turkish');
+
+INSERT INTO Level Values
+                      ('A1'),
+                      ('A2'),
+                      ('B1'),
+                      ('B2'),
+                      ('C1'),
+                      ('C2'),
+                      ('Native');
+
+INSERT INTO Gender VALUES
+                       ('Male'),
+                       ('Female'),
+                       ('Other')
+
 
 
 
