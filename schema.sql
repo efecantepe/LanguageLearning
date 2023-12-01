@@ -34,11 +34,11 @@ CREATE TABLE IF NOT EXISTS Learner(
 
 CREATE TABLE IF NOT EXISTS Teacher(
     teacherId varchar(20) PRIMARY KEY,
-    username VARCHAR(50) ,
+    username VARCHAR(50) UNIQUE ,
     teacherName varchar(50),
     surname VARCHAR(50),
     gender VARCHAR(50),
-    email VARCHAR(345),
+    email VARCHAR(345) UNIQUE ,
     "password" VARCHAR(50),
     FOREIGN KEY (gender) references Gender(genderName)
 );

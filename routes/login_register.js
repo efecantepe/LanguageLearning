@@ -3,6 +3,7 @@
 const express = require("express")
 const crypto = require('crypto')
 const connection = require('./../db')
+const { register } = require("module")
 let router = express.Router()
 
 router
@@ -20,15 +21,19 @@ router
 
         let user = req.body
 
-        if(user.user_type = "learner"){
+        if(user.user_type === "learner"){
             registerLearner(user);
         }
 
-        else if(user.user_type = "teacher"){
-            
+        else if(user.user_type === "teacher"){
+
+            registerTeacher(user);
+
+            console.log("JKSAHD")            
+
         }
 
-        else if(user.user_type = "nativeSpeaker"){
+        else if(user.user_type === "nativeSpeaker"){
             
         }
 
@@ -61,7 +66,20 @@ async function registerLearner(user){
 }
 
 async function registerTeacher(user){
+    let teacherId = createHashedId()
+    let query = `Insert Into teacher (teacherId, username, teacherName, surname, gender, email, password) VALUES
+                                     ($1, $2, $3, $4, $5, $6, $7) `
 
+    let values = [teacherId, user.username, user.name, user.surname, user.gender, user.email, user.password]
+
+
+    try{
+        const respond = await connection.query(query, values)
+        console.log(respond)
+    
+    }catch(e){
+        console.log("Error is: ", e)
+    }
 }
 
 async function registerNativeSpeaker(user){
