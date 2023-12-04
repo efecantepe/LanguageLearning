@@ -1,5 +1,6 @@
 const express = require("express")
 let router = express.Router()
+const connection = require("./../../db")
 
 // For sending request to the teacher
 router
@@ -12,13 +13,25 @@ router
 router
     .route("/getLanguages")
     .get((req, res) =>{
-        res.send("Get Languages Work")
+        let sqlQuery = `Select * FROM language`
+        let respond = connection.query(sqlQuery)
+
+        respond.then((response) => {
+            res.send(response.rows)
+        })
     })
 
 router
     .route("/getLevels")
     .get((req, res) => {
-        res.send("Get Levels Work")
+        
+        let sqlQuery = `Select * FROM level`
+        let respond = connection.query(sqlQuery)
+
+        respond.then((response) => {
+            res.send(response.rows)
+        })
+
     })
 
 router
