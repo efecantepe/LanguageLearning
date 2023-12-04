@@ -99,4 +99,66 @@ router
 
     })
 
+router
+    .route("/targetLanguages")
+    .get((req, res) => {
+
+        let user = req.query
+
+        console.log(user)
+
+        let sqlQuery = `SELECT * FROM targetLanguages WHERE learnerId = ($1)`
+        let values = [user.learnerId,]
+        let respond = connection.query(sqlQuery, values)
+
+        // Respond is a promise
+        respond.then((response) => {
+            res.send(response.rows)
+        })
+
+    })
+
+router
+    .route("/addTargetLanguage")
+    .post((req, res) => {
+        let language = req.body
+
+        console.log(language.targetLevel)
+
+
+        let sqlQuery = `Insert INTO targetLanguages Values ($1,$2,$3)`
+        let values = [language.languageName, language.learnerId, language.targetLevel]
+
+        let respond = connection.query(sqlQuery, values)
+        
+        // TODO Make sure targetLevel always higher then the known language
+
+        res.send(200)
+
+    })
+
+    router
+    .route("/updateTargetLanguage")
+    .put((req, res) => {
+        
+        let language = req.query;
+        //console.log(language);
+
+        let sqlQuery = `UPDATE targetLanguages SET targetLevel = ($1) WHERE learnerId = ($2) AND languageName = ($3)`;
+        let values = [language.targetLevel, language.learnerId, language.languageName];
+
+        connection.query(sqlQuery, values, (error, respond) => {
+            if (error) {
+                console.error(error);
+                res.sendStatus(500);
+            } else {
+                console.log(respond);
+                res.sendStatus(200);
+            }
+         });
+        
+    })
+
+
+
 module.exports = router
