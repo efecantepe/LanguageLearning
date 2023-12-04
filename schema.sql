@@ -1,13 +1,14 @@
+/*
 DROP TABLE IF EXISTS homeworksInClass;
 DROP TABLE IF EXISTS class;
 DROP TABLE IF EXISTS learnerLanguages;
 DROP TABLE IF EXISTS targetLanguages;
-DROP TABLE IF EXISTS Learner;
-DROP TABLE IF EXISTS Teacher;
+/* DROP TABLE IF EXISTS Learner ;
+DROP TABLE IF EXISTS Teacher; */
 DROP TABLE IF EXISTS Language;
 DROP TABLE IF EXISTS Level;
 DROP TABLE IF EXISTS Gender;
-
+*/
 CREATE TABLE IF NOT EXISTS Gender(
     genderName VARCHAR(50) PRIMARY KEY
 );
@@ -110,7 +111,11 @@ INSERT INTO Level Values
 INSERT INTO Gender VALUES
                        ('Male'),
                        ('Female'),
-                       ('Other')
+                       ('Other');
+
+INSERT INTO learnerLanguages VALUES
+                        ('French', 'a18fbf9acca53f39a929', 'A1' ),
+                        ('English', 'a18fbf9acca53f39a929', 'B2')
 
 
 

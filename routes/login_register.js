@@ -3,8 +3,7 @@
 const express = require("express")
 const crypto = require('crypto')
 const connection = require('./../db')
-const { register } = require("module")
-const { log } = require("console")
+
 let router = express.Router()
 
 router
@@ -38,12 +37,8 @@ router
             
         }
 
-
         console.log(user)
-
-
         res.sendStatus(200)
-
     })
 
 router

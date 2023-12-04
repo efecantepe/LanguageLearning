@@ -1,5 +1,6 @@
 const express = require("express")
 let router = express.Router()
+const connection = require("./../../db")
 
 // TODO: GETS are tested but others are not. Test put and post
 
@@ -20,7 +21,19 @@ router
 router
     .route("/myLanguages")
     .get((req, res) => {
-        res.send("My Languages Work")
+
+        let user = req.query
+
+        console.log(user)
+
+        let sqlQuery = `SELECT * FROM learnerLanguages WHERE learnerId = ($1)`
+        let values = [user.learnerId,]
+        let respond = connection.query(sqlQuery, values)
+
+        // Respond is a promise
+        respond.then((response) => {
+            res.send(response.rows)
+        })
     })
 
 
@@ -28,14 +41,41 @@ router
 router
     .route("/addNewLanguage")
     .post((req, res) => {
-        console.log(req.body)
+        
+        let language = req.body
+
+        let sqlQuery = `Insert INTO learnerLanguages Values ($1,$2,$3)`
+        let values = [language.languageName, language.learnerId, language.level]
+
+        let respond = connection.query(sqlQuery, values)
+        
+        // TODO : when the values are wrong. Code crashes, DO ERROR HANDLING
+        // TODO : update database schema make sure there will be no duplicates
+        res.send(200)
     })
 
 // Updating Language For The User
 router
     .route("/updateLanguage")
     .put((req, res) => {
-        console.log("Updating Language")
+        
+        console.log("AKJSHDAKSD");
+        let language = req.query;
+        console.log(language);
+
+        let sqlQuery = `UPDATE learnerLanguages SET level = ($1) WHERE learnerId = ($2) AND languageName = ($3)`;
+        let values = [language.level, language.learnerId, language.languageName];
+
+        connection.query(sqlQuery, values, (error, respond) => {
+            if (error) {
+                console.error(error);
+                res.sendStatus(500);
+            } else {
+                console.log(respond);
+                res.sendStatus(200);
+            }
+         });
+        
     })
 
 
