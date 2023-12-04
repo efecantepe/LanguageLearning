@@ -16,4 +16,16 @@ connection.connect(function(err) {
     console.log("Connected")
 })
 
-module.exports = connection
+async function executeQuery(query) {
+    try {
+        const result = await connection.query(query);
+        return result.rows;
+    } catch (error) {
+        throw new Error(`Error executing query: ${error.message}`);
+    }
+}
+
+module.exports = {
+    connection,
+    executeQuery,
+};
