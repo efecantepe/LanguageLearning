@@ -20,6 +20,9 @@ const CourseComponentContent = ({ course, action }) => {
                 Teacher: {teacher}
                 </Typography>
                 <Typography color="textSecondary" gutterBottom>
+                Learner: {learner}
+                </Typography>
+                <Typography color="textSecondary" gutterBottom>
                 Language: {language}, {level}
                 </Typography>
                 <Typography color="textSecondary" gutterBottom>
@@ -30,6 +33,12 @@ const CourseComponentContent = ({ course, action }) => {
                 </Typography>
                 <Typography color="textSecondary" gutterBottom>
                 Progress: {progress}
+                </Typography>
+                <Typography color="textSecondary" gutterBottom>
+                Registered Date: {registerDate}
+                </Typography>
+                <Typography color="textSecondary" gutterBottom>
+                Homework: {homework}
                 </Typography>
                 <Typography color="textSecondary">{description}</Typography>
             </CardContent>

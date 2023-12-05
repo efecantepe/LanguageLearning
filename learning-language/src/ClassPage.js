@@ -3,6 +3,7 @@ import { Card, CardContent, Typography, Button } from '@mui/material';
 import CourseComponent from './Components/CourseComponent';
 import NavigationBar from './NavigationBar';
 import Popup from './Components/PopupComponent';
+import MainLayout from './Components/MainLayout';
 
 
 const activeCoursesData = [
@@ -38,6 +39,7 @@ const ClassPage = () => {
     };
 
   return (
+    <MainLayout children={
       <div>
         <NavigationBar/>
         <div>
@@ -58,6 +60,7 @@ const ClassPage = () => {
           ))}
         </div>
       </div>
+    }/>
   );
 };
 
