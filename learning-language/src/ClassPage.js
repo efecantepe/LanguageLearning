@@ -40,15 +40,13 @@ const ClassPage = () => {
   return (
       <div>
         <NavigationBar/>
-        <button onClick={openPopup}>Open Popup</button>
-        <Popup open={isPopupOpen} onClose={closePopup} title="Popup Title" content="This is the content of the popup." actionText="Perform Action" onAction={handleAction}/>
         <div>
           <Typography variant="h4" gutterBottom>
             Active Courses
           </Typography>
 
           {activeCourses.map((course) => (
-            <CourseComponent course={course} onRegister={handleRegisterCourse}/>
+            <CourseComponent course={course} />
           ))}
         </div>
         <div>
@@ -56,7 +54,7 @@ const ClassPage = () => {
             Finished Courses
           </Typography>
           {finishedCourses.map((course) => (
-            <CourseComponent course={course} onRegister={handleRegisterCourse}/>
+            <CourseComponent course={course}/>
           ))}
         </div>
       </div>
