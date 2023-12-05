@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Card, CardContent, Typography, Button } from '@mui/material';
 import CourseComponent from './Components/CourseComponent';
+import NavigationBar from './NavigationBar';
 
 
 const activeCoursesData = [
@@ -22,7 +23,9 @@ const ClassPage = () => {
   };
 
   return (
+    
       <div>
+        <NavigationBar/>
         <div>
           <Typography variant="h4" gutterBottom>
             Active Courses
