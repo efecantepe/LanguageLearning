@@ -3,6 +3,7 @@ import { deepOrange } from '@mui/material/colors';
 import React from 'react';
 import { styled } from '@mui/system';
 import { Grid, Paper, Typography, TextField,Stack,Button } from '@mui/material';
+import NavigationBar from './NavigationBar';
 
 const useStyles = styled((theme) => ({
   root: {
@@ -80,6 +81,7 @@ const ProfilePage = () => {
 
   return (
     <div className={classes.root}>
+        <NavigationBar />
       <Typography variant="h4">User Profile</Typography>
       <Grid container spacing={3}>
         <Grid item xs={12} sm={6}>
