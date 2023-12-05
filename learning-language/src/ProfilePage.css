@@ -1,0 +1,18 @@
+/* ProfilePage.css */
+
+.profile-page {
+    padding: 20px;
+  }
+  
+  .profile-layout {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .left-column,
+  .right-column {
+    width: 45%;
+  }
+  
+  /* Add more specific styling as needed */
+  

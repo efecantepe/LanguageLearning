@@ -24,9 +24,6 @@ app.get('/', (req, res) => {
     res.send('Hello World')
 })
 
-
-
-
 async function doWork(){
 
     const res = await connection.query('Select * from language')
