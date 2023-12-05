@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Card, CardContent, Typography, Button } from '@mui/material';
 import CourseComponent from './Components/CourseComponent';
 import NavigationBar from './NavigationBar';
+import Popup from './Components/PopupComponent';
 
 
 const activeCoursesData = [
@@ -15,17 +16,32 @@ const finishedCoursesData = [
 ];   
 
 const ClassPage = () => {
-  const [activeCourses, setActiveCourses] = useState(activeCoursesData);
-  const [finishedCourses, setFinishedCourses] = useState(finishedCoursesData);
+    const [activeCourses, setActiveCourses] = useState(activeCoursesData);
+    const [finishedCourses, setFinishedCourses] = useState(finishedCoursesData);
+    const [isPopupOpen, setPopupOpen] = useState(false);
 
-  const handleRegisterCourse = (courseId, courseType) => {
-    console.log(`Registered for ${courseType} course with ID ${courseId}`);
-  };
+    const handleRegisterCourse = (courseId, courseType) => {
+        console.log(`Registered for ${courseType} course with ID ${courseId}`);
+    };
+
+    const openPopup = () => {
+        setPopupOpen(true);
+    };
+
+    const closePopup = () => {
+        setPopupOpen(false);
+    };
+
+    const handleAction = () => {
+        console.log('Action performed within the popup');
+        closePopup();
+    };
 
   return (
-    
       <div>
         <NavigationBar/>
+        <button onClick={openPopup}>Open Popup</button>
+        <Popup open={isPopupOpen} onClose={closePopup} title="Popup Title" content="This is the content of the popup." actionText="Perform Action" onAction={handleAction}/>
         <div>
           <Typography variant="h4" gutterBottom>
             Active Courses
