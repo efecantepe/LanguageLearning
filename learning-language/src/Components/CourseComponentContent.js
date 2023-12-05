@@ -1,20 +1,11 @@
 import React, { useState } from 'react';
 import { Card, CardContent, Typography, Button } from '@mui/material';
 import Popup from './PopupComponent';
-import CourseComponentContent from './CourseComponentContent';
 
 
-const CourseComponent = ({ course, onRegister }) => {
+const CourseComponentContent = ({ course, action }) => {
     const { id, title, language, level, teacher, learner, registerDate, meetingDate, progress, homework, status, description } = course;
-    
-    const [isPopupOpen, setPopupOpen] = useState(false);
-    const openPopup = () => { setPopupOpen(true);};
-    const closePopup = () => { setPopupOpen(false);};
 
-    const handleAction = () => {
-        console.log('Action performed within the popup');
-        closePopup();
-    };
     return (
         <Card variant="outlined" sx={{ display: 'inline-block', minWidth: 300 }}>
             <CardContent>
@@ -41,13 +32,9 @@ const CourseComponent = ({ course, onRegister }) => {
                 Progress: {progress}
                 </Typography>
                 <Typography color="textSecondary">{description}</Typography>
-                <Button variant="contained" onClick={openPopup}>
-                View
-                </Button>
-                <Popup open={isPopupOpen} onClose={closePopup} title="Popup Title" content={<CourseComponentContent course={course}/>} actionText="Perform Action" onAction={handleAction}/>
             </CardContent>
         </Card>
     );
 };
   
-export default CourseComponent;
+export default CourseComponentContent;
