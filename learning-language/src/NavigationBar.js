@@ -33,6 +33,11 @@ const NavigationBar = () => {
             Profile Page
           </Link>
         </Button>
+        <Button variant="contained" color="success">
+          <Link to="/courses" className={classes.link}>
+            Courses Page
+          </Link>
+        </Button>
       </Toolbar>
     </AppBar>
   );
