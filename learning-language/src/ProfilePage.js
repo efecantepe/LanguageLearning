@@ -16,15 +16,18 @@ const useStyles = styled((theme) => ({
 }));
 
 const UserInfo = ({ user }) => {
-return (
-  <Paper elevation={3}>
-      <Stack component="form" sx={{width: '25ch',}} spacing={2} noValidateautoComplete="off">
-          <Typography variant="h6">Profile Information</Typography>
-          <Avatar sx={{ bgcolor: deepOrange[500] }}>J</Avatar>
-          <TextField label="Pronunciation" defaultValue={user.pronunciation} variant="filled" />
-          <Button variant="contained">Update</Button>
-      </Stack>
-  </Paper>
+  return (
+      <Paper elevation={3}>
+          <Stack component="form" sx={{width: '25ch',}} spacing={2} noValidateautoComplete="off">
+              <Typography variant="h6">Profile Information</Typography>
+              <Avatar sx={{ bgcolor: deepOrange[500] }}>J</Avatar>
+              <TextField label="Full Name" defaultValue={user.name} variant="filled" />
+              <TextField label="Email" defaultValue={user.email} variant="filled" />
+              <TextField label="Gender" defaultValue={user.gender} variant="filled" />
+              <TextField label="Pronunciation" defaultValue={user.pronunciation} variant="filled" />
+              <Button variant="contained">Update</Button>
+          </Stack>
+      </Paper>
   );
 };
 
@@ -78,25 +81,25 @@ const ProfilePage = () => {
 
   return (
     <MainLayout children={
-      <div className={classes.root}>
-          <NavigationBar />
-        <Typography variant="h4">User Profile</Typography>
-        <Grid container spacing={3}>
-          <Grid item xs={12} sm={6}>
-            <UserInfo user={user} />
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <Grid container spacing={3}>
-              <Grid item xs={12}>
-                <MyLanguages languages={myLanguages} />
-              </Grid>
-              <Grid item xs={12}>
-                <EnrolledCourses courses={enrolledCourses} />
-              </Grid>
+    <div className={classes.root}>
+        <NavigationBar />
+      <Typography variant="h4">User Profile</Typography>
+      <Grid container spacing={3}>
+        <Grid item xs={12} sm={6}>
+          <UserInfo user={user} />
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <Grid container spacing={3}>
+            <Grid item xs={12}>
+              <MyLanguages languages={myLanguages} />
+            </Grid>
+            <Grid item xs={12}>
+              <EnrolledCourses courses={enrolledCourses} />
             </Grid>
           </Grid>
         </Grid>
-      </div>
+      </Grid>
+    </div>
     }/>
   );
 };
