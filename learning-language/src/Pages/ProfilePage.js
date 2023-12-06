@@ -69,7 +69,7 @@ const ProfilePage = () => {
   };
 
   const myLanguages = [
-    { title: 'English: Native' },
+    { title: 'English: Native ahjskdasjkdhasdjkhasd' },
     { title: 'French: B2' },
   ];
 
