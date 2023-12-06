@@ -8,7 +8,7 @@
   },
 
   "scripts": {
-    "startAll": "docker compose up -d && nodemon app.js",
+    "startAll": "docker compose up -d && nodemon app.js && cd learning-language && npm start",
     "startServer" : "nodemon app.js"
   }
 }

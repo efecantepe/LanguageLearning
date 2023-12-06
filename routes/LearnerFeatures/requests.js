@@ -1,6 +1,6 @@
 const express = require("express")
 let router = express.Router()
-const connection = require("./../../db")
+const connection = require("./../../db/db")
 
 // For sending request to the teacher
 router
