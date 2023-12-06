@@ -2,6 +2,8 @@ import React from 'react';
 import { styled } from '@mui/system';
 import { Container,Grid  } from '@mui/material';
 import NavigationBar from './NavigationBar';
+import '../Css/Components.css';
+import Header from './Header';
 
 const useStyles = styled((theme) => ({
   root: {
@@ -15,6 +17,7 @@ const MainLayout = ({ children }) => {
 
   return (
     <Container maxWidth="lg" className={classes.root}>
+      <Header/>
       <Grid container>
         <Grid>
           <NavigationBar/>

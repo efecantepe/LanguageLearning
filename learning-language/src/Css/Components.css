@@ -2,3 +2,13 @@
     text-decoration: none;
     color: black;
 }
+
+.test{
+    font-family: 'Agbalumo';
+}
+
+.test2{
+    font-family: 'Agbalumo';
+    font-size: 64px;
+    text-align: center;
+}
