@@ -7,7 +7,7 @@ const learner = require("./routes/learner")
 const teacher = require("./routes/teacher")
 const login_register = require("./routes/login_register")
 
-const connection = require("./db")
+const connection = require("./db/db")
 
 
 const port = 3000
