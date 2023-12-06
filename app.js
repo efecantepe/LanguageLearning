@@ -9,6 +9,8 @@ const login_register = require("./routes/login_register")
 
 const connection = require("./db/db")
 
+var cors = require('cors');
+app.use(cors());
 
 const port = 3000
 

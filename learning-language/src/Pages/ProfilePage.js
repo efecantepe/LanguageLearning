@@ -1,9 +1,15 @@
 import Avatar from '@mui/material/Avatar';
 import { deepOrange } from '@mui/material/colors';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { styled } from '@mui/system';
 import { Grid, Paper, Typography, TextField,Stack,Button } from '@mui/material';
 import MainLayout from '../Components/MainLayout';
+import urlList from '../urllist';
+import sendRequest from '../axios';
+import axios from 'axios';
+//import { response } from 'express';
+
+
 
 const useStyles = styled((theme) => ({
   root: {
@@ -57,16 +63,21 @@ const EnrolledCourses = ({ courses }) => {
 };
 
 const ProfilePage = () => {
+  
   const classes = useStyles();
 
+  const [user, setUser] = useState([]);
 
-  const user = {
-    name: 'John Doe',
-    email: 'johndoe@example.com',
-    gender: 'Male',
-    pronunciation: 'He/Him',
-    language: 'Spanish',
-  };
+
+  useEffect(() => {
+
+    axios.get(urlList.getLanguages).then((result) => {
+
+      console.log(result)
+
+    })
+
+  }, [])
 
   const myLanguages = [
     { title: 'English: Native ahjskdasjkdhasdjkhasd' },

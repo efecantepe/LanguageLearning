@@ -1,14 +1,14 @@
-import axios from 'axios' 
+//import axios from 'axios' 
 
-//const axios = require("axios")
+//import { response } from "express"
+
+const axios = require("axios")
 //const urlList = require("./urllist")
 
 const sendRequest = async (url, method = 'get', data = null) => {
  
     try{
         
-        console.log(url)
-
         const response = await axios({
             method,
             url,
@@ -20,11 +20,18 @@ const sendRequest = async (url, method = 'get', data = null) => {
     }catch(error){
 
         console.log(error)
-        return ["error"]
+        return ["asdjklasd"]
     }
 
 
 }
 
+sendRequest("http://localhost:3000/learner/requests/getLanguages", 'get').then((response) => {
 
-export default sendRequest
+    console.log(response)
+
+})
+
+//console.log()
+
+//sexport default sendRequest
