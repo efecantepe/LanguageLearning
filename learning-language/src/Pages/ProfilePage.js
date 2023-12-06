@@ -3,8 +3,8 @@ import { deepOrange } from '@mui/material/colors';
 import React from 'react';
 import { styled } from '@mui/system';
 import { Grid, Paper, Typography, TextField,Stack,Button } from '@mui/material';
-import NavigationBar from './NavigationBar';
-import MainLayout from './Components/MainLayout';
+import NavigationBar from '../Components/NavigationBar';
+import MainLayout from '../Components/MainLayout';
 
 const useStyles = styled((theme) => ({
   root: {

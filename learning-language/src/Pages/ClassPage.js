@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Card, CardContent, Typography, Button } from '@mui/material';
-import CourseComponent from './Components/CourseComponent';
-import NavigationBar from './NavigationBar';
-import Popup from './Components/PopupComponent';
-import MainLayout from './Components/MainLayout';
+import CourseComponent from '../Components/CourseComponent';
+import NavigationBar from '../Components/NavigationBar';
+import Popup from '../Components/PopupComponent';
+import MainLayout from '../Components/MainLayout';
 
 
 const activeCoursesData = [
