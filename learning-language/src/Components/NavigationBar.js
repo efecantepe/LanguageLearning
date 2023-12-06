@@ -1,45 +1,44 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { styled } from '@mui/system';
-import { AppBar, Toolbar, Typography, Button } from '@mui/material';
+import '../Css/Components.css'
+import { AppBar, Toolbar, Typography, Button, Paper, MenuList, ListItemIcon, MenuItem,ListItemText } from '@mui/material';
 
 const useStyles = styled((theme) => ({
   title: {
     flexGrow: 1,
   },
-  link: {
-    textDecoration: 'none',
-    color: 'inherit',
-    marginRight: theme.spacing(2),
-  },
 }));
 
 const NavigationBar = () => {
   const classes = useStyles();
-
   return (
-    <AppBar position="static">
-      <Toolbar>
-        <Typography variant="h6" className={classes.title}>
-          Language Learning Platform
-        </Typography>
-        <Button variant="contained" color="success">
-          <Link to="/" className={classes.link}>
-            Main Page
-          </Link>
-        </Button>
-        <Button variant="contained" color="error">
-          <Link to="/profile" className={classes.link}>
-            Profile Page
-          </Link>
-        </Button>
-        <Button variant="contained" color="success">
-          <Link to="/courses" className={classes.link}>
-            Courses Page
-          </Link>
-        </Button>
-      </Toolbar>
-    </AppBar>
+    <Paper sx={{ width: 320, maxWidth: '100%' }}>
+    <MenuList>
+      <Link to="/" className='link-style'>
+        <MenuItem>
+          <ListItemIcon>
+          </ListItemIcon>
+          <ListItemText>Dashboard</ListItemText>
+        </MenuItem>
+      </Link>
+      <Link to="/profile" className='link-style'>
+        <MenuItem>
+          <ListItemIcon>
+          </ListItemIcon>
+          <ListItemText>Profile Page</ListItemText>
+        </MenuItem>
+      </Link>
+      <Link to="/courses" className='link-style'>
+        <MenuItem>
+          <ListItemIcon>
+          </ListItemIcon>
+          <ListItemText>Courses</ListItemText>
+        </MenuItem>
+      </Link>
+      </MenuList>
+    </Paper>
+    
   );
 };
 

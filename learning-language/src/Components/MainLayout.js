@@ -1,6 +1,7 @@
 import React from 'react';
 import { styled } from '@mui/system';
 import { Container } from '@mui/material';
+import NavigationBar from './NavigationBar';
 
 const useStyles = styled((theme) => ({
   root: {
@@ -14,6 +15,7 @@ const MainLayout = ({ children }) => {
 
   return (
     <Container maxWidth="lg" className={classes.root}>
+      <NavigationBar/>
       {children}
     </Container>
   );

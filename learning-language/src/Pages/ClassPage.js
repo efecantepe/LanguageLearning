@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Card, CardContent, Typography, Button } from '@mui/material';
 import CourseComponent from '../Components/CourseComponent';
-import NavigationBar from '../Components/NavigationBar';
 import Popup from '../Components/PopupComponent';
 import MainLayout from '../Components/MainLayout';
 
@@ -41,7 +40,6 @@ const ClassPage = () => {
   return (
     <MainLayout children={
       <div>
-        <NavigationBar/>
         <div>
           <Typography variant="h4" gutterBottom>
             Active Courses
