@@ -2,7 +2,7 @@
 
 const express = require("express")
 const crypto = require('crypto')
-const connection = require('./../db')
+const connection = require('../db/db')
 
 let router = express.Router()
 

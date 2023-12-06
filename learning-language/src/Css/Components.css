@@ -1,0 +1,19 @@
+.link-style{
+    text-decoration: none;
+    color: black;
+}
+
+.test{
+    font-family: 'Agbalumo';
+}
+
+.test2{
+    font-family: 'Agbalumo';
+    font-size: 64px;
+    text-align: center;
+    color: white;
+}
+
+.main{
+    background-color: #9BB8CD;
+}

@@ -1,21 +1,25 @@
 import React from 'react';
 import { styled } from '@mui/system';
-import { Container } from '@mui/material';
-
-const useStyles = styled((theme) => ({
-  root: {
-    paddingTop: theme.spacing(4),
-    paddingBottom: theme.spacing(4),
-  },
-}));
+import { Container,Grid  } from '@mui/material';
+import NavigationBar from './NavigationBar';
+import '../Css/Components.css';
+import Header from './Header';
 
 const MainLayout = ({ children }) => {
-  const classes = useStyles();
-
   return (
-    <Container maxWidth="lg" className={classes.root}>
-      {children}
-    </Container>
+    <div className='main'>
+      <Container maxWidth="lg" >
+        <Header/>
+        <Grid container>
+          <Grid>
+            <NavigationBar/>
+          </Grid>
+          <Grid>
+            {children}
+          </Grid>
+        </Grid>
+      </Container>
+    </div>
   );
 };
 
