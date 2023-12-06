@@ -5,28 +5,21 @@ import NavigationBar from './NavigationBar';
 import '../Css/Components.css';
 import Header from './Header';
 
-const useStyles = styled((theme) => ({
-  root: {
-    paddingTop: theme.spacing(4),
-    paddingBottom: theme.spacing(4),
-  },
-}));
-
 const MainLayout = ({ children }) => {
-  const classes = useStyles();
-
   return (
-    <Container maxWidth="lg" className={classes.root}>
-      <Header/>
-      <Grid container>
-        <Grid>
-          <NavigationBar/>
+    <div className='main'>
+      <Container maxWidth="lg" >
+        <Header/>
+        <Grid container>
+          <Grid>
+            <NavigationBar/>
+          </Grid>
+          <Grid>
+            {children}
+          </Grid>
         </Grid>
-        <Grid>
-          {children}
-        </Grid>
-      </Grid>
-    </Container>
+      </Container>
+    </div>
   );
 };
 
