@@ -30,11 +30,17 @@ router
     })
 
 // send new class request
-router
-    .route("/newClassRequest")
-    .post((req, res) => {
-        console.log(req.body)
-    })
+router.post('/sendClassRequest', async (req, res) => {
+    const { learnerId, teacherId, classId } = req.body;
+ 
+    try {
+       await learnerQueries.sendClassRequest(learnerId, teacherId, classId);
+       res.status(200).json({ message: 'Class request sent successfully.' });
+    } catch (error) {
+       console.error('Error sending class request:', error.message);
+       res.status(500).json({ error: 'Internal server error' });
+    }
+ });
 
 
 module.exports = router 
