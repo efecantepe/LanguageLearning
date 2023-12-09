@@ -10,6 +10,9 @@ import axios from 'axios';
 //import { response } from 'express';
 
 
+const listOfUrl = urlList.urlList
+const createQuery = urlList.createQuery
+
 
 const useStyles = styled((theme) => ({
   root: {
@@ -37,11 +40,47 @@ const UserInfo = ({ user }) => {
 };
 
 const MyLanguages = ({ languages }) => {
+
+  const params = {learnerId : "a18fbf9acca53f39a929"}
+  const [languages1, setLanguages1] = useState([])
+  console.log(params)
+  
+  let url = createQuery(listOfUrl.learnerLanguages, params)
+  
+  
+  /*
+  useEffect(() => {
+        axios.get(url).then((result) => {
+        const learnerLanguage = result.data
+        const myLanguages = []
+        for(let a = 0; a < learnerLanguage.length; a++){
+          myLanguages.push({title : `${learnerLanguage.languageName}   ${learnerLanguage.level}`})
+        }
+        //console.log(myLanguages)
+        setLanguages1(myLanguages)
+    });
+  }, []);
+  */
+  
+  
+  useEffect(() => {
+      axios.get(url).then((result) => {
+      const learnerLanguage = result.data;
+      const myLanguages = learnerLanguage.map((language) => ({
+        title: `${language.languagename}  ${language.level}`,
+      }
+      ));
+      setLanguages1(myLanguages);
+    });
+  }, []); // Empty dependency array causes the effect to run only on mount
+  
+  
+
     return (
         <Paper elevation={3}>
             <Typography variant="h6">My Languages</Typography>
                 <ul>
-                    {languages.map((language, index) => (
+                    {languages1.map((language, index) => (
                     <li key={index}>{language.title}</li>
                     ))}
                 </ul>
@@ -68,21 +107,39 @@ const ProfilePage = () => {
 
   const [user, setUser] = useState([]);
 
+  //const [myLanguages, setMyLanguages] = useState([])
 
+  let myLanguages = [{}]
+      
+
+
+
+  /*    
   useEffect(() => {
-
-    axios.get(urlList.getLanguages).then((result) => {
-
-      console.log(result)
+    axios.get(listOfUrl.getLanguages).then((result) => {
+      //console.log(result)
 
     })
-
   }, [])
+
+
+
+  useEffect(() => {
+    
+
+  })
+
+  */
+
+
+  /*
 
   const myLanguages = [
     { title: 'English: Native ahjskdasjkdhasdjkhasd' },
     { title: 'French: B2' },
   ];
+
+  */
 
   const enrolledCourses = [
     { title: 'Spanish A1' },
