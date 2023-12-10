@@ -48,21 +48,24 @@ const MyLanguages = ({ languages }) => {
   let url = createQuery(listOfUrl.learnerLanguages, params)
   
   
-  /*
+  
   useEffect(() => {
         axios.get(url).then((result) => {
         const learnerLanguage = result.data
         const myLanguages = []
         for(let a = 0; a < learnerLanguage.length; a++){
-          myLanguages.push({title : `${learnerLanguage.languageName}   ${learnerLanguage.level}`})
+          myLanguages.push({title : `${learnerLanguage.languageName} ${learnerLanguage.level}`})
         }
-        //console.log(myLanguages)
+        console.log(myLanguages)
         setLanguages1(myLanguages)
     });
   }, []);
-  */
   
   
+  /*
+
+  NEDEN YANlIS OLSUN
+
   useEffect(() => {
       axios.get(url).then((result) => {
       const learnerLanguage = result.data;
@@ -73,7 +76,7 @@ const MyLanguages = ({ languages }) => {
       setLanguages1(myLanguages);
     });
   }, []); // Empty dependency array causes the effect to run only on mount
-  
+  */
   
 
     return (
