@@ -146,6 +146,8 @@ const ProfilePage = () => {
 
   const MyLanguages = ({ languages }) => {
 
+
+/* BEN ALPEREN TEST ICIN COMMENT ATTIM. SIZ ACABILIRSINIZ, SORUN YOK
   useEffect(() => {
       axios.get(url).then((result) => {
       const learnerLanguage = result.data;
@@ -156,7 +158,9 @@ const ProfilePage = () => {
       setLanguages1(myLanguages);
     });
   }, []); // Empty dependency array causes the effect to run only on mount
-  
+  */
+
+
     return (
         <Paper elevation={3}>
             <Typography variant="h6">My Languages</Typography>
@@ -165,26 +169,12 @@ const ProfilePage = () => {
                     <li key={index}>{language.title}</li>
                     ))}
                 </ul>
-        </Paper>
-    ); 
-  };
-
-  /*
-  const MyLanguages = ({ languages }) => {
-    return (
-        <Paper elevation={3}>
-            <Typography variant="h6">My Languages</Typography>
-                <ul>
-                    {languages.map((language, index) => (
-                    <li key={index}>{language.title}</li>
-                    ))}
-                </ul>
                 <Button variant="contained" onClick={openPopup}>
                   Add Language
                 </Button>
         </Paper>
-    );
-    */ 
+    ); 
+  };
   
   return (
     <MainLayout children={
@@ -205,12 +195,9 @@ const ProfilePage = () => {
           </Grid>
         </Grid>
       </Grid>
+      <Popup open={isPopupOpen} onClose={closePopup} content={<PopupLanguageContent/>} actionText="Add Language" onAction={handleAction}/>
     </div>
     }/>
   );
-  
 };
-// BURDA  <Popup open={isPopupOpen} onClose={closePopup} content={<PopupLanguageContent languageContent={addLanguageDataContent}/>} actionText="Perform Action" onAction={handleAction}/>
-
-
 export default ProfilePage;

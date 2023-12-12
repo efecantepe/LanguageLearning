@@ -17,3 +17,7 @@
 .main{
     background-color: #9BB8CD;
 }
+
+.margin-top-1{
+    margin-top: 10px !important;
+}
