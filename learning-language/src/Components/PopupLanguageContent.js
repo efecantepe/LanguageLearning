@@ -56,9 +56,6 @@ const PopupLanguageContent = () => {
                     ))}
                     </Select>
                 </FormControl>
-                <FormControl className='margin-top-1'>
-                    <Button>Add Language</Button>
-                </FormControl>
             </CardContent>
         </Card>
     );
