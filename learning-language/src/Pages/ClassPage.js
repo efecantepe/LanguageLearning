@@ -54,7 +54,7 @@ const ClassPage = () => {
               </Grid>
               <Grid item xs={6} className='margin-top-1'>
               <Box sx={{ display: 'flex', justifyContent: 'flex-end', padding:1}}>
-                <Button variant="contained" color="success">Register</Button>
+                <Button variant="contained" color="success" onClick={openPopup}>Register</Button>
               </Box>
               </Grid>
             </Grid>
@@ -79,6 +79,7 @@ const ClassPage = () => {
           </Box>
           </Paper>
         </div>
+        <Popup open={isPopupOpen} onClose={closePopup} title="Register Course" actionText="Register" onAction={handleAction}/>
       </div>
     }/>
   );
