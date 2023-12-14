@@ -4,6 +4,7 @@ import CourseComponent from '../Components/CourseComponent';
 import Popup from '../Components/PopupComponent';
 import '../Css/Components.css'
 import MainLayout from '../Components/MainLayout';
+import PopupRegisterComponent from '../Components/PopupRegisterComponent';
 
 
 const activeCoursesData = [
@@ -79,7 +80,7 @@ const ClassPage = () => {
           </Box>
           </Paper>
         </div>
-        <Popup open={isPopupOpen} onClose={closePopup} title="Register Course" actionText="Register" onAction={handleAction}/>
+        <Popup open={isPopupOpen} onClose={closePopup} title="Register Course" content={<PopupRegisterComponent/>} actionText="Register" onAction={handleAction}/>
       </div>
     }/>
   );
