@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Card, CardContent, Typography, Button } from '@mui/material';
+import { Card, CardContent, Typography, Button,Box } from '@mui/material';
 import Popup from './PopupComponent';
 
 
@@ -9,14 +9,14 @@ const CourseComponentContent = ({ course, action,onAccept,onReject,onCancel }) =
     const renderButtons = () => {
         if (course.status == 'Waiting') {
             return (
-                <>
-                    <Button variant="contained" onClick={onAccept}>
+                <Box sx={{display: 'flex', justifyContent: 'space-between', width: '100%',}}>
+                    <Button variant="contained" color='success' onClick={onAccept}>
                         Accept
                     </Button>
-                    <Button variant="contained" onClick={onReject}>
+                    <Button variant="contained" color='error' onClick={onReject}>
                         Reject
                     </Button>
-                </>
+                </Box>
             );
         } else if (course.status == 'Active') {
             return (
