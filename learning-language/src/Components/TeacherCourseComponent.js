@@ -44,7 +44,7 @@ const TeacherCourseComponent = ({ course, onRegister }) => {
                 <Button variant="contained" onClick={openPopup}>
                 View
                 </Button>
-                <Popup open={isPopupOpen} onClose={closePopup} title={title} content={<TeacherCourseComponentContent course={course}/>} actionText="Perform Action" onAction={handleAction}/>
+                <Popup open={isPopupOpen} onClose={closePopup} title={title} content={<TeacherCourseComponentContent course={course}/>}/>
             </CardContent>
         </Card>
     );

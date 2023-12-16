@@ -3,8 +3,29 @@ import { Card, CardContent, Typography, Button } from '@mui/material';
 import Popup from './PopupComponent';
 
 
-const CourseComponentContent = ({ course, action }) => {
+const CourseComponentContent = ({ course, action,onAccept,onReject,onCancel }) => {
     const { id, title, language, level, teacher, learner, registerDate, meetingDate, progress, homework, status, feedback, description } = course;
+
+    const renderButtons = () => {
+        if (course.status == 'Waiting') {
+            return (
+                <>
+                    <Button variant="contained" onClick={onAccept}>
+                        Accept
+                    </Button>
+                    <Button variant="contained" onClick={onReject}>
+                        Reject
+                    </Button>
+                </>
+            );
+        } else if (course.status == 'Active') {
+            return (
+                <Button variant="contained" onClick={onCancel}>
+                    Cancel
+                </Button>
+            );
+        }
+    };
 
     return (
         <Card variant="outlined" sx={{ display: 'inline-block', minWidth: 300 }}>
@@ -44,6 +65,7 @@ const CourseComponentContent = ({ course, action }) => {
                 Feedback: {feedback}
                 </Typography>
                 <Typography color="textSecondary">{description}</Typography>
+                {renderButtons()}
             </CardContent>
         </Card>
     );
