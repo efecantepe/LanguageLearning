@@ -14,11 +14,18 @@ const Popup = ({ open, onClose, title, content, actionText, onAction }) => {
           bgcolor: 'background.paper',
           boxShadow: 24,
           p: 4,
+          borderRadius: 4,
         }}
       >
-        <Typography variant="h6" gutterBottom>
-          {title}
-        </Typography>
+        
+        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 2}}>
+          <Typography variant="h6">
+            {title}
+          </Typography>
+          <Button onClick={onClose} color='error'  variant="text" sx={{borderRadius:28, fontWeight:'900', fontSize:16}}>
+            X
+          </Button>
+        </Box>
         <Typography variant="body1" gutterBottom>
           {content}
         </Typography>
@@ -27,9 +34,6 @@ const Popup = ({ open, onClose, title, content, actionText, onAction }) => {
             {actionText}
           </Button>
         )}
-        <Button variant="outlined" onClick={onClose} sx={{ marginLeft: 2 }}>
-          Close
-        </Button>
       </Box>
     </Modal>
   );
