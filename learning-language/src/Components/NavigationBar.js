@@ -58,7 +58,7 @@ const NavigationBar = ({ onLogout }) => {
           <ListItemText>TeacherProfile Page</ListItemText>
         </MenuItem>
       </Link>
-      <Link to="/TeacherCourses" className='link-style'>
+      <Link to="/TeacherClass" className='link-style'>
         <MenuItem>
           <ListItemIcon>
             <ClassIcon />
