@@ -8,13 +8,13 @@ import Header from './Header';
 const MainLayout = ({ children }) => {
   return (
     <div className='main'>
-      <Container maxWidth="lg" >
+      <Container maxWidth="lg">
         <Header/>
-        <Grid container>
-          <Grid>
+        <Grid container >
+          <Grid >
             <NavigationBar/>
           </Grid>
-          <Grid>
+          <Grid sx={{paddingLeft:2}}>
             {children}
           </Grid>
         </Grid>

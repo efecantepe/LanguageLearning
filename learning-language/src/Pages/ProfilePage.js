@@ -9,27 +9,14 @@ import sendRequest from '../axios';
 import axios from 'axios';
 import PopupLanguageContent from '../Components/PopupLanguageContent';
 import Popup from '../Components/PopupComponent';
-//import { response } from 'express';
-
 
 const listOfUrl = urlList.urlList
 const createQuery = urlList.createQuery
 
 
-const useStyles = styled((theme) => ({
-  root: {
-    padding: theme.spacing(3),
-  },
-  paper: {
-    padding: theme.spacing(2),
-  },
-}));
-
-
-
 const UserInfo = ({ user }) => {
   return (
-      <Paper elevation={3}>
+      <Paper elevation={3} sx={{width: '25ch', padding:2,}}>
           <Stack component="form" sx={{width: '25ch',}} spacing={2} noValidateautoComplete="off">
               <Typography variant="h6">Profile Information</Typography>
               <Avatar sx={{ bgcolor: deepOrange[500] }}>J</Avatar>
@@ -43,11 +30,9 @@ const UserInfo = ({ user }) => {
   );
 };
 
-
-
 const EnrolledCourses = ({ courses }) => {
   return (
-    <Paper elevation={3}>
+    <Paper elevation={3} sx={{width: '25ch', padding:2,}}>
       <Typography variant="h6">Enrolled Courses</Typography>
       <ul>
         {courses.map((course, index) => (
@@ -70,8 +55,6 @@ const ProfilePage = () => {
     console.log('Action performed within the popup');
     closePopup();
   };
-  
-  const classes = useStyles();
 
   const [user, setUser] = useState([]);
 
@@ -79,8 +62,6 @@ const ProfilePage = () => {
 
   let myLanguages = [{}]
       
-
-
 
   /*    
   useEffect(() => {
@@ -162,7 +143,7 @@ const ProfilePage = () => {
 
 
     return (
-        <Paper elevation={3}>
+        <Paper elevation={3} sx={{width: '25ch', padding:2,}}>
             <Typography variant="h6">My Languages</Typography>
                 <ul>
                     {languages1.map((language, index) => (
@@ -178,23 +159,26 @@ const ProfilePage = () => {
   
   return (
     <MainLayout children={
-    <div className={classes.root}>
-      <Typography variant="h4">User Profile</Typography>
-      <Grid container spacing={3}>
-        <Grid item xs={12} sm={6}>
-          <UserInfo user={user} />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <Grid container spacing={3}>
-            <Grid item xs={12}>
-              <MyLanguages languages={myLanguages} />
-            </Grid>
-            <Grid item xs={12}>
-              <EnrolledCourses courses={enrolledCourses} />
+    <div>
+      <Paper elevation={1} sx={{padding:2,}}>
+        <Typography variant="h4">Learner Profile</Typography>
+        <hr/>
+        <Grid container>
+          <Grid item xs={6} sm={6}>
+            <UserInfo user={user} />
+          </Grid>
+          <Grid item xs={6} sm={6}>
+            <Grid container spacing={3}>
+              <Grid item xs={12}>
+                <MyLanguages languages={myLanguages} />
+              </Grid>
+              <Grid item xs={12}>
+                <EnrolledCourses courses={enrolledCourses} />
+              </Grid>
             </Grid>
           </Grid>
         </Grid>
-      </Grid>
+      </Paper>
       <Popup open={isPopupOpen} onClose={closePopup} content={<PopupLanguageContent/>} actionText="Add Language" onAction={handleAction}/>
     </div>
     }/>

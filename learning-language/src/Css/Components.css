@@ -16,6 +16,7 @@
 
 .main{
     background-color: #9BB8CD;
+    min-height: 100vh;
 }
 
 .margin-top-1{

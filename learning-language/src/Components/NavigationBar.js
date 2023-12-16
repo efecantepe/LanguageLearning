@@ -13,7 +13,7 @@ const useStyles = styled((theme) => ({
   },
 }));
 
-const NavigationBar = () => {
+const NavigationBar = ({ onLogout }) => {
   const classes = useStyles();
   return (
     <Paper sx={{ width: 256, maxWidth: '100%' }}>
@@ -42,6 +42,31 @@ const NavigationBar = () => {
           <ListItemText>Courses</ListItemText>
         </MenuItem>
       </Link>
+      <Link to="/TeacherHome" className='link-style'>
+        <MenuItem>
+          <ListItemIcon HomeIcon>
+            <HomeIcon/>
+          </ListItemIcon>
+          <ListItemText>Teacher Dashboard</ListItemText>
+        </MenuItem>
+      </Link>
+      <Link to="/TeacherProfile" className='link-style'>
+        <MenuItem>
+          <ListItemIcon>
+            <AccountBoxIcon/>
+          </ListItemIcon>
+          <ListItemText>TeacherProfile Page</ListItemText>
+        </MenuItem>
+      </Link>
+      <Link to="/TeacherCourses" className='link-style'>
+        <MenuItem>
+          <ListItemIcon>
+            <ClassIcon />
+          </ListItemIcon>
+          <ListItemText>Teacher Courses</ListItemText>
+        </MenuItem>
+      </Link>
+      <button onClick={onLogout}>Logout</button>
       </MenuList>
     </Paper>
     
