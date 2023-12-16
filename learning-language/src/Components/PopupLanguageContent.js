@@ -1,11 +1,39 @@
 import React, { useState } from 'react';
 import { Card, CardContent, Typography, Button, FormControl,MenuItem,Select,InputLabel  } from '@mui/material';
 import Popup from './PopupComponent';
+import axios from 'axios';
 
 
 const PopupLanguageContent = () => {
+    
     const [selectedLanguage, setSelectedLanguage] = useState('');
     const [selectedLevel, setSelectedLevel] = useState('');
+    const [addLanguageContent, setAddLanguageContent] = useState([])
+    const [addLevelContent, setAddLevelContent] = useState([])
+    
+    fetchLevels().then((result) => {
+        setAddLevelContent(result.data)
+    })
+
+    fetchLanguages().then((result) => {
+        setAddLanguageContent(result.data)
+    })
+
+
+    function sendLanguage(){
+
+
+
+        axios.post('http://localhost:3000/learner/myProfile/addNewLanguage', {
+
+            "languageName" : selectedLanguage,
+            "level" : selectedLevel,
+            "learnerId" : "a18fbf9acca53f39a929"
+
+        })
+
+    }
+
 
     const handleLanguageChange = (event) => {
         setSelectedLanguage(event.target.value);
@@ -14,20 +42,10 @@ const PopupLanguageContent = () => {
         setSelectedLevel(event.target.value);
       };
 
-    const addLanguageDataContent = [
-        {language: 'English'},
-        {language: 'French'},
-        {language: 'Spanish'},
-        {language: 'Turkish'},
-      ];
-      const addLevelDataContent = [
-        {level: 'A1'},
-        {level: 'A2'},
-        {level: 'B1'},
-        {level: 'B2'},
-        {level: 'C1'},
-        {level: 'C2'},
-      ];
+
+    
+
+    
 
     return (
         <Card variant="outlined" sx={{ display: 'inline-block', minWidth: 300 }}>
@@ -39,9 +57,9 @@ const PopupLanguageContent = () => {
                 <FormControl fullWidth className='margin-top-1'>
                     <InputLabel>Language</InputLabel>
                     <Select value={selectedLanguage} onChange={handleLanguageChange} label="Language">
-                    {addLanguageDataContent.map((data, index) => (
-                        <MenuItem key={index} value={data.language}>
-                        {data.language}
+                    {addLanguageContent.map((data, index) => (
+                        <MenuItem key={index} value={data.languagename}>
+                        {data.languagename}
                         </MenuItem>
                     ))}
                     </Select>
@@ -49,16 +67,32 @@ const PopupLanguageContent = () => {
                 <FormControl fullWidth className='margin-top-1'>
                     <InputLabel>Level</InputLabel>
                     <Select value={selectedLevel} onChange={handleLevelChange} label="Level">
-                    {addLevelDataContent.map((data, index) => (
+                    {addLevelContent.map((data, index) => (
                         <MenuItem key={index} value={data.level}>
                         {data.level}
                         </MenuItem>
                     ))}
                     </Select>
                 </FormControl>
+                
+                <Button onClick={() => sendLanguage()} > Add Language </Button>
+
             </CardContent>
         </Card>
     );
 };
+
+
+async function fetchLevels(){
+
+    let result = await axios.get("http://localhost:3000/learner/requests/getLevels")
+    return result;
+
+} 
+
+async function fetchLanguages(){
+    let result = await axios.get("http://localhost:3000/learner/requests/getLanguages")
+    return result;
+}
   
 export default PopupLanguageContent;

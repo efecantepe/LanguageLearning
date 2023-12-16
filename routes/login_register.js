@@ -112,7 +112,7 @@ async function login(user){
     console.log(user)
 
     try{
-
+    
     let sqlQuery = `SELECT * FROM ${user.user_type} WHERE username = ($1) AND "password" = ($2)`
     let values = [user.username, user.password]
 

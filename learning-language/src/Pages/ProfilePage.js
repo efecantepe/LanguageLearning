@@ -126,14 +126,6 @@ const ProfilePage = () => {
   //NEDEN YANlIS OLSUN
 
   const MyLanguages = ({ languages }) => {
-  
-    
-  // Alper: useState, useEffect, HTTP requests get, post, put, delete
-  
-  // Post: body -> JSON
-  // Get : query
-  // PUT bilinmiyor bakilmasi lazim
-  // Useeffect yazilacak uygun axiosla. Eger use state tanimlanmazsa use state de tanimlanacak.
 
 
 /* BEN ALPEREN TEST ICIN COMMENT ATTIM. SIZ ACABILIRSINIZ, SORUN YOK
