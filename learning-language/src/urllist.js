@@ -12,7 +12,8 @@ function createQuery(url, data){
 
 const urlList = {
     learnerLanguages : "http://localhost:3000/learner/myProfile/myLanguages",
-    getLanguages: "http://localhost:3000/learner/requests/getLanguages"    
+    getLanguages: "http://localhost:3000/learner/requests/getLanguages"
+        
 
 }
 
