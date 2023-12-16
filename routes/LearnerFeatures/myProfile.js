@@ -14,7 +14,31 @@ router
 router
     .route("/updateInfo")
     .put((req, res) => {
-        console.log("Update Info")
+
+        let user = req.body
+
+        console.log(user)
+
+        let sqlQuery = `UPDATE learner SET learnername = ($1), surname = ($2), gender = ($3), email = ($4) WHERE learnerid = ($5)`
+        values = [user.name, user.surname, user.gender, user.email, user.learnerId,]
+
+        try{
+            let respond = connection.query(sqlQuery, values)
+            
+            respond.then((result) => {
+
+                try{
+                    console.log(result)
+                    res.send(200)
+                }catch(e){
+                    console.log(e)
+                }
+                
+            })
+
+        }catch(e){
+            console.log(e)
+        }    
     })
 
 // For getting users languages and their level

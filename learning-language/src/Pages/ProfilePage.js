@@ -14,17 +14,64 @@ const listOfUrl = urlList.urlList
 const createQuery = urlList.createQuery
 
 
-const UserInfo = ({ user }) => {
+const UserInfo = ({user}) => {
+
+  const [name, setName] = useState("")
+  const [surName, setSurname] = useState("")
+  const [email, setEmail] = useState("")
+  const [gender, setGender] = useState("")
+  const [pronunciation, setPronunciation ] = useState("")
+
+  const handleNameChange = (event) => {
+    setName(event.target.value);
+  };
+
+  const handleSurnameChange = (event) => {
+    setSurname(event.target.value);
+  };
+
+  const handleEmailChange = (event) => {
+    setEmail(event.target.value);
+  };
+
+  const handleGenderChange = (event) => {
+    setGender(event.target.value);
+  };
+
+  const handlePronunciationChange = (event) => {
+    setPronunciation(event.target.value);
+  };
+
+
+
+  const updateInfo = () => {
+
+    let user = {
+      "learnerId" : "a18fbf9acca53f39a929",
+      "name" : name,
+      "surname" : surName,
+      "gender" : gender,
+      "email" : email,
+      "pronunciation" : pronunciation
+    }
+
+    console.log(user)
+    
+    axios.put("http://localhost:3000/learner/myProfile/updateInfo", user)
+
+  }
+
   return (
       <Paper elevation={3} sx={{width: '25ch', padding:2,}}>
           <Stack component="form" sx={{width: '25ch',}} spacing={2} noValidateautoComplete="off">
               <Typography variant="h6">Profile Information</Typography>
               <Avatar sx={{ bgcolor: deepOrange[500] }}>J</Avatar>
-              <TextField label="Full Name" defaultValue={user.name} variant="filled" />
-              <TextField label="Email" defaultValue={user.email} variant="filled" />
-              <TextField label="Gender" defaultValue={user.gender} variant="filled" />
-              <TextField label="Pronunciation" defaultValue={user.pronunciation} variant="filled" />
-              <Button variant="contained">Update</Button>
+              <TextField onChange={handleNameChange} label="Name" defaultValue={user.name} variant="filled" />
+              <TextField onChange={handleSurnameChange} label="Surname" defaultValue={user.name} variant="filled" />
+              <TextField onChange={handleEmailChange} label="Email" defaultValue={user.email} variant="filled" />
+              <TextField onChange={handleGenderChange} label="Gender" defaultValue={user.gender} variant="filled" />
+              <TextField onChange={handlePronunciationChange} label="Pronunciation" defaultValue={user.pronunciation} variant="filled" />
+              <Button onClick={() => updateInfo()} variant="contained">Update</Button>
           </Stack>
       </Paper>
   );
@@ -184,4 +231,9 @@ const ProfilePage = () => {
     }/>
   );
 };
+
+function updateInfo(){
+
+}
+
 export default ProfilePage;
