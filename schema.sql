@@ -128,6 +128,13 @@ CREATE TABLE IF NOT EXISTS teacherLanguages(
 /* ALTER TABLE Level ADD rank INT */
 
 
+CREATE VIEW teacher_name_surname AS
+    SELECT teacherid, teacherName, surname FROM teacher;
 
 
-
+SELECT teacherLanguages.teacherid ,teacherName, surname FROM teacher_name_surname ,teacherLanguages, Level a, Level b, Level c
+         WHERE teacherLanguages.languageName = 'English'
+               AND teacherLanguages.level = a.level
+               AND b.level = 'A1' AND c.level = 'C2'
+               AND a.rank >= b.rank AND a.rank <= c.rank
+               AND teacher_name_surname.teacherId = teacherLanguages.teacherid;
