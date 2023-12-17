@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Card, CardContent, Typography, Button, Box, Grid, Paper } from '@mui/material';
 import CourseComponent from '../Components/CourseComponent';
 import Popup from '../Components/PopupComponent';
@@ -8,7 +8,7 @@ import PopupRegisterComponent from '../Components/PopupRegisterComponent';
 import axios  from 'axios';
 import urlList from '../urllist'
 
-
+// Bunlari silme burda bir sıkıntı var.
 const activeCoursesData = [
     {id: 1, title: 'Sample Course', teacher: 'Alex Hale', language: 'English', level: 'A1', status: 'Active', progress: '%20', meetingDate: '01.01.2023', description: 'Description for the sample course.'},
     {id: 2, title: 'Sample Course', teacher: 'Alex Hale', language: 'English', level: 'A1', status: 'Active', progress: '%20', meetingDate: '01.01.2023', description: 'Description for the sample course.'},
@@ -19,26 +19,41 @@ const activeCoursesData = [
 const finishedCoursesData = [
     {id: 3, title: 'Sample Course', teacher: 'Alex Hale', language: 'English', level: 'A1', status: 'Active', progress: '%20', meetingDate: '01.01.2023', description: 'Description for the sample course.'},
     {id: 4, title: 'Sample Course', teacher: 'Alex Hale', language: 'English', level: 'A1', status: 'Active', progress: '%20', meetingDate: '01.01.2023', description: 'Description for the sample course.'}
-];   
+];
+
 
 const ClassPage = () => {
-    const [activeCourses, setActiveCourses] = useState(activeCoursesData);
-    const [finishedCourses, setFinishedCourses] = useState(finishedCoursesData);
+    const [activeCourses, setActiveCourses] = useState([activeCoursesData]);
+    const [finishedCourses, setFinishedCourses] = useState([finishedCoursesData]);
     const [waitingCourses, setWaitingCourses] = useState([])
 
-    fetchWaitingCourses().then((result) => {
-      setWaitingCourses(result)
-    })
+    useEffect(() => {
 
-    fetchActiveCourses().then((result) => {
-      setActiveCourses(result)
-    })
+      fetchWaitingCourses().then((result) => {
 
-    fetchFinishedCourses().then((result) => {
-      setFinishedCourses(result)
-    })
+        if(result.length !== 0){
+          setWaitingCourses(result)
+        }
+  
+      })
+  
+      fetchActiveCourses().then((result) => {
+  
+        if(result.length !== 0){
+          setActiveCourses(result)
+        }
+        
+      })
+  
+      fetchFinishedCourses().then((result) => {
+        if(result.length !== 0){
+          setFinishedCourses(result)
+        }
+      })
+  
+    }, [])
 
-
+    
 
     const [isPopupOpen, setPopupOpen] = useState(false);
 
