@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { Card, CardContent, Typography, Button, FormControl,MenuItem,Select,InputLabel  } from '@mui/material';
+import { Card, CardContent, Typography, Button, FormControl,MenuItem,Select,InputLabel, useStepContext  } from '@mui/material';
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import axios  from 'axios';
 import Popup from './PopupComponent';
 
 
@@ -11,17 +12,43 @@ const PopupRegisterComponent = () => {
     const [selectedLanguage, setSelectedLanguage] = useState('');
     const [selectedLevel, setSelectedLevel] = useState('');
     const [selectedTeacher, setSelectedTeacher] = useState('');
+    const [selectedDate, setSelectedDate] = useState();
+
+
+    const [languages, setLanguages] = useState([])
+    const [levels, setLevels] = useState([])
+    const [teachers, setTeachers] = useState([])
+    
+
+    
+    fetchLanguages().then((result => {
+        setLanguages(result.data)
+    }))
+
+    fetchLevels().then((result) => {
+        setLevels(result.data)
+    })
+
 
     const handleLanguageChange = (event) => {
         setSelectedLanguage(event.target.value);
-      };
-      const handleLevelChange = (event) => {
+    };
+    
+    const handleLevelChange = (event) => {
         setSelectedLevel(event.target.value);
-      };
-      const handleTeacherChange = (event) => {
+    };
+      
+    const handleTeacherChange = (event) => {
         setSelectedTeacher(event.target.value);
-      };
+    };
 
+    const handleDateChange = (date) => {
+        setSelectedDate(date)
+    }
+
+
+    
+    /*
     const addLanguageDataContent = [
         {language: 'English'},
         {language: 'French'},
@@ -36,6 +63,8 @@ const PopupRegisterComponent = () => {
         {level: 'C1'},
         {level: 'C2'},
       ];
+      */
+
       const addTeacherDataContent = [
         {teacher: 'Brixton Randall'},
         {teacher: 'Tomas Faulkner'},
@@ -50,9 +79,9 @@ const PopupRegisterComponent = () => {
                 <FormControl fullWidth className='margin-top-1'>
                     <InputLabel>Language</InputLabel>
                     <Select value={selectedLanguage} onChange={handleLanguageChange} label="Language">
-                    {addLanguageDataContent.map((data, index) => (
-                        <MenuItem key={index} value={data.language}>
-                        {data.language}
+                    {languages.map((data, index) => (
+                        <MenuItem key={index} value={data.languagename}>
+                        {data.languagename}
                         </MenuItem>
                     ))}
                     </Select>
@@ -60,7 +89,7 @@ const PopupRegisterComponent = () => {
                 <FormControl fullWidth className='margin-top-1'>
                     <InputLabel>Level</InputLabel>
                     <Select value={selectedLevel} onChange={handleLevelChange} label="Level">
-                    {addLevelDataContent.map((data, index) => (
+                    {levels.map((data, index) => (
                         <MenuItem key={index} value={data.level}>
                         {data.level}
                         </MenuItem>
@@ -80,13 +109,44 @@ const PopupRegisterComponent = () => {
                 <FormControl fullWidth className='margin-top-1'>
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                     <DemoContainer components={['DatePicker']} >
-                        <DatePicker label="Basic date picker" />
+                        <DatePicker value={selectedDate} onChange={handleDateChange} label="Basic date picker" />
                     </DemoContainer>
                 </LocalizationProvider>
                 </FormControl>
             </CardContent>
+
+            <Button onClick={() => handleClick(selectedLanguage, selectedLevel, selectedTeacher, selectedDate)}> Add Course </Button>
+
+
         </Card>
     );
 };
   
+async function fetchLevels(){
+    let result = await axios.get("http://localhost:3000/learner/requests/getLevels")
+    return result;
+} 
+
+async function fetchLanguages(){
+    let result = await axios.get("http://localhost:3000/learner/requests/getLanguages")
+    return result;
+}
+
+async function fetchTeachers(){
+    
+}
+
+
+
+
 export default PopupRegisterComponent;
+
+
+function handleClick(languages, levels, teachers, date){
+
+    console.log("Languages" , languages)
+    console.log("Levels" , levels)
+    console.log("Teachers" , teachers)
+    console.log("Date is", date.$d)
+
+}

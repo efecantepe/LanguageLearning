@@ -1,7 +1,10 @@
 "use strict"
 
 const express = require("express")
+const myProfile = require("./TeacherFeatures/myProfile")
 let router = express.Router()
+
+router.use("/myProfile", myProfile)
 
 router
     .route("/")

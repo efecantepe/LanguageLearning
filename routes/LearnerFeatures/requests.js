@@ -25,7 +25,7 @@ router
     .route("/getLevels")
     .get((req, res) => {
         
-        let sqlQuery = `Select * FROM level`
+        let sqlQuery = `Select * FROM level Order BY rank`
         let respond = connection.query(sqlQuery)
 
         respond.then((response) => {

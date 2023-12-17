@@ -114,7 +114,18 @@ INSERT INTO Gender VALUES
 
 INSERT INTO learnerLanguages VALUES
                         ('French', 'a18fbf9acca53f39a929', 'A1' ),
-                        ('English', 'a18fbf9acca53f39a929', 'B2')
+                        ('English', 'a18fbf9acca53f39a929', 'B2');
+
+CREATE TABLE IF NOT EXISTS teacherLanguages(
+    languageName varchar(50),
+    teacherid varchar(50),
+    level varchar(50),
+    FOREIGN KEY (languageName) references Language(languageName),
+    FOREIGN KEY (teacherid) references teacher(teacherid),
+    FOREIGN KEY (level) references Level(level)
+);
+
+/* ALTER TABLE Level ADD rank INT */
 
 
 
