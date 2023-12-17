@@ -59,7 +59,6 @@ const PopupRegisterComponent = () => {
         setLevels(result.data)
     })
 
-
     const handleLanguageChange = (event) => {
         setSelectedLanguage(event.target.value);
     };
@@ -138,9 +137,9 @@ const PopupRegisterComponent = () => {
                     <InputLabel>Teacher</InputLabel>
                     <Select defaultValue='' disabled = {isDisabled} value={selectedTeacher} onChange={handleTeacherChange} label="Teacher">
                     
-                    {   
+                    {
                         teachers.map((data, index) => (
-                            <MenuItem key={index} value= {data.teachername + " " + data.surname}  >
+                            <MenuItem key={index} value= { data.teacherid }  >
                                 {data.teachername} {data.surname}
                             </MenuItem>
                         ))
@@ -197,12 +196,21 @@ async function fetchTeachers(languageName, minLevel, maxLevel){
 export default PopupRegisterComponent;
 
 
-function handleClick(languages, selectedMinLevel , selectedMaxLevel , teachers, date){
+function handleClick(selectedLanguage, selectedMinLevel, selectedMaxLevel, selectedTeacher, selectedDate){
 
-    console.log("Languages" , languages)
-    console.log("Min Level" , selectedMinLevel)
-    console.log("Max Level" , selectedMaxLevel)
-    console.log("Teachers" , teachers)
-    console.log("Date is", date.$d)
+    let data = {
+
+        "language" : selectedLanguage,
+        "minLevel" : selectedMinLevel,
+        "maxLevel" : selectedMaxLevel,
+        "learnerid" : "a18fbf9acca53f39a929",
+        "teacherid" : selectedTeacher,
+        "date" : selectedDate
+
+    }
+
+
+
+    axios.post("http://localhost:3000/learner/myClasses/addClass", data)
 
 }

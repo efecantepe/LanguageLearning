@@ -1,26 +1,138 @@
 const express = require("express")
 let router = express.Router()
+const connection = require("../../db/db")
+
 
 router
-    .route("/addRequest")
+    .route("/addClass")
     .post((req, res) =>{
-        console.log(req.body)
-        console.log("myClasses-learner add request successful")
+        
+        const {language, minLevel, maxLevel, learnerid, teacherid, date} = req.body
+
+        let sqlQuery = `INSERT INTO class (languageName, learnerid, teacherid, classlevel, classDate) 
+                                    VALUES (($1), ($2), ($3), ($4), ($5))`
+
+        let values = [language, learnerid, teacherid, maxLevel, date]
+
+        console.log(values)
+
+        
+
+        try{
+
+            let response = connection.query(sqlQuery, values)
+            
+            response.then((e) => {
+
+                try{
+                    console.log(e)
+                }
+
+                catch(e){
+                    console.log(e)
+                }
+            })
+
+        }catch(e){
+            console.log(e)
+        }
+
+
     })
 
 // show old classes for the learner
 router
-    .route("/showOldClasses")
+    .route("/getWaitingClasses")
     .get((req, res) =>{
-        res.send("showing old classes")
+
+        let learnerId = req.query.learnerId
+
+        let sqlQuery = `Select teacher.teachername,  waitingClasses.* FROM waitingClasses, teacher WHERE learnerid = ($1) AND teacher.teacherid = waitingClasses.teacherid`
+        let values = [learnerId,]
+
+        let response = connection.query(sqlQuery, values)
+
+        response.then((result) => {
+
+            if(result.rowCount === 0){
+                res.send(result.rows)
+            }
+
+            else{
+                res.send(result.rows)
+            }  
+        })
     })
 
 // show present classes for the learner
 router
-    .route("/showNewClasses")
+    .route("/getActiveClasses")
     .get((req, res) =>{
-        res.send("showing new classes")
+        let learnerId = req.query.learnerId
+
+        let sqlQuery = `Select * FROM activeClasses WHERE learnerid = ($1)`
+        let values = [learnerId,]
+
+        let response = connection.query(sqlQuery, values)
+
+        response.then((result) => {
+
+            if(result.rowCount === 0){
+                res.send(result.rows)
+            }
+
+            else{
+                res.send(result.rows)
+            }  
+        })
     })
+
+router
+    .route("/getRejectedClasses")
+    .get((req, res) =>{
+        let learnerId = req.query.learnerId
+
+        let sqlQuery = `Select * FROM rejectedClasses WHERE learnerid = ($1)`
+        let values = [learnerId,]
+
+        let response = connection.query(sqlQuery, values)
+
+        response.then((result) => {
+
+            if(result.rowCount === 0){
+                res.send(result.rows)
+            }
+
+            else{
+                res.send(result.rows)
+            }  
+        })
+    })
+
+
+router
+    .route("/getFinishedClasses")
+    .get((req, res) =>{
+        let learnerId = req.query.learnerId
+
+        let sqlQuery = `Select * FROM finishedClasses WHERE learnerid = ($1)`
+        let values = [learnerId,]
+
+        let response = connection.query(sqlQuery, values)
+
+        response.then((result) => {
+
+            if(result.rowCount === 0){
+                res.send(result.rows)
+            }
+
+            else{
+                res.send(result.rows)
+            }  
+        })
+    })
+
+
 
 // show class detail
 router

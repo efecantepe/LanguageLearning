@@ -5,7 +5,11 @@ const Login = ({ onLogin }) => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
 
+
   const handleLogin = (e) => {
+
+    //email, password, type : learner , teacher
+
     e.preventDefault();
     if (email === 's@s.com' && password === '123') {
       onLogin('Student');

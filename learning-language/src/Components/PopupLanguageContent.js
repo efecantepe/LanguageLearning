@@ -22,8 +22,6 @@ const PopupLanguageContent = () => {
 
     function sendLanguage(){
 
-
-
         axios.post('http://localhost:3000/learner/myProfile/addNewLanguage', {
 
             "languageName" : selectedLanguage,

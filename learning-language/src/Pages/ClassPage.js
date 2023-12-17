@@ -5,6 +5,8 @@ import Popup from '../Components/PopupComponent';
 import '../Css/Components.css'
 import MainLayout from '../Components/MainLayout';
 import PopupRegisterComponent from '../Components/PopupRegisterComponent';
+import axios  from 'axios';
+import urlList from '../urllist'
 
 
 const activeCoursesData = [
@@ -22,6 +24,22 @@ const finishedCoursesData = [
 const ClassPage = () => {
     const [activeCourses, setActiveCourses] = useState(activeCoursesData);
     const [finishedCourses, setFinishedCourses] = useState(finishedCoursesData);
+    const [waitingCourses, setWaitingCourses] = useState([])
+
+    fetchWaitingCourses().then((result) => {
+      setWaitingCourses(result)
+    })
+
+    fetchActiveCourses().then((result) => {
+      setActiveCourses(result)
+    })
+
+    fetchFinishedCourses().then((result) => {
+      setFinishedCourses(result)
+    })
+
+
+
     const [isPopupOpen, setPopupOpen] = useState(false);
 
     const handleRegisterCourse = (courseId, courseType) => {
@@ -44,6 +62,7 @@ const ClassPage = () => {
   return (
     <MainLayout children={
       <div>
+
         <div>
         <Paper>
           <Typography variant="h4" gutterBottom>
@@ -52,7 +71,7 @@ const ClassPage = () => {
               <Box sx={{ display: 'flex', justifyContent: 'flex-start', padding:1}}>
                 Active Courses
               </Box>
-              </Grid>
+              </Grid> 
               <Grid item xs={6} className='margin-top-1'>
               <Box sx={{ display: 'flex', justifyContent: 'flex-end', padding:1}}>
                 <Button variant="contained" color="success" onClick={openPopup}>Register</Button>
@@ -67,23 +86,90 @@ const ClassPage = () => {
           </Box>
           </Paper>
         </div>
+        
+        <div>
+          <Paper>
+            <Typography variant="h4" gutterBottom>
+              Waiting Courses
+            </Typography>
+            <Box sx={{ display: 'flex', flexDirection: 'row', overflowX: 'auto', width:700 }}>
+            {waitingCourses.map((course) => (
+              <CourseComponent course={course}/>
+            ))}
+            </Box>
+            </Paper>
+        </div>    
 
         <div>
           <Paper>
-          <Typography variant="h4" gutterBottom>
-            Finished Courses
-          </Typography>
-          <Box sx={{ display: 'flex', flexDirection: 'row', overflowX: 'auto', width:700 }}>
-          {finishedCourses.map((course) => (
-            <CourseComponent course={course}/>
-          ))}
-          </Box>
-          </Paper>
+            <Typography variant="h4" gutterBottom>
+              Finished Courses
+            </Typography>
+            <Box sx={{ display: 'flex', flexDirection: 'row', overflowX: 'auto', width:700 }}>
+            {finishedCourses.map((course) => (
+              <CourseComponent course={course}/>
+            ))}
+            </Box>
+            </Paper>
         </div>
+
         <Popup open={isPopupOpen} onClose={closePopup} title="Register Course" content={<PopupRegisterComponent/>} actionText="Register" onAction={handleAction}/>
       </div>
     }/>
   );
 };
+
+async function fetchWaitingCourses(){
+
+  let user = {
+    learnerId : "a18fbf9acca53f39a929"
+  }
+
+  let url = urlList.createQuery("http://localhost:3000/learner/myClasses/getWaitingClasses", user)
+
+  let rows = await axios.get(url)
+
+
+  console.log(rows.data)
+
+  return rows.data;
+
+}
+
+async function fetchActiveCourses(){
+
+  let user = {
+    learnerId : "a18fbf9acca53f39a929"
+  }
+
+  let url = urlList.createQuery("http://localhost:3000/learner/myClasses/getActiveClasses", user)
+
+  let rows = await axios.get(url)
+
+
+  console.log(rows.data)
+
+  return rows.data;
+
+
+}
+
+async function fetchFinishedCourses(){
+
+  let user = {
+    learnerId : "a18fbf9acca53f39a929"
+  }
+
+  let url = urlList.createQuery("http://localhost:3000/learner/myClasses/getFinishedClasses", user)
+
+  let rows = await axios.get(url)
+
+
+  console.log(rows.data)
+
+  return rows.data;
+
+}
+
 
 export default ClassPage;

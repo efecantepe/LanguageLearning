@@ -63,34 +63,7 @@ CREATE TABLE IF NOT EXISTS targetLanguages(
     FOREIGN KEY (targetLevel) references Level(level)
 );
 
-CREATE TABLE IF NOT EXISTS class(
 
-    classId INT PRIMARY KEY , /* can be redundant*/
-    languageName varchar(50),
-    learnerId varchar(50),
-    teacherId varchar(50),
-    classLevel varchar(50),
-    creationTime date default NOW(),
-    classDate date,
-    classStatus VARCHAR(50) default 'pending',
-
-    FOREIGN KEY (languageName) references Language(languageName),
-    FOREIGN KEY (learnerId) references Learner(learnerId),
-    FOREIGN KEY (teacherId) references Teacher(teacherId)
-
-);
-
-CREATE TABLE IF NOT EXISTS homeworksInClass(
-    classId INT,
-    teacherId varchar(50),
-    learnerId varchar(50),
-    homeworkDescription varchar(1000),
-    dueDate date,
-
-    FOREIGN KEY (learnerId) references Learner(learnerId),
-    FOREIGN KEY (teacherId) references Teacher(teacherId),
-    FOREIGN KEY (classId) references class(classId)
-);
 
 
 INSERT INTO Language VALUES
@@ -138,3 +111,57 @@ SELECT teacherLanguages.teacherid ,teacherName, surname FROM teacher_name_surnam
                AND b.level = 'A1' AND c.level = 'C2'
                AND a.rank >= b.rank AND a.rank <= c.rank
                AND teacher_name_surname.teacherId = teacherLanguages.teacherid;
+
+CREATE SEQUENCE class_seq START 1;
+
+CREATE TABLE IF NOT EXISTS class(
+
+    classId SERIAL PRIMARY KEY, /* can be redundant*/
+    languageName varchar(50),
+    learnerId varchar(50),
+    teacherId varchar(50),
+    classLevel varchar(50),
+    creationTime date default NOW(),
+    classDate date,
+    classStatus VARCHAR(50) default 'waiting',
+
+    FOREIGN KEY (languageName) references Language(languageName),
+    FOREIGN KEY (learnerId) references Learner(learnerId),
+    FOREIGN KEY (teacherId) references Teacher(teacherId)
+
+
+);
+
+CREATE TABLE IF NOT EXISTS homeworksInClass(
+    classId INT,
+    teacherId varchar(50),
+    learnerId varchar(50),
+    homeworkDescription varchar(1000),
+    dueDate date,
+
+    FOREIGN KEY (learnerId) references Learner(learnerId),
+    FOREIGN KEY (teacherId) references Teacher(teacherId),
+    FOREIGN KEY (classId) references class(classId)
+);
+
+CREATE VIEW waitingClasses AS (
+    Select * FROM class WHERE class.classStatus = 'waiting'
+);
+
+CREATE VIEW activeClasses AS (
+
+    Select * FROM class WHERE class.classStatus = 'active'
+
+);
+
+CREATE VIEW rejectedClasses AS(
+
+    Select * FROM class WHERE class.classStatus = 'rejected'
+
+);
+
+CREATE VIEW finishedClasses AS(
+    Select * FROM class WHERE class.classStatus = 'finished'
+)
+
+/*(ALTER TABLE class  ALTER COLUMN classId SET DEFAULT nextval('class_seq')*/
