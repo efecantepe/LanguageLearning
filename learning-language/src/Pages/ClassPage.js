@@ -26,7 +26,7 @@ const ClassPage = () => {
     const [activeCourses, setActiveCourses] = useState([activeCoursesData]);
     const [finishedCourses, setFinishedCourses] = useState([finishedCoursesData]);
     const [waitingCourses, setWaitingCourses] = useState([])
-
+ 
     useEffect(() => {
 
       fetchWaitingCourses().then((result) => {
@@ -137,7 +137,7 @@ const ClassPage = () => {
 async function fetchWaitingCourses(){
 
   let user = {
-    learnerId : "a18fbf9acca53f39a929"
+    learnerid : "a18fbf9acca53f39a929"
   }
 
   let url = urlList.createQuery("http://localhost:3000/learner/myClasses/getWaitingClasses", user)
@@ -154,7 +154,7 @@ async function fetchWaitingCourses(){
 async function fetchActiveCourses(){
 
   let user = {
-    learnerId : "a18fbf9acca53f39a929"
+    learnerid : "a18fbf9acca53f39a929"
   }
 
   let url = urlList.createQuery("http://localhost:3000/learner/myClasses/getActiveClasses", user)
@@ -172,7 +172,7 @@ async function fetchActiveCourses(){
 async function fetchFinishedCourses(){
 
   let user = {
-    learnerId : "a18fbf9acca53f39a929"
+    learnerid : "a18fbf9acca53f39a929"
   }
 
   let url = urlList.createQuery("http://localhost:3000/learner/myClasses/getFinishedClasses", user)

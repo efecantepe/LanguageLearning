@@ -1,74 +1,115 @@
 import React, { useState } from 'react';
 import { Card, CardContent, Typography, Button,Box } from '@mui/material';
 import Popup from './PopupComponent';
+import axios  from 'axios';
+import urlList from '../urllist'
 
 
-const CourseComponentContent = ({ course, action,onAccept,onReject,onCancel }) => {
-    const { id, title, language, level, teacher, learner, registerDate, meetingDate, progress, homework, status, feedback, description } = course;
+const CourseComponentContent = ({ course, action, onAccept,onReject,onCancel }) => {
+    //const { id, title, language, level, teacher, learner, registerDate, meetingDate, progress, homework, status, feedback, description } = course;
 
-    const renderButtons = () => {
-        if (course.status == 'Waiting') {
+
+
+    const renderButtons = (classid) => {
+        if (course.classstatus == 'waiting') {
             return (
                 <Box sx={{display: 'flex', justifyContent: 'space-between', width: '100%',}}>
-                    <Button variant="contained" color='success' onClick={onAccept}>
+                    <Button variant="contained" color='success' onClick={ () => accept(classid)}>
                         Accept
                     </Button>
-                    <Button variant="contained" color='error' onClick={onReject}>
+                    <Button variant="contained" color='error' onClick={() => reject(classid)}>
                         Reject
                     </Button>
                 </Box>
             );
-        } else if (course.status == 'Active') {
+
+
+        } else if (course.classstatus == 'active') {
             return (
-                <Button variant="contained" onClick={onCancel}>
+                <Button variant="contained" onClick={() => cancel()}>
                     Cancel
                 </Button>
             );
         }
+
+
+
     };
 
     return (
         <Card variant="outlined" sx={{ display: 'inline-block', minWidth: 300 }}>
             <CardContent>
                 <Typography variant="h5" component="div">
-                {title}
+                {"S"}
                 </Typography>
                 <hr/>
                 <Typography color="textSecondary" gutterBottom>
-                Course ID: {id}
+                Course ID: {course.classid}
                 </Typography>
                 <Typography color="textSecondary" gutterBottom>
-                Teacher: {teacher}
+                Teacher: {"Eylol Bedem"}
                 </Typography>
                 <Typography color="textSecondary" gutterBottom>
-                Learner: {learner}
+                Learner: {course.learnername}
                 </Typography>
                 <Typography color="textSecondary" gutterBottom>
-                Language: {language}, {level}
+                Language: {course.languagename} , {course.classLevel}
                 </Typography>
                 <Typography color="textSecondary" gutterBottom>
-                Status: {status}
+                Status: {course.classstatus}
                 </Typography>
                 <Typography color="textSecondary" gutterBottom>
-                Meeting Date: {meetingDate}
+                Meeting Date: {course.classdate}
                 </Typography>
                 <Typography color="textSecondary" gutterBottom>
-                Progress: {progress}
+                Progress: {"100%"}
                 </Typography>
                 <Typography color="textSecondary" gutterBottom>
-                Registered Date: {registerDate}
+                Registered Date: {course.classdate}
                 </Typography>
                 <Typography color="textSecondary" gutterBottom>
-                Homework: {homework}
+                Homework: {"Homework"}
                 </Typography>
                 <Typography color="textSecondary" gutterBottom>
-                Feedback: {feedback}
+                Feedback: {"Feedback"}
                 </Typography>
-                <Typography color="textSecondary">{description}</Typography>
-                {renderButtons()}
+                <Typography color="textSecondary">{"SAD"}</Typography>
+                {renderButtons(course.classid)}
             </CardContent>
         </Card>
     );
 };
+
+async function accept(id){
+
+    let course = {
+        classid : id
+    }
+
+    axios.post("http://localhost:3000/teacher/myClasses/accept", course)
+
+}   
+
+async function reject(id){
+    
+    let course = {
+        classid : id
+    }
+
+    axios.post("http://localhost:3000/teacher/myClasses/reject", course)
+
+    
+}
+
+async function cancel(){
+    
+
+    console.log("Cancel")
+
+    
+    
+}
+
+
   
 export default CourseComponentContent;

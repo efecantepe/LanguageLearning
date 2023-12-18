@@ -45,14 +45,17 @@ router
     .route("/getWaitingClasses")
     .get((req, res) =>{
 
-        let learnerid = req.query.learnerid
+        let teacherid = req.query.teacherid
 
-        let sqlQuery = `Select teacher.teachername,  waitingClasses.* FROM waitingClasses, teacher WHERE learnerid = ($1) AND teacher.teacherid = waitingClasses.teacherid`
-        let values = [learnerid,]
+        let sqlQuery = `Select learner.learnername,  waitingClasses.* FROM waitingClasses, learner WHERE teacherid = ($1) AND learner.learnerid = waitingClasses.learnerid`
+        let values = [teacherid,]
 
         let response = connection.query(sqlQuery, values)
 
         response.then((result) => {
+
+        
+            console.log(result.rows)
 
             if(result.rowCount === 0){
                 res.send(result.rows)
@@ -68,14 +71,19 @@ router
 router
     .route("/getActiveClasses")
     .get((req, res) =>{
-        let learnerid = req.query.learnerid
+        let teacherid = req.query.teacherid
 
-        let sqlQuery = `Select teacher.teachername,  activeClasses.* FROM activeClasses, teacher WHERE learnerid = ($1) AND teacher.teacherid = activeClasses.teacherid`
-        let values = [learnerid,]
+        console.log("Teacher id !!!!!!", teacherid)
+
+        let sqlQuery = `Select learner.learnername, activeClasses.* FROM activeClasses, learner WHERE teacherid = ($1) AND learner.learnerid = activeClasses.learnerid`
+        let values = [teacherid,]
 
         let response = connection.query(sqlQuery, values)
 
         response.then((result) => {
+
+            
+            console.log("Active Table !!!!!!!", result.rows)
 
             if(result.rowCount === 0){
                 res.send(result.rows)
@@ -90,14 +98,17 @@ router
 router
     .route("/getRejectedClasses")
     .get((req, res) =>{
-        let learnerid = req.query.learnerid
+        let teacherid = req.query.teacherid
 
-        let sqlQuery = `Select teacher.teachername,  rejectedClasses.* FROM rejectedClasses, teacher WHERE learnerid = ($1) AND teacher.teacherid = rejectedClasses.teacherid`
-        let values = [learnerid,]
+        let sqlQuery = `Select learner.learnername,  rejectedClasses.* FROM rejectedClasses, learner WHERE teacherid = ($1) AND learner.learnerid = rejectedClasses.learnerid`
+        let values = [teacherid,]
 
         let response = connection.query(sqlQuery, values)
 
         response.then((result) => {
+
+        
+            console.log(result.rows)
 
             if(result.rowCount === 0){
                 res.send(result.rows)
@@ -113,14 +124,17 @@ router
 router
     .route("/getFinishedClasses")
     .get((req, res) =>{
-        let learnerid = req.query.learnerid
+        let teacherid = req.query.teacherid
 
-        let sqlQuery = `Select teacher.teachername,  finishedClasses.* FROM finishedClasses, teacher WHERE learnerid = ($1) AND teacher.teacherid = finishedClasses.teacherid`
-        let values = [learnerid,]
+        let sqlQuery = `Select learner.learnername,  finishedClasses.* FROM finishedClasses, learner WHERE teacherid = ($1) AND learner.learnerid = finishedClasses.learnerid`
+        let values = [teacherid,]
 
         let response = connection.query(sqlQuery, values)
 
         response.then((result) => {
+
+        
+            console.log(result.rows)
 
             if(result.rowCount === 0){
                 res.send(result.rows)
@@ -132,6 +146,52 @@ router
         })
     })
 
+
+router
+    .route("/accept")
+    .post((req, res) => {
+        console.log(req.body.classid)
+
+        let values = [req.body.classid,]
+        let sqlQuery = "UPDATE class SET classstatus = 'active' WHERE classid = ($1) "
+
+        let result = connection.query(sqlQuery, values)
+
+        result.then((a) => {
+
+            console.log(a)
+
+            try{
+                res.send(200)
+            }catch(e){
+                res.send(400)
+            }
+
+        })
+    })
+
+router
+    .route("/reject")
+    .post((req, res) => {
+        console.log(req.body.classid)
+
+        let values = [req.body.classid,]
+        let sqlQuery = "UPDATE class SET classstatus = 'rejected' WHERE classid = ($1) "
+
+        let result = connection.query(sqlQuery, values)
+
+        result.then((a) => {
+
+            console.log(a)
+
+            try{
+                res.send(200)
+            }catch(e){
+                res.send(400)
+            }
+
+        })
+    })
 
 
 // show class detail

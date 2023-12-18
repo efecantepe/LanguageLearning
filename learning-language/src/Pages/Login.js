@@ -10,6 +10,8 @@ const Login = ({ onLogin }) => {
 
     //email, password, type : learner , teacher
 
+    
+
     e.preventDefault();
     if (email === 's@s.com' && password === '123') {
       onLogin('Student');

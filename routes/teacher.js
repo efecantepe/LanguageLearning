@@ -2,9 +2,11 @@
 
 const express = require("express")
 const myProfile = require("./TeacherFeatures/myProfile")
+const myClasses = require("./TeacherFeatures/myClasses")
 let router = express.Router()
 
 router.use("/myProfile", myProfile)
+router.use("/myClasses", myClasses)
 
 router
     .route("/")
@@ -17,7 +19,7 @@ router
 router
     .route("/speak")
     .get((req,res) => {
-        res.send("Native Speaker Speak ")
+        res.send("Teacher Speak ")
     })
 
 

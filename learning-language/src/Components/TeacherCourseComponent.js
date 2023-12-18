@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { Card, CardContent, Typography, Button } from '@mui/material';
 import Popup from './PopupComponent';
 import TeacherCourseComponentContent from './TeacherCourseComponentContent';
-
+import axios  from 'axios';
+import urlList from '../urllist'
 
 const TeacherCourseComponent = ({ course, onRegister }) => {
     const { id, title, language, level, teacher, learner, registerDate, meetingDate, progress, homework, status, feedback, description } = course;
@@ -19,28 +20,28 @@ const TeacherCourseComponent = ({ course, onRegister }) => {
         <Card variant="outlined" sx={{ display: 'inline-block', minWidth: 300 }}>
             <CardContent>
                 <Typography variant="h5" component="div">
-                {title}
+                {"Couse Title IS EMPTY"}
                 </Typography>
                 <hr/>
                 <Typography color="textSecondary" gutterBottom>
-                Course ID: {id}
+                Course ID: {course.classid}
                 </Typography>
                 <Typography color="textSecondary" gutterBottom>
-                Learner: {learner}
+                Learner: {course.learname}
                 </Typography>
                 <Typography color="textSecondary" gutterBottom>
-                Language: {language}, {level}
+                Language: {course.languagename} , {course.classlevel}
                 </Typography>
                 <Typography color="textSecondary" gutterBottom>
-                Status: {status}
+                Status: {course.classstatus}
                 </Typography>
                 <Typography color="textSecondary" gutterBottom>
-                Meeting Date: {meetingDate}
+                Meeting Date: {course.classdate}
                 </Typography>
                 <Typography color="textSecondary" gutterBottom>
-                Progress: {progress}
+                Progress: {"100%"}
                 </Typography>
-                <Typography color="textSecondary">{description}</Typography>
+                <Typography color="textSecondary">{"DESCRIPTION IS EMPTY"}</Typography>
                 <Button variant="contained" onClick={openPopup}>
                 View
                 </Button>

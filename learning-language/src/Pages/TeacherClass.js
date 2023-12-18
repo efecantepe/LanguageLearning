@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Card, CardContent, Typography, Button, Box, Grid, Paper } from '@mui/material';
 import CourseComponent from '../Components/CourseComponent';
 import Popup from '../Components/PopupComponent';
@@ -6,10 +6,13 @@ import '../Css/Components.css'
 import MainLayout from '../Components/MainLayout';
 import PopupRegisterComponent from '../Components/PopupRegisterComponent';
 import TeacherCourseComponent from '../Components/TeacherCourseComponent';
+import urllist from '../urllist';
+import axios  from 'axios';
 
-
+/*
 const activeCoursesData = [
     {id: 1, title: 'Sample Course', learner: 'Berkley Rush', registerDate: '12.12.2022', homework: 'Book 1 Reeding', feedback: 'Great Work!', teacher: 'Alex Hale', language: 'English', level: 'A1', status: 'Active', progress: '%20', meetingDate: '01.01.2023', description: 'Description for the sample course.'},
+
     {id: 2, title: 'Sample Course', learner: 'Berkley Rush', registerDate: '12.12.2022', homework: 'Book 1 Reeding', feedback: 'Great Work!', teacher: 'Alex Hale', language: 'English', level: 'A1', status: 'Waiting', progress: '%20', meetingDate: '01.01.2023', description: 'Description for the sample course.'},
     {id: 5, title: 'Sample Course', learner: 'Berkley Rush', registerDate: '12.12.2022', homework: 'Book 1 Reeding', feedback: 'Great Work!', teacher: 'Alex Hale', language: 'English', level: 'A1', status: 'Active', progress: '%20', meetingDate: '01.01.2023', description: 'Description for the sample course.'},
     {id: 6, title: 'Sample Course', learner: 'Berkley Rush', registerDate: '12.12.2022', homework: 'Book 1 Reeding', feedback: 'Great Work!', teacher: 'Alex Hale', language: 'English', level: 'A1', status: 'Active', progress: '%20', meetingDate: '01.01.2023', description: 'Description for the sample course.'}
@@ -18,11 +21,47 @@ const activeCoursesData = [
 const finishedCoursesData = [
     {id: 3, title: 'Sample Course', learner: 'Berkley Rush', registerDate: '12.12.2022', homework: 'Book 1 Reeding', feedback: 'Great Work!', teacher: 'Alex Hale', language: 'English', level: 'A1', status: 'Finished', progress: '%20', meetingDate: '01.01.2023', description: 'Description for the sample course.'},
     {id: 4, title: 'Sample Course', learner: 'Berkley Rush', registerDate: '12.12.2022', homework: 'Book 1 Reeding', feedback: 'Great Work!', teacher: 'Alex Hale', language: 'English', level: 'A1', status: 'Finished', progress: '%20', meetingDate: '01.01.2023', description: 'Description for the sample course.'}
-];   
+];
+*/   
 
 const TeacherClass = () => {
-    const [activeCourses, setActiveCourses] = useState(activeCoursesData);
-    const [finishedCourses, setFinishedCourses] = useState(finishedCoursesData);
+    const [activeCourses, setActiveCourses] = useState([]);
+    const [finishedCourses, setFinishedCourses] = useState([]);
+    const [waitingCourses, setWaitingCourses] = useState([])
+
+    
+    useEffect(() => {
+
+
+      fetchActiveCourses().then((result) => {
+
+        if(result.length !== 0){
+          setActiveCourses(result)
+        }
+        
+
+      })
+
+      fetchWaitingCourses().then((result) => {
+
+        if(result.length !== 0){
+          setWaitingCourses(result)
+        }
+        
+
+      })
+
+      fetchFinishedCourses().then((result) => {
+        if(result.length !== 0){
+          setFinishedCourses(result)
+        }
+      })
+    }, [])
+
+
+
+
+
     const [isPopupOpen, setPopupOpen] = useState(false);
 
     const handleRegisterCourse = (courseId, courseType) => {
@@ -71,6 +110,20 @@ const TeacherClass = () => {
         <div>
           <Paper>
           <Typography variant="h4" gutterBottom>
+            Waiting Courses
+          </Typography>
+          <Box sx={{ display: 'flex', flexDirection: 'row', overflowX: 'auto', width:700 }}>
+          {waitingCourses.map((course) => (
+            <TeacherCourseComponent course={course}/>
+          ))}
+          </Box>
+          </Paper>
+        </div>    
+
+
+        <div>
+          <Paper>
+          <Typography variant="h4" gutterBottom>
             Finished Courses
           </Typography>
           <Box sx={{ display: 'flex', flexDirection: 'row', overflowX: 'auto', width:700 }}>
@@ -85,4 +138,56 @@ const TeacherClass = () => {
   );
 };
 
+async function fetchActiveCourses(){
+  let user = {
+    teacherid : "e0351a27737749cb76ed"
+  }
+  let url = urllist.createQuery("http://localhost:3000/teacher/myClasses/getActiveClasses", user)
+  let result = await axios.get(url)
+
+  return result.data
+
+}
+
+async function fetchRejectedCourses(){
+
+  let user = {
+    teacherid : "e0351a27737749cb76ed"
+  }
+  let url = urllist.createQuery("http://localhost:3000/teacher/myClasses/getRejectedClasses", user)
+  let result = await axios.get(url)
+
+  return result.data
+
+}
+
+async function fetchWaitingCourses(){
+
+  let user = {
+    teacherid : "e0351a27737749cb76ed"
+  }
+  let url = urllist.createQuery("http://localhost:3000/teacher/myClasses/getWaitingClasses", user)
+  let result = await axios.get(url)
+
+  console.log(result.data)
+
+
+  return result.data
+
+}
+
+async function fetchFinishedCourses(){
+
+  let user = {
+    teacherid : "e0351a27737749cb76ed"
+  }
+  let url = urllist.createQuery("http://localhost:3000/teacher/myClasses/getFinishedClasses", user)
+  let result = await axios.get(url)
+
+  return result.data
+
+}
+
+
 export default TeacherClass;
+
