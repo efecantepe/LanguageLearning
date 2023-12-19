@@ -6,6 +6,7 @@ import { Container,Grid,TextField,FormControl,MenuItem,Select,InputLabel,Box,But
 import { useNavigate } from 'react-router-dom';
 import '../Css/Components.css';
 import Header from '../Components/Header'
+import User from './User';
 
 const Login = ({ onLogin }) => {
   const [email, setEmail] = useState('');
@@ -19,11 +20,52 @@ const Login = ({ onLogin }) => {
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
 
-    setLoggedIn(true);
+    console.log("Email", email)
+    console.log("Password", password)
+    console.log("User Type", userType)
 
-    if (loggedIn) {
-      navigate('/profile');
+    let obj = {
+
+      "username" : email,
+      "password" : password,
+      "user_type" : userType
+
     }
+
+    let url = urlList.createQuery("http://localhost:3000/login", obj)
+
+    let response = axios.get(url)
+
+    response.then((result) => {
+
+        console.log(result)
+
+        if(result.data.length === 0){
+
+          console.log("You Are Wrong")
+          
+        }
+
+        else if(result.data.length === 1){
+          setLoggedIn(true)
+
+          console.log(userType)
+
+          if(userType === 'learner'){
+            new User(result.data.learnerid, result.data.learnername, result.data.surname, result.data.email)
+            navigate('/profile')
+          }
+
+          else if (userType === 'teacher'){
+
+
+
+            new User(result.data.teacherid, result.data.teachername, result.data.surname, result.data.email)
+            navigate('/TeacherProfile')
+          }
+          //navigate('/profile');
+        }
+    })
   };
 
   return (
@@ -39,7 +81,7 @@ const Login = ({ onLogin }) => {
                   <FormControl variant="filled" sx={{ m: 1, width:'50ch' }}>
                     <InputLabel  sx={{margin:1}}>User Type</InputLabel>
                     <Select  value={userType} onChange={(e) => setRole(e.target.value)} sx={{margin:1,marginRight:3, backgroundColor:'white'}}>
-                      <MenuItem value={'student'}>Student</MenuItem>
+                      <MenuItem value={'learner'}>Learner</MenuItem>
                       <MenuItem value={'teacher'}>Teacher</MenuItem>
                       <MenuItem value={'admin'}>Admin</MenuItem>
                     </Select>
