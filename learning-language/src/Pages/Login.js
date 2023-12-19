@@ -1,48 +1,50 @@
 import React, { useState } from 'react';
+import urlList from '../urllist';
+import sendRequest from '../axios';
+import axios from 'axios';
+import { Container,Grid,TextField,FormControl,MenuItem,Select,InputLabel,Box,Button  } from '@mui/material';
+import '../Css/Components.css';
+import Header from '../Components/Header'
 
 const Login = ({ onLogin }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [userType, setRole] = useState('');
   const [error, setError] = useState(null);
 
-
-  const handleLogin = (e) => {
-
-    //email, password, type : learner , teacher
-
-    
-
-    e.preventDefault();
-    if (email === 's@s.com' && password === '123') {
-      onLogin('Student');
-      setError(null);
-    } else if (email === 't@t.com' && password === '123') {
-      onLogin('Teacher');
-      setError(null);
-    } else {
-      setError('Invalid credentials');
-    }
-  };
-
   return (
-    <div>
-      <h2>Login</h2>
-      <form onSubmit={handleLogin}>
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <button type="submit">Login</button>
-        {error && <p style={{ color: 'red' }}>{error}</p>}
-      </form>
+    <div className='main'>
+      <Container maxWidth="lg">
+        <Header/>
+        <Grid container justifyContent="center">
+          <Grid sx={{paddingLeft:2}}>
+            <div>
+              <form >
+                <FormControl sx={{width:'50ch'}}>
+                  <TextField variant='filled' id="outlined-required" label="Email"  type="email" value={email} onChange={(e) => setEmail(e.target.value)} sx={{margin:2, backgroundColor:'white'}}/>
+                  <TextField variant='filled' id="outlined-required" label="Password"  type="password" value={password} onChange={(e) => setPassword(e.target.value)} sx={{margin:2, backgroundColor:'white'}}/>
+                  <FormControl variant="filled" sx={{ m: 1, width:'50ch' }}>
+                    <InputLabel  sx={{margin:1}}>User Type</InputLabel>
+                    <Select  value={userType} onChange={(e) => setRole(e.target.value)} sx={{margin:1,marginRight:3, backgroundColor:'white'}}>
+                      <MenuItem value={'student'}>Student</MenuItem>
+                      <MenuItem value={'teacher'}>Teacher</MenuItem>
+                      <MenuItem value={'admin'}>Admin</MenuItem>
+                    </Select>
+                  </FormControl>
+                  <Box sx={{display: 'flex', justifyContent: 'space-between', width: '100%',}}>
+                    <Button variant="contained" href='/Register' >
+                        Register
+                    </Button>
+                    <Button type="submit" variant="contained" color='success'>
+                        Login
+                    </Button>
+                </Box>
+                </FormControl>
+              </form>
+            </div>
+          </Grid>
+        </Grid>
+      </Container>
     </div>
   );
 };
