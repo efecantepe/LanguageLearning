@@ -4,6 +4,12 @@ DROP TABLE IF EXISTS learnerLanguages;
 DROP TABLE IF EXISTS targetLanguages;
 DROP TABLE IF EXISTS Learner ;
 DROP TABLE IF EXISTS Teacher;
+
+DROP TABLE IF EXISTS inbox_participants;
+DROP TABLE IF EXISTS inbox;
+DROP TABLE IF EXISTS messages;
+
+
 DROP TABLE IF EXISTS Language;
 DROP TABLE IF EXISTS Level;
 DROP TABLE IF EXISTS Gender;
@@ -62,57 +68,6 @@ CREATE TABLE IF NOT EXISTS targetLanguages(
     FOREIGN KEY (learnerId) references Learner(learnerId),
     FOREIGN KEY (targetLevel) references Level(level)
 );
-
-
-
-
-INSERT INTO Language VALUES
-                    ('English'),
-                    ('French'),
-                    ('Turkish');
-
-INSERT INTO Level Values
-                      ('A1'),
-                      ('A2'),
-                      ('B1'),
-                      ('B2'),
-                      ('C1'),
-                      ('C2'),
-                      ('Native');
-
-INSERT INTO Gender VALUES
-                       ('Male'),
-                       ('Female'),
-                       ('Other');
-
-INSERT INTO learnerLanguages VALUES
-                        ('French', 'a18fbf9acca53f39a929', 'A1' ),
-                        ('English', 'a18fbf9acca53f39a929', 'B2');
-
-CREATE TABLE IF NOT EXISTS teacherLanguages(
-    languageName varchar(50),
-    teacherid varchar(50),
-    level varchar(50),
-    FOREIGN KEY (languageName) references Language(languageName),
-    FOREIGN KEY (teacherid) references teacher(teacherid),
-    FOREIGN KEY (level) references Level(level)
-);
-
-/* ALTER TABLE Level ADD rank INT */
-
-
-CREATE VIEW teacher_name_surname AS
-    SELECT teacherid, teacherName, surname FROM teacher;
-
-
-SELECT teacherLanguages.teacherid ,teacherName, surname FROM teacher_name_surname ,teacherLanguages, Level a, Level b, Level c
-         WHERE teacherLanguages.languageName = 'English'
-               AND teacherLanguages.level = a.level
-               AND b.level = 'A1' AND c.level = 'C2'
-               AND a.rank >= b.rank AND a.rank <= c.rank
-               AND teacher_name_surname.teacherId = teacherLanguages.teacherid;
-
-CREATE SEQUENCE class_seq START 1;
 
 CREATE TABLE IF NOT EXISTS class(
 
@@ -189,7 +144,60 @@ CREATE TABLE inbox_participants(
     PRIMARY KEY (user_id, inbox_id)
 );
 
-DROP TABLE IF EXISTS inbox_participants;
-DROP TABLE IF EXISTS inbox;
-DROP TABLE IF EXISTS messages;
+CREATE TABLE IF NOT EXISTS teacherLanguages(
+    languageName varchar(50),
+    teacherid varchar(50),
+    level varchar(50),
+    FOREIGN KEY (languageName) references Language(languageName),
+    FOREIGN KEY (teacherid) references teacher(teacherid),
+    FOREIGN KEY (level) references Level(level)
+);
+
+/* ALTER TABLE Level ADD rank INT */
+
+
+CREATE VIEW teacher_name_surname AS
+    SELECT teacherid, teacherName, surname FROM teacher;
+
+
+
+
+
+INSERT INTO Language VALUES
+                    ('English'),
+                    ('French'),
+                    ('Turkish');
+
+INSERT INTO Level Values
+                      ('A1'),
+                      ('A2'),
+                      ('B1'),
+                      ('B2'),
+                      ('C1'),
+                      ('C2'),
+                      ('Native');
+
+INSERT INTO Gender VALUES
+                       ('Male'),
+                       ('Female'),
+                       ('Other');
+
+/*
+INSERT INTO learnerLanguages VALUES
+                        ('French', 'a18fbf9acca53f39a929', 'A1' ),
+                        ('English', 'a18fbf9acca53f39a929', 'B2');
+
+
+
+SELECT teacherLanguages.teacherid ,teacherName, surname FROM teacher_name_surname ,teacherLanguages, Level a, Level b, Level c
+         WHERE teacherLanguages.languageName = 'English'
+               AND teacherLanguages.level = a.level
+               AND b.level = 'A1' AND c.level = 'C2'
+               AND a.rank >= b.rank AND a.rank <= c.rank
+               AND teacher_name_surname.teacherId = teacherLanguages.teacherid;
+
+CREATE SEQUENCE class_seq START 1;
+*/
+
+
 
