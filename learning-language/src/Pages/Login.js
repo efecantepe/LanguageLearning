@@ -3,6 +3,7 @@ import urlList from '../urllist';
 import sendRequest from '../axios';
 import axios from 'axios';
 import { Container,Grid,TextField,FormControl,MenuItem,Select,InputLabel,Box,Button  } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 import '../Css/Components.css';
 import Header from '../Components/Header'
 
@@ -12,6 +13,19 @@ const Login = ({ onLogin }) => {
   const [userType, setRole] = useState('');
   const [error, setError] = useState(null);
 
+  const navigate = useNavigate();
+  const [loggedIn, setLoggedIn] = useState(false);
+
+  const handleLoginSubmit = async (e) => {
+    e.preventDefault();
+
+    setLoggedIn(true);
+
+    if (loggedIn) {
+      navigate('/profile');
+    }
+  };
+
   return (
     <div className='main'>
       <Container maxWidth="lg">
@@ -19,7 +33,6 @@ const Login = ({ onLogin }) => {
         <Grid container justifyContent="center">
           <Grid sx={{paddingLeft:2}}>
             <div>
-              <form >
                 <FormControl sx={{width:'50ch'}}>
                   <TextField variant='filled' id="outlined-required" label="Email"  type="email" value={email} onChange={(e) => setEmail(e.target.value)} sx={{margin:2, backgroundColor:'white'}}/>
                   <TextField variant='filled' id="outlined-required" label="Password"  type="password" value={password} onChange={(e) => setPassword(e.target.value)} sx={{margin:2, backgroundColor:'white'}}/>
@@ -35,12 +48,11 @@ const Login = ({ onLogin }) => {
                     <Button variant="contained" href='/Register' >
                         Register
                     </Button>
-                    <Button type="submit" variant="contained" color='success'>
+                    <Button type="submit" variant="contained" color='success' onClick={handleLoginSubmit}>
                         Login
                     </Button>
                 </Box>
                 </FormControl>
-              </form>
             </div>
           </Grid>
         </Grid>
