@@ -5,7 +5,6 @@ const express = require("express")
 
 const requests = require("./LearnerFeatures/requests")
 const myProfile = require("./LearnerFeatures/myProfile")
-const myFriends = require("./LearnerFeatures/myFriends")
 const myClasses = require("./LearnerFeatures/myClasses")
 const dashboard = require("./LearnerFeatures/dashboard")
 
@@ -14,7 +13,6 @@ let router = express.Router()
 
 router.use("/myProfile", myProfile)
 router.use("/requests", requests)
-router.use("/myFriends", myFriends)
 router.use("/myClasses", myClasses)
 router.use("/dashboard", dashboard)
 

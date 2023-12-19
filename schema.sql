@@ -162,6 +162,34 @@ CREATE VIEW rejectedClasses AS(
 
 CREATE VIEW finishedClasses AS(
     Select * FROM class WHERE class.classStatus = 'finished'
-)
+);
 
-/*(ALTER TABLE class  ALTER COLUMN classId SET DEFAULT nextval('class_seq')*/
+CREATE TABLE messages (
+
+    inbox_id varchar(8),
+    user_id varchar(20),
+    "message" varchar(500),
+    created_at date default now()
+
+);
+
+CREATE TABLE inbox(
+
+    inbox_id varchar(8),
+    last_message varchar(500) default NULL,
+    last_sent_user_id varchar(20) default NULL
+
+);
+
+CREATE TABLE inbox_participants(
+
+    user_id varchar(20),
+    inbox_id varchar(8),
+
+    PRIMARY KEY (user_id, inbox_id)
+);
+
+DROP TABLE IF EXISTS inbox_participants;
+DROP TABLE IF EXISTS inbox;
+DROP TABLE IF EXISTS messages;
+

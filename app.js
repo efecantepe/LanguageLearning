@@ -6,6 +6,7 @@ const nativeSpeaker = require("./routes/nativeSpeaker")
 const learner = require("./routes/learner")
 const teacher = require("./routes/teacher")
 const login_register = require("./routes/login_register")
+const chat = require("./routes/chat")
 
 const connection = require("./db/db")
 
@@ -19,12 +20,16 @@ app.use(express.json())
 app.use("/nativeSpeaker", nativeSpeaker)
 app.use("/learner", learner)
 app.use("/teacher", teacher)
+app.use("/chat", chat)
 app.use("", login_register )
+
 
 
 app.get('/', (req, res) => {
     res.send('Hello World')
 })
+
+
 
 async function doWork(){
 
