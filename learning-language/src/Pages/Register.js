@@ -25,7 +25,6 @@ const Register = () => {
         <Grid container justifyContent="center">
           <Grid sx={{paddingLeft:2}}>
             <div>
-              <form >
                 <FormControl sx={{width:'50ch'}}>
                   <TextField variant='filled' id="outlined-required" label="Username" type="userName"  value={userName} onChange={(e) => setUserName(e.target.value)} sx={{margin:2, backgroundColor:'white'}}/>
                   <TextField variant='filled' id="outlined-required" label="Name" type="name" value={name} onChange={(e) => setName(e.target.value)} sx={{margin:2, backgroundColor:'white'}}/>
@@ -43,7 +42,7 @@ const Register = () => {
                   <FormControl variant="filled" sx={{ m: 1, width:'50ch' }}>
                     <InputLabel  sx={{margin:1}}>User Type</InputLabel>
                     <Select  value={userType} onChange={(e) => setRole(e.target.value)} sx={{margin:1,marginRight:3, backgroundColor:'white'}}>
-                      <MenuItem value={'student'}>Student</MenuItem>
+                      <MenuItem value={'learner'}>Student</MenuItem>
                       <MenuItem value={'teacher'}>Teacher</MenuItem>
                       <MenuItem value={'admin'}>Admin</MenuItem>
                     </Select>
@@ -57,7 +56,6 @@ const Register = () => {
                     </Button>
                 </Box>
                 </FormControl>
-              </form>
             </div>
           </Grid>
         </Grid>
@@ -67,6 +65,10 @@ const Register = () => {
 };
 
 async function RegisterSubmit(username,name,surname,email,password,gender,userType){
+  
+  console.log(username, "   ",name, "   ",surname, "   ",email, "    ",password, "    ",gender,"    ",userType);
+
+
   let obj ={
     username:username,
     name:name,

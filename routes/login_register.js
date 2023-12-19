@@ -19,6 +19,8 @@ router
     .route("/register")
     .post((req, res) =>{
 
+        console.log("ASD")
+
         let user = req.body
 
         if(user.user_type === "learner"){
