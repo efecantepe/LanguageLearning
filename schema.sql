@@ -153,7 +153,7 @@ CREATE TABLE IF NOT EXISTS teacherLanguages(
     FOREIGN KEY (level) references Level(level)
 );
 
-/* ALTER TABLE Level ADD rank INT */
+ALTER TABLE Level ADD rank INT
 
 
 CREATE VIEW teacher_name_surname AS
