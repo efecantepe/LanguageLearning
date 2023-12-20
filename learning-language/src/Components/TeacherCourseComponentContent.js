@@ -7,7 +7,33 @@ import urlList from '../urllist'
 
 const CourseComponentContent = ({ course, action, onAccept,onReject,onCancel }) => {
     //const { id, title, language, level, teacher, learner, registerDate, meetingDate, progress, homework, status, feedback, description } = course;
+    const [homeworkFile, setHomeworkFile] = useState(null);
+    const handleFileChange = (e) => {
+        const file = e.target.files[0];
+        setHomeworkFile(file);
+    };
 
+    const uploadHomework = async () => {
+        if (homeworkFile) {
+            const formData = new FormData();
+            formData.append('homework', homeworkFile);
+
+            try {
+                const response = await axios.post('YOUR_UPLOAD_ENDPOINT', formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                    },
+                });
+                // Handle response or perform necessary actions after successful upload
+                console.log('Homework uploaded:', response.data);
+            } catch (error) {
+                // Handle error during upload
+                console.error('Error uploading homework:', error);
+            }
+        } else {
+            console.error('No file selected');
+        }
+    };
 
 
     const renderButtons = (classid) => {
@@ -68,7 +94,11 @@ const CourseComponentContent = ({ course, action, onAccept,onReject,onCancel }) 
                 Registered Date: {course.classdate}
                 </Typography>
                 <Typography color="textSecondary" gutterBottom>
-                Homework: {"Homework"}
+                <input type="file" onChange={handleFileChange} />
+                    <Button variant="contained" onClick={uploadHomework}>
+                        Upload Homework
+                    </Button>
+
                 </Typography>
                 <Typography color="textSecondary" gutterBottom>
                 Feedback: {"Feedback"}
