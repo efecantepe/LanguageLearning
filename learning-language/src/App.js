@@ -9,6 +9,7 @@ import TeacherHome from './Pages/TeacherHome';
 import TeacherProfile from './Pages/TeacherProfile';
 import TeacherClass from './Pages/TeacherClass';
 import Friend from './Pages/Friend'
+import { useContext } from 'react';
 
 const App = () => {
   return (

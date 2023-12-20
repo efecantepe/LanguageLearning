@@ -6,7 +6,6 @@ import { Container,Grid,TextField,FormControl,MenuItem,Select,InputLabel,Box,But
 import { useNavigate } from 'react-router-dom';
 import '../Css/Components.css';
 import Header from '../Components/Header'
-import User from './User';
 
 const Login = ({ onLogin }) => {
   const [email, setEmail] = useState('');
@@ -49,18 +48,24 @@ const Login = ({ onLogin }) => {
         else if(result.data.length === 1){
           setLoggedIn(true)
 
-          console.log(userType)
+          let obj = {
+
+            id : result.data.id,
+            name : result.data.name,
+            surname: result.data.surname,
+            email : result.data.email
+
+          }
+
+          console.log("OBJ IS    " , obj)
 
           if(userType === 'learner'){
-            new User(result.data.learnerid, result.data.learnername, result.data.surname, result.data.email)
+            localStorage.setItem('user', JSON.stringify(obj))
             navigate('/profile')
           }
 
           else if (userType === 'teacher'){
-
-
-
-            new User(result.data.teacherid, result.data.teachername, result.data.surname, result.data.email)
+            localStorage.setItem('user', JSON.stringify(obj))
             navigate('/TeacherProfile')
           }
           //navigate('/profile');

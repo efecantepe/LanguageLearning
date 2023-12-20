@@ -16,8 +16,6 @@ const TeacherHome = () => {
     
     <div>
 
-        
-
         <p> Enter Message </p>
 
         <input
@@ -31,8 +29,8 @@ const TeacherHome = () => {
 
     </div>
    
-
   );
+  
 };
 
 export default TeacherHome;

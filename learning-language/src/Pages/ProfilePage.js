@@ -16,6 +16,9 @@ const createQuery = urlList.createQuery
 
 const UserInfo = ({user}) => {
 
+
+
+
   const [name, setName] = useState("")
   const [surName, setSurname] = useState("")
   const [email, setEmail] = useState("")
@@ -94,6 +97,13 @@ const EnrolledCourses = ({ courses }) => {
 };
 
 const ProfilePage = () => {
+
+  console.log("--------------------------")
+  console.log( JSON.parse(localStorage.getItem('user')))
+  console.log("--------------------------")
+
+
+
   const [isPopupOpen, setPopupOpen] = useState(false);
   const openPopup = () => { setPopupOpen(true);};
   const closePopup = () => { setPopupOpen(false);};
