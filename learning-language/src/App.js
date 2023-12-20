@@ -9,6 +9,7 @@ import TeacherHome from './Pages/TeacherHome';
 import TeacherProfile from './Pages/TeacherProfile';
 import TeacherClass from './Pages/TeacherClass';
 import Friend from './Pages/Friend'
+import Chat from './Pages/Chat';
 
 const App = () => {
   return (
@@ -22,7 +23,8 @@ const App = () => {
         <Route exact path="/TeacherClass" element={<TeacherClass />} />
         <Route exact path="/login" element={<Login />} />
         <Route exact path="/register" element={<Register />} />
-        <Route exact path='/chat' element = {<Friend/>}/>
+        <Route exact path='/Friend' element = {<Friend/>}/>
+        <Route exact path='/chat' element = {<Chat/>}/>
       </Routes>
     </BrowserRouter>
   );
