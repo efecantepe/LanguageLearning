@@ -56,10 +56,20 @@ const Login = ({ onLogin }) => {
             email : result.data.email
 
           }
-
+          
           console.log("OBJ IS    " , obj)
 
           if(userType === 'learner'){
+
+            let obj = result.data[0]
+
+            console.log(obj)
+
+            let id = result.data.learnerid
+            let name = result.data.learnername
+            let surname = result.data.surname
+            let email = result.data.email
+
             localStorage.setItem('user', JSON.stringify(obj))
             navigate('/profile')
           }
