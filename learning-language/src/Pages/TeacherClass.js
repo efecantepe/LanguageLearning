@@ -9,6 +9,9 @@ import TeacherCourseComponent from '../Components/TeacherCourseComponent';
 import urllist from '../urllist';
 import axios  from 'axios';
 
+let globalUser = JSON.parse(localStorage.getItem('user'))
+
+
 /*
 const activeCoursesData = [
     {id: 1, title: 'Sample Course', learner: 'Berkley Rush', registerDate: '12.12.2022', homework: 'Book 1 Reeding', feedback: 'Great Work!', teacher: 'Alex Hale', language: 'English', level: 'A1', status: 'Active', progress: '%20', meetingDate: '01.01.2023', description: 'Description for the sample course.'},
@@ -140,7 +143,7 @@ const TeacherClass = () => {
 
 async function fetchActiveCourses(){
   let user = {
-    teacherid : "e0351a27737749cb76ed"
+    teacherid : globalUser.id
   }
   let url = urllist.createQuery("http://localhost:3000/teacher/myClasses/getActiveClasses", user)
   let result = await axios.get(url)
@@ -152,7 +155,7 @@ async function fetchActiveCourses(){
 async function fetchRejectedCourses(){
 
   let user = {
-    teacherid : "e0351a27737749cb76ed"
+    teacherid : globalUser.id
   }
   let url = urllist.createQuery("http://localhost:3000/teacher/myClasses/getRejectedClasses", user)
   let result = await axios.get(url)
@@ -164,7 +167,7 @@ async function fetchRejectedCourses(){
 async function fetchWaitingCourses(){
 
   let user = {
-    teacherid : "e0351a27737749cb76ed"
+    teacherid : globalUser.id
   }
   let url = urllist.createQuery("http://localhost:3000/teacher/myClasses/getWaitingClasses", user)
   let result = await axios.get(url)
@@ -179,7 +182,7 @@ async function fetchWaitingCourses(){
 async function fetchFinishedCourses(){
 
   let user = {
-    teacherid : "e0351a27737749cb76ed"
+    teacherid : globalUser.id
   }
   let url = urllist.createQuery("http://localhost:3000/teacher/myClasses/getFinishedClasses", user)
   let result = await axios.get(url)

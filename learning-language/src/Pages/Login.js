@@ -47,34 +47,36 @@ const Login = ({ onLogin }) => {
 
         else if(result.data.length === 1){
           setLoggedIn(true)
-
-          let obj = {
-
-            id : result.data.id,
-            name : result.data.name,
-            surname: result.data.surname,
-            email : result.data.email
-
-          }
-          
-          console.log("OBJ IS    " , obj)
-
           if(userType === 'learner'){
 
-            let obj = result.data[0]
+            let data = result.data[0]
 
-            console.log(obj)
+            let obj = {
 
-            let id = result.data.learnerid
-            let name = result.data.learnername
-            let surname = result.data.surname
-            let email = result.data.email
+              id: data.learnerid,
+              name : data.learnername,
+              surname : data.surname,
+              email : data.email
+
+            }
 
             localStorage.setItem('user', JSON.stringify(obj))
             navigate('/profile')
           }
 
           else if (userType === 'teacher'){
+
+            let data = result.data[0]
+
+            let obj = {
+
+              id: data.teacherid,
+              name : data.teachername,
+              surname : data.surname,
+              email : data.email
+
+            }
+
             localStorage.setItem('user', JSON.stringify(obj))
             navigate('/TeacherProfile')
           }
@@ -82,6 +84,8 @@ const Login = ({ onLogin }) => {
         }
     })
   };
+
+  
 
   return (
     <div className='main'>

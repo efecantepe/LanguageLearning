@@ -10,6 +10,7 @@ import axios from 'axios';
 import PopupLanguageContent from '../Components/PopupLanguageContent';
 import Popup from '../Components/PopupComponent';
 
+let globalUser = JSON.parse(localStorage.getItem('user'))
 const listOfUrl = urlList.urlList
 const createQuery = urlList.createQuery
 
@@ -50,7 +51,7 @@ const UserInfo = ({user}) => {
   const updateInfo = () => {
 
     let user = {
-      "learnerId" : "a18fbf9acca53f39a929",
+      "learnerId" : globalUser.id,
       "name" : name,
       "surname" : surName,
       "gender" : gender,
@@ -97,13 +98,6 @@ const EnrolledCourses = ({ courses }) => {
 };
 
 const ProfilePage = () => {
-
-  console.log("--------------------------")
-  console.log( JSON.parse(localStorage.getItem('user')))
-  console.log("--------------------------")
-
-
-
   const [isPopupOpen, setPopupOpen] = useState(false);
   const openPopup = () => { setPopupOpen(true);};
   const closePopup = () => { setPopupOpen(false);};
@@ -157,7 +151,7 @@ const ProfilePage = () => {
     { title: 'Turkish C2' },
   ];
 
-  const params = {learnerId : "a18fbf9acca53f39a929"}
+  const params = {learnerId : globalUser.id}
   const [languages1, setLanguages1] = useState([])
   console.log(params)
   

@@ -10,6 +10,9 @@ import axios from 'axios';
 import PopupTeacherLanguageContent from '../Components/PopupTeacherLanguageContent';
 import Popup from '../Components/PopupComponent';
 
+let globalUser = JSON.parse(localStorage.getItem('user'))
+
+
 const listOfUrl = urlList.urlList
 const createQuery = urlList.createQuery
 
@@ -46,7 +49,7 @@ const UserInfo = ({ user }) => {
   const updateInfo = () => {
 
     let user = {
-      "teacherId" : "e0351a27737749cb76ed",
+      "teacherId" : globalUser.id,
       "name" : name,
       "surname" : surName,
       "gender" : gender,

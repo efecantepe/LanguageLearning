@@ -3,6 +3,8 @@ import { Card, CardContent, Typography, Button, FormControl,MenuItem,Select,Inpu
 import Popup from './PopupComponent';
 import axios from 'axios';
 
+let globalUser = JSON.parse(localStorage.getItem('user'))
+
 
 const PopupLanguageContent = () => {
     
@@ -26,7 +28,7 @@ const PopupLanguageContent = () => {
 
             "languageName" : selectedLanguage,
             "level" : selectedLevel,
-            "learnerId" : "a18fbf9acca53f39a929"
+            "learnerId" : globalUser.id
 
         })
 

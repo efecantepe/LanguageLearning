@@ -8,6 +8,8 @@ import PopupRegisterComponent from '../Components/PopupRegisterComponent';
 import axios  from 'axios';
 import urlList from '../urllist'
 
+let globalUser = JSON.parse(localStorage.getItem('user'))
+
 // Bunlari silme burda bir sıkıntı var.
 const activeCoursesData = [
     {id: 1, title: 'Sample Course', teacher: 'Alex Hale', language: 'English', level: 'A1', status: 'Active', progress: '%20', meetingDate: '01.01.2023', description: 'Description for the sample course.'},
@@ -137,7 +139,7 @@ const ClassPage = () => {
 async function fetchWaitingCourses(){
 
   let user = {
-    learnerid : "a18fbf9acca53f39a929"
+    learnerid : globalUser.id
   }
 
   let url = urlList.createQuery("http://localhost:3000/learner/myClasses/getWaitingClasses", user)
@@ -154,7 +156,7 @@ async function fetchWaitingCourses(){
 async function fetchActiveCourses(){
 
   let user = {
-    learnerid : "a18fbf9acca53f39a929"
+    learnerid : globalUser.id
   }
 
   let url = urlList.createQuery("http://localhost:3000/learner/myClasses/getActiveClasses", user)
@@ -172,7 +174,7 @@ async function fetchActiveCourses(){
 async function fetchFinishedCourses(){
 
   let user = {
-    learnerid : "a18fbf9acca53f39a929"
+    learnerid : globalUser.id
   }
 
   let url = urlList.createQuery("http://localhost:3000/learner/myClasses/getFinishedClasses", user)

@@ -11,6 +11,8 @@ import 'rc-slider/assets/index.css'
 
 import urllist from '../urllist';
 
+let globalUser = JSON.parse(localStorage.getItem('user'))
+
 
 const PopupRegisterComponent = () => {
 
@@ -203,7 +205,7 @@ function handleClick(selectedLanguage, selectedMinLevel, selectedMaxLevel, selec
         "language" : selectedLanguage,
         "minLevel" : selectedMinLevel,
         "maxLevel" : selectedMaxLevel,
-        "learnerid" : "a18fbf9acca53f39a929",
+        "learnerid" : globalUser.id,
         "teacherid" : selectedTeacher,
         "date" : selectedDate
 
