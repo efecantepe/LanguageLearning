@@ -8,6 +8,7 @@ import PopupRegisterComponent from '../Components/PopupRegisterComponent';
 import TeacherCourseComponent from '../Components/TeacherCourseComponent';
 import urllist from '../urllist';
 import axios  from 'axios';
+import TeacherLayout from '../Components/TeacherLayout';
 
 let globalUser = JSON.parse(localStorage.getItem('user'))
 
@@ -83,7 +84,7 @@ const TeacherClass = () => {
     };
 
   return (
-    <MainLayout children={
+    <TeacherLayout children={
       <div>
         <div>
         <Paper>

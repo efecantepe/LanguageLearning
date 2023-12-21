@@ -95,7 +95,7 @@ const Login = ({ onLogin }) => {
           <Grid sx={{paddingLeft:2}}>
             <div>
                 <FormControl sx={{width:'50ch'}}>
-                  <TextField variant='filled' id="outlined-required" label="Email"  type="email" value={email} onChange={(e) => setEmail(e.target.value)} sx={{margin:2, backgroundColor:'white'}}/>
+                  <TextField variant='filled' id="outlined-required" label="Username"  type="email" value={email} onChange={(e) => setEmail(e.target.value)} sx={{margin:2, backgroundColor:'white'}}/>
                   <TextField variant='filled' id="outlined-required" label="Password"  type="password" value={password} onChange={(e) => setPassword(e.target.value)} sx={{margin:2, backgroundColor:'white'}}/>
                   <FormControl variant="filled" sx={{ m: 1, width:'50ch' }}>
                     <InputLabel  sx={{margin:1}}>User Type</InputLabel>

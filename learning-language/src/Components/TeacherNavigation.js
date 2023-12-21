@@ -14,12 +14,12 @@ const useStyles = styled((theme) => ({
   },
 }));
 
-const NavigationBar = ({ onLogout }) => {
+const TeacherNavigation = ({ onLogout }) => {
   const classes = useStyles();
   return (
     <Paper sx={{ width: 256, maxWidth: '100%' }}>
     <MenuList>
-      <Link to="/home" className='link-style'>
+      <Link to="/TeacherHome" className='link-style'>
         <MenuItem>
           <ListItemIcon HomeIcon>
             <HomeIcon/>
@@ -27,7 +27,7 @@ const NavigationBar = ({ onLogout }) => {
           <ListItemText>Dashboard</ListItemText>
         </MenuItem>
       </Link>
-      <Link to="/profile" className='link-style'>
+      <Link to="/TeacherProfile" className='link-style'>
         <MenuItem>
           <ListItemIcon>
             <AccountBoxIcon/>
@@ -35,7 +35,7 @@ const NavigationBar = ({ onLogout }) => {
           <ListItemText>Profile Page</ListItemText>
         </MenuItem>
       </Link>
-      <Link to="/courses" className='link-style'>
+      <Link to="/TeacherClass" className='link-style'>
         <MenuItem>
           <ListItemIcon>
             <ClassIcon />
@@ -57,4 +57,4 @@ const NavigationBar = ({ onLogout }) => {
   );
 };
 
-export default NavigationBar;
+export default TeacherNavigation;
