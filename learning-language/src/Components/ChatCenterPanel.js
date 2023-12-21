@@ -6,7 +6,7 @@ import axios  from 'axios';
 
 let globalUser = JSON.parse(localStorage.getItem('user'))
 
-const ChatCenterPanel = () => {
+const ChatCenterPanel = (messages) => {
     const [message, setMessage] = useState('');
     const [chatMessages, setChatMessages] = useState([]);
     const [inbox_id, setInboxId] = useState()

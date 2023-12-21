@@ -6,9 +6,14 @@ import axios  from 'axios';
 
 let globalUser = JSON.parse(localStorage.getItem('user'))
 
+
+
+
 const LeftPanel = () => {
 
   const [inbox, setInboxes] = useState([])
+  
+
   /*
   fetchInboxes().then((result) => {
     setInboxes(result)
@@ -20,20 +25,19 @@ const LeftPanel = () => {
       <h2>Previous Messages</h2>
     </div>
   );
+
+
+
 };
 
 const CenterPanel = () => {
 
   const [messages, setMessages] = useState([])
 
-  
-
-  
-
   return (
     <div className="center-panel">
       <h2>Active Chat</h2>
-      <ChatCenterPanel/>
+      <ChatCenterPanel message = {messages}/>
     </div>
   );
 };
@@ -48,10 +52,14 @@ const RightPanel = () => {
 
 const ChatPanel = () => {
 
+  const [message, setMessages] = useState([])
+  const [inbox, setInboxes] = useState([])
+
+
   return (
     <div className="chat-grid">
       <LeftPanel />
-      <CenterPanel />
+      <CenterPanel messages = {message} />
       <RightPanel />
     </div>
   );
