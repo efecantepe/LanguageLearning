@@ -7,6 +7,8 @@ import { useNavigate } from 'react-router-dom';
 import '../Css/Components.css';
 import Header from '../Components/Header'
 
+
+
 const Login = ({ onLogin }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -17,6 +19,9 @@ const Login = ({ onLogin }) => {
   const [loggedIn, setLoggedIn] = useState(false);
 
   const handleLoginSubmit = async (e) => {
+
+    localStorage.removeItem('user')
+
     e.preventDefault();
 
     console.log("Email", email)
