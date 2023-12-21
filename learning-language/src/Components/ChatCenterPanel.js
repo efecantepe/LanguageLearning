@@ -6,10 +6,8 @@ import axios  from 'axios';
 
 let globalUser = JSON.parse(localStorage.getItem('user'))
 
-const ChatCenterPanel = (messages) => {
-    const [message, setMessage] = useState('');
-    const [chatMessages, setChatMessages] = useState([]);
-    const [inbox_id, setInboxId] = useState()
+const ChatCenterPanel = (message, chatMessages ,inbox_id) => {
+    
 
 
     /*
@@ -22,7 +20,7 @@ const ChatCenterPanel = (messages) => {
 
 
     const handleMessageChange = (e) => {
-      setMessage(e.target.value);
+      //setMessage(e.target.value);
     };
   
     const sendMessage = () => {
@@ -32,7 +30,7 @@ const ChatCenterPanel = (messages) => {
         send_message(message, inbox_id);
         
         
-        setMessage('');
+        //setMessage('');
       }
     };
   
@@ -60,19 +58,6 @@ const ChatCenterPanel = (messages) => {
       </div>
     );
   };
-
-
-  async function fetchMessages(inbox_id){
-
-    let values = [inbox_id,]
-  
-    let url = urllist.createQuery("http://localhost:3000/chat/getAllMessages")
-  
-    let result = await axios.get(url)
-  
-    return result
-  
-  }
 
   async function send_message(message, inbox_id){
 
