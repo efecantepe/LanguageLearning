@@ -155,8 +155,8 @@ const PopupRegisterComponent = ({ onCloseAndRefresh }) => {
 
                 <Box display="flex" justifyContent="flex-end">
                     <Button className='margin-top-1' variant='contained' 
-                    onClick={() => {handleClick(selectedLanguage, selectedMinLevel, selectedMaxLevel, selectedTeacher, selectedDate); onCloseAndRefresh();}}
-                    > Add Course </Button>
+                    onClick={() => {handleClick(selectedLanguage, selectedMinLevel, selectedMaxLevel, selectedTeacher, selectedDate); 
+                        onCloseAndRefresh();}} > Add Course </Button>
                 </Box>
 
             </CardContent>

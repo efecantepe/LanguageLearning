@@ -6,7 +6,7 @@ import axios from 'axios';
 let globalUser = JSON.parse(localStorage.getItem('user'))
 
 
-const PopupLanguageContent = () => {
+const PopupLanguageContent = ({onCloseAndRefresh}) => {
     
     const [selectedLanguage, setSelectedLanguage] = useState('');
     const [selectedLevel, setSelectedLevel] = useState('');
@@ -71,7 +71,7 @@ const PopupLanguageContent = () => {
                     </Select>
                 </FormControl>
                 <Box display="flex"  justifyContent="flex-end">
-                    <Button variant="contained" className='margin-top-1' onClick={() => sendLanguage()} > Add Language </Button>
+                    <Button variant="contained" className='margin-top-1' onClick={() => {sendLanguage();onCloseAndRefresh();}} > Add Language </Button>
                 </Box>
             </CardContent>
         </Card>

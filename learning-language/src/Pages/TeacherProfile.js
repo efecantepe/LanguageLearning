@@ -86,9 +86,9 @@ const TeacherProfile = () => {
   const openPopup = () => { setPopupOpen(true);};
   const closePopup = () => { setPopupOpen(false);};
 
-  const handleAction = () => {
-    console.log('Action performed within the popup');
-    closePopup();
+  const closePopupAndRefresh = () => {
+    setPopupOpen(false)
+    window.location.reload();
   };
   
   const [user, setUser] = useState([]);
@@ -128,7 +128,7 @@ const TeacherProfile = () => {
                     </Grid>
                 </Grid>
             </Paper>
-            <Popup open={isPopupOpen} onClose={closePopup} content={<PopupTeacherLanguageContent/>} title={"Add Language"}/>
+            <Popup open={isPopupOpen} onClose={closePopup} content={<PopupTeacherLanguageContent onCloseAndRefresh={closePopupAndRefresh}/>} title={"Add Language"}/>
         </div>
         }/>
   );

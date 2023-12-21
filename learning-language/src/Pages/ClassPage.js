@@ -132,7 +132,8 @@ const ClassPage = () => {
             </Paper>
         </div>
 
-        <Popup open={isPopupOpen} onClose={closePopup} title="Register Course" content={<PopupRegisterComponent onCloseAndRefresh={closePopupAndRefresh} />} />
+        <Popup open={isPopupOpen} onClose={closePopup} title="Register Course" 
+        content={<PopupRegisterComponent onCloseAndRefresh={closePopupAndRefresh} />} />
       </div>
     }/>
   );
