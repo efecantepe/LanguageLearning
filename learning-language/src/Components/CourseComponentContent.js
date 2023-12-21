@@ -12,7 +12,6 @@ const CourseComponentContent = ({ course, action }) => {
                 <Typography variant="h5" component="div">
                 {title}
                 </Typography>
-                <hr/>
                 <Typography color="textSecondary" gutterBottom>
                 Course ID: {id}
                 </Typography>

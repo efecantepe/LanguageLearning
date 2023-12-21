@@ -12,6 +12,8 @@ import Friend from './Pages/Friend'
 import Chat from './Pages/Chat';
 
 const App = () => {
+  
+  
   return (
     <BrowserRouter basename="/">
       <Routes>

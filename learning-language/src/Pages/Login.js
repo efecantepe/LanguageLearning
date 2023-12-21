@@ -66,7 +66,7 @@ const Login = ({ onLogin }) => {
             }
 
             localStorage.setItem('user', JSON.stringify(obj))
-            navigate('/profile')
+            navigate('/home')
           }
           
           else if (userType === 'teacher'){
@@ -83,7 +83,7 @@ const Login = ({ onLogin }) => {
             }
 
             localStorage.setItem('user', JSON.stringify(obj))
-            navigate('/TeacherProfile')
+            navigate('/TeacherHome')
           }
           //navigate('/profile');
         }

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Card, CardContent, Typography, Button, FormControl,MenuItem,Select,InputLabel, useStepContext  } from '@mui/material';
+import { Card, CardContent, Typography, Button, FormControl,MenuItem,Select,InputLabel, Box  } from '@mui/material';
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -14,7 +14,7 @@ import urllist from '../urllist';
 let globalUser = JSON.parse(localStorage.getItem('user'))
 
 
-const PopupRegisterComponent = () => {
+const PopupRegisterComponent = ({ onCloseAndRefresh }) => {
 
     const [isDisabled, setIsDisabled] = useState(true);
 
@@ -46,8 +46,6 @@ const PopupRegisterComponent = () => {
                 }
             })
         }
-
-        console.log("Hello World")
 
     }, [selectedLanguage, selectedMinLevel, selectedMaxLevel])
 
@@ -138,31 +136,31 @@ const PopupRegisterComponent = () => {
                 <FormControl fullWidth className='margin-top-1'>
                     <InputLabel>Teacher</InputLabel>
                     <Select defaultValue='' disabled = {isDisabled} value={selectedTeacher} onChange={handleTeacherChange} label="Teacher">
-                    
                     {
                         teachers.map((data, index) => (
                             <MenuItem key={index} value= { data.teacherid }  >
                                 {data.teachername} {data.surname}
                             </MenuItem>
                         ))
-                
                     }
-
-
                     </Select>
-
-                    
                 </FormControl>
                 <FormControl fullWidth className='margin-top-1'>
-                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <LocalizationProvider  dateAdapter={AdapterDayjs}>
                     <DemoContainer components={['DatePicker']} >
                         <DatePicker value={selectedDate} onChange={handleDateChange} label="Basic date picker" />
                     </DemoContainer>
                 </LocalizationProvider>
                 </FormControl>
-            </CardContent>
 
-            <Button onClick={() => handleClick(selectedLanguage, selectedMinLevel, selectedMaxLevel, selectedTeacher, selectedDate)}> Add Course </Button>
+                <Box display="flex" justifyContent="flex-end">
+                    <Button className='margin-top-1' variant='contained' 
+                    onClick={() => {handleClick(selectedLanguage, selectedMinLevel, selectedMaxLevel, selectedTeacher, selectedDate); onCloseAndRefresh();}}
+                    > Add Course </Button>
+                </Box>
+
+            </CardContent>
+            
         </Card>
     );
 };
@@ -191,9 +189,6 @@ async function fetchTeachers(languageName, minLevel, maxLevel){
     let result = await axios.get(url) 
     return result;
 }
-
-
-
 
 export default PopupRegisterComponent;
 

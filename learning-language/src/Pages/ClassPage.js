@@ -28,6 +28,8 @@ const ClassPage = () => {
     const [activeCourses, setActiveCourses] = useState([activeCoursesData]);
     const [finishedCourses, setFinishedCourses] = useState([finishedCoursesData]);
     const [waitingCourses, setWaitingCourses] = useState([])
+
+    
  
     useEffect(() => {
 
@@ -69,6 +71,11 @@ const ClassPage = () => {
 
     const closePopup = () => {
         setPopupOpen(false);
+    };
+
+    const closePopupAndRefresh = () => {
+      setPopupOpen(false)
+      window.location.reload();
     };
 
   return (
@@ -125,7 +132,7 @@ const ClassPage = () => {
             </Paper>
         </div>
 
-        <Popup open={isPopupOpen} onClose={closePopup} title="Register Course" content={<PopupRegisterComponent/>}/>
+        <Popup open={isPopupOpen} onClose={closePopup} title="Register Course" content={<PopupRegisterComponent onCloseAndRefresh={closePopupAndRefresh} />} />
       </div>
     }/>
   );

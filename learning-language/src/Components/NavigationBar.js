@@ -1,59 +1,56 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { styled } from '@mui/system';
-import '../Css/Components.css'
-import { AppBar, Toolbar, Typography, Button, Paper, MenuList, ListItemIcon, MenuItem,ListItemText, Icon } from '@mui/material';
+import '../Css/Components.css';
+import {
+  Paper,
+  MenuList,
+  ListItemIcon,
+  MenuItem,
+  ListItemText,
+} from '@mui/material';
 import HomeIcon from '@mui/icons-material/Home';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import ClassIcon from '@mui/icons-material/Class';
 import LogoutIcon from '@mui/icons-material/Logout';
 
-const useStyles = styled((theme) => ({
-  title: {
-    flexGrow: 1,
-  },
-}));
+const NavigationBar = () => {
+  const navigate = useNavigate();
 
-const NavigationBar = ({ onLogout }) => {
-  const classes = useStyles();
+  const handleLinkClick = (path) => {
+    navigate(path);
+    window.location.reload();
+  };
+
   return (
     <Paper sx={{ width: 256, maxWidth: '100%' }}>
-    <MenuList>
-      <Link to="/home" className='link-style'>
-        <MenuItem>
-          <ListItemIcon HomeIcon>
-            <HomeIcon/>
+      <MenuList>
+        <MenuItem onClick={() => handleLinkClick('/home')} className='link-style'>
+          <ListItemIcon>
+            <HomeIcon />
           </ListItemIcon>
           <ListItemText>Dashboard</ListItemText>
         </MenuItem>
-      </Link>
-      <Link to="/profile" className='link-style'>
-        <MenuItem>
+        <MenuItem onClick={() => handleLinkClick('/profile')} className='link-style'>
           <ListItemIcon>
-            <AccountBoxIcon/>
+            <AccountBoxIcon />
           </ListItemIcon>
           <ListItemText>Profile Page</ListItemText>
         </MenuItem>
-      </Link>
-      <Link to="/courses" className='link-style'>
-        <MenuItem>
+        <MenuItem onClick={() => handleLinkClick('/courses')} className='link-style'>
           <ListItemIcon>
             <ClassIcon />
           </ListItemIcon>
           <ListItemText>Courses</ListItemText>
         </MenuItem>
-      </Link>
-      <Link to="/" className='link-style'>
-        <MenuItem>
+        <MenuItem onClick={() => handleLinkClick('/')} className='link-style'>
           <ListItemIcon>
             <LogoutIcon />
           </ListItemIcon>
           <ListItemText>Logout</ListItemText>
         </MenuItem>
-      </Link>
       </MenuList>
     </Paper>
-    
   );
 };
 
