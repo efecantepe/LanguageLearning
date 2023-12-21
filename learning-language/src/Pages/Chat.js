@@ -1,13 +1,10 @@
 import React, { useState} from 'react';
 import { useEffect } from 'react';
 import '../Css/Chat.css'; 
-import React, { useState, useEffect } from 'react';
 import { List, ListItem, ListItemText, Divider,Avatar,Typography, FormControl,MenuItem,Select,InputLabel } from '@mui/material';
-import '../Css/Chat.css';
 import ChatCenterPanel from '../Components/ChatCenterPanel';
 import urllist from '../urllist';
 import axios  from 'axios';
-import { List, ListItem, ListItemText, Typography, Divider,Avatar } from '@mui/material';
 
 let globalUser = JSON.parse(localStorage.getItem('user'))
 
@@ -37,10 +34,29 @@ const getColorForLetter = (letter) => {
   return colorMap[letter.toUpperCase()] || '#CCCCCC'; // Default color if letter not found
 };
 
-const LeftPanel = () => {
+const LeftPanel = (props) => {
+
+  function handleClick(inbox_id){
+
+    //console.log(inbox_id)
+    props.parentLeftPanelCallBack(inbox_id)
+
+  }
 
   const [inbox, setInboxes] = useState([])
   
+  useEffect(() => {
+
+    fetchInboxes().then((result) => {
+      
+      console.log(result)
+      setInboxes(result.data)
+
+
+
+    })
+
+  }, [])
 
   /*
   fetchInboxes().then((result) => {
@@ -54,11 +70,11 @@ const LeftPanel = () => {
         Previous Messages
       </Typography>
       <List>
-        {previousChats.map((chat) => (
-          <React.Fragment key={chat.id}>
-            <ListItem button>
-              <Avatar sx={{color:'MintCream', bgcolor: getColorForLetter(chat.name.charAt(0)) }}> {chat.name.charAt(0)} </Avatar>
-              <ListItemText primary={chat.name} secondary={chat.lastMessage} sx={{ paddingLeft: 2 }} />
+        {inbox.map((chat) => (
+          <React.Fragment key={chat.inbox_id}>
+            <ListItem onClick={() => handleClick(chat.inbox_id)} button>
+              <Avatar sx={{color:'MintCream', bgcolor: getColorForLetter('a') }}> {"a"} </Avatar>
+              <ListItemText primary={"Efe"} secondary={"Hasan"} sx={{ paddingLeft: 2 }} />
             </ListItem>
             <Divider />
           </React.Fragment>
@@ -220,7 +236,7 @@ const ChatPanel = () => {
   const [message, setMessages] = useState([])
   const [inbox, setInboxes] = useState([])
   const [chatMessages, setChatMessages] = useState([]);
-  const [inbox_id, setInboxId] = useState()
+  const [inbox_id, setInboxId] = useState("00000000")
   const [people, setPeople] = useState()
 
 
@@ -248,13 +264,17 @@ const ChatPanel = () => {
   */
 
   
+  function setInboxIdLeftPanel(inbox_id){
+    setInboxId(inbox_id)
 
+    console.log("NEW ", inbox_id)
+  }
 
 
   return (
     <div className="chat-grid">
-      <LeftPanel inbox = {inbox} />
-      <ChatCenterPanel></ChatCenterPanel>
+      <LeftPanel parentLeftPanelCallBack = { (inbox_id) => setInboxIdLeftPanel(inbox_id)}/>
+      <ChatCenterPanel inbox_id = {inbox_id} ></ChatCenterPanel>
       <RightPanel peope = {people} />
     </div>
   );
@@ -264,9 +284,15 @@ async function fetchInboxes(){
 
   let id = globalUser.id
   
-  let values = [id]
+  let values = {
+
+    "id" : id
+
+  }
 
   let url = urllist.createQuery("http://localhost:3000/chat/myInboxes", values)
+
+  console.log(url)
 
   let result = await axios.get(url)
 

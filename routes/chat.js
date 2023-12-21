@@ -56,11 +56,13 @@ router
         let myId = req.query.id
 
         let values = [myId,]
-        let sqlQuery = `Select * FROM inbox JOIN inbox_participants ON inbox.inbox_id = inbox_participants.inbox_id WHERE inbox_participants.user_id = ($1)`
+        let sqlQuery = `Select * FROM inbox , inbox_participants WHERE inbox.inbox_id = inbox_participants.inbox_id AND inbox_participants.user_id = ($1)`
 
         let result = connection.query(sqlQuery, values)
 
         result.then((a) => {
+
+
             res.send(a.rows)
         })
 

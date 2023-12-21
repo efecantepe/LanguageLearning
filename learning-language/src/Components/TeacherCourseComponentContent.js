@@ -5,7 +5,7 @@ import axios  from 'axios';
 import urlList from '../urllist'
 
 
-const CourseComponentContent = ({ course, action, onAccept,onReject,onCancel ,onCloseAndRefresh}) => {
+const CourseComponentContent = ({ course, action, onAccept,onReject,onCancel }) => {
     //const { id, title, language, level, teacher, learner, registerDate, meetingDate, progress, homework, status, feedback, description } = course;
     const [homework, setHomeworkText] = useState('');
     const [isTextFieldLocked, setIsTextFieldLocked] = useState(false);
@@ -87,10 +87,10 @@ const CourseComponentContent = ({ course, action, onAccept,onReject,onCancel ,on
         if (course.classstatus == 'waiting') {
             return (
                 <Box sx={{display: 'flex', justifyContent: 'space-between', width: '100%',}}>
-                    <Button variant="contained" color='success' onClick={ () => {accept(classid); onCloseAndRefresh();}}>
+                    <Button variant="contained" color='success' onClick={ () => accept(classid)}>
                         Accept
                     </Button>
-                    <Button variant="contained" color='error' onClick={() => {reject(classid); onCloseAndRefresh();}}>
+                    <Button variant="contained" color='error' onClick={() => reject(classid)}>
                         Reject
                     </Button>
                 </Box>
