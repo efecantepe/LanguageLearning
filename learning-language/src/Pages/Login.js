@@ -63,7 +63,7 @@ const Login = ({ onLogin }) => {
             localStorage.setItem('user', JSON.stringify(obj))
             navigate('/profile')
           }
-
+          
           else if (userType === 'teacher'){
 
             let data = result.data[0]

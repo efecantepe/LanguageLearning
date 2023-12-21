@@ -25,14 +25,19 @@ const PopupLanguageContent = () => {
     function sendLanguage(){
 
 
-
-        axios.post('http://localhost:3000/teacher/myProfile/addNewLanguage', {
+        let obj = {
 
             "languageName" : selectedLanguage,
             "level" : selectedLevel,
             "teacherid" : globalUser.id
 
-        })
+        }
+
+        console.log(obj)
+
+        axios.post('http://localhost:3000/teacher/myProfile/addNewLanguage', obj)
+
+        
 
     }
 
