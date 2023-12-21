@@ -1,8 +1,9 @@
-import React from 'react';
-import { List, ListItem, ListItemText, Typography, Divider,Avatar } from '@mui/material';
-import { deepOrange } from '@mui/material/colors';
+import React, { useState, useEffect } from 'react';
+import { List, ListItem, ListItemText, Divider,Avatar,Typography, FormControl,MenuItem,Select,InputLabel } from '@mui/material';
 import '../Css/Chat.css';
 import ChatCenterPanel from '../Components/ChatCenterPanel';
+import axios  from 'axios';
+import urllist from '../urllist';
 
 const previousChats = [
   { id: 1, name: 'Eylul', lastMessage: 'Last message in Chat 1' },
@@ -58,9 +59,94 @@ const CenterPanel = () => {
 };
 
 const RightPanel = () => {
+
+    const [selectedLanguage, setSelectedLanguage] = useState('');
+    const [selectedMinLevel, setSelectedMinLevel] = useState('');
+    const [selectedMaxLevel, setSelectedMaxLevel] = useState('');
+    const [isDisabled, setIsDisabled] = useState(true);
+    const [teachers, setTeachers] = useState([])
+    const [languages, setLanguages] = useState([])
+    const [levels, setLevels] = useState([])
+    
+    useEffect(() => {
+
+        if(selectedLanguage === '' || selectedMinLevel === '' || selectedMaxLevel === ''){
+            setIsDisabled(true)
+        }
+
+        else{
+            setIsDisabled(false)
+            fetchTeachers(selectedLanguage, selectedMinLevel, selectedMaxLevel).then((result) => {
+                result.data.map((index, key) => {
+                    console.log(index , "    ", key)
+                })
+
+                if(result.data.length !== 0){
+                    setTeachers(result.data)
+                }
+            })
+        }
+
+    }, [selectedLanguage, selectedMinLevel, selectedMaxLevel])
+
+
+    
+    fetchLanguages().then((result => {
+        setLanguages(result.data)
+    }))
+
+    fetchLevels().then((result) => {
+        setLevels(result.data)
+    })
+
+    const handleLanguageChange = (event) => {
+        setSelectedLanguage(event.target.value);
+    };
+    
+    const handleMinLevelChange = (event) => {
+        setSelectedMinLevel(event.target.value);
+    };
+
+    const handleMaxLevelChange = (event) => {
+        setSelectedMaxLevel(event.target.value)
+    }
+
   return (
     <div className="right-panel">
-      <h2>People List</h2>
+      <Typography variant="h6" gutterBottom>
+        People List
+      </Typography>
+      <FormControl fullWidth className='margin-top-1'>
+                    <InputLabel>Language</InputLabel>
+                    <Select value={selectedLanguage} onChange={handleLanguageChange} label="Language">
+                    {languages.map((data, index) => (
+                        <MenuItem key={index} value={data.languagename}>
+                        {data.languagename}
+                        </MenuItem>
+                    ))}
+                    </Select>
+                </FormControl>
+                <FormControl fullWidth className='margin-top-1'>  
+                    <InputLabel>Min Level</InputLabel>
+                    <Select value={selectedMinLevel} onChange={handleMinLevelChange} label="Min Level">
+                    {levels.map((data, index) => (
+                        <MenuItem key={index} value={data.level}>
+                        {data.level}
+                        </MenuItem>
+                    ))}
+                    </Select>
+                </FormControl>
+                
+                <FormControl fullWidth className='margin-top-1'>  
+                    <InputLabel>Max Level</InputLabel>
+                    <Select value={selectedMaxLevel} onChange={handleMaxLevelChange} label="Max Level">
+                    {levels.map((data, index) => (
+                        <MenuItem key={index} value={data.level}>
+                        {data.level}
+                        </MenuItem>
+                    ))}
+                    </Select>
+                </FormControl>
       <List>
         {peopleList.map((person) => (
           <React.Fragment key={person.id}>
@@ -74,6 +160,31 @@ const RightPanel = () => {
       </List>
     </div>
   );
+
+  async function fetchLevels(){
+    let result = await axios.get("http://localhost:3000/learner/requests/getLevels")
+    return result;
+} 
+
+async function fetchLanguages(){
+    let result = await axios.get("http://localhost:3000/learner/requests/getLanguages")
+    return result;
+}
+
+async function fetchTeachers(languageName, minLevel, maxLevel){
+    console.log(languageName, "   " ,minLevel, "   "  ,maxLevel)
+
+    let obj = {
+
+        'languageName' : languageName,
+        'minLevel' : minLevel,
+        'maxLevel' : maxLevel
+
+    }
+    let url = urllist.createQuery("http://localhost:3000/learner/requests/getTeachers", obj)
+    let result = await axios.get(url) 
+    return result;
+}
 };
 
 const ChatPanel = () => {
