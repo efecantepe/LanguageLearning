@@ -13,6 +13,7 @@ import HomeIcon from '@mui/icons-material/Home';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import ClassIcon from '@mui/icons-material/Class';
 import LogoutIcon from '@mui/icons-material/Logout';
+import ChatIcon from '@mui/icons-material/Chat';
 
 const useStyles = styled((theme) => ({
   title: {
@@ -49,6 +50,12 @@ const TeacherNavigation = () => {
             <ClassIcon />
           </ListItemIcon>
           <ListItemText>Courses</ListItemText>
+        </MenuItem>
+        <MenuItem onClick={() => handleLinkClick('/chat')} className='link-style'>
+          <ListItemIcon>
+            <ChatIcon />
+          </ListItemIcon>
+          <ListItemText>Chat</ListItemText>
         </MenuItem>
         <MenuItem onClick={() => handleLinkClick('/')} className='link-style'>
           <ListItemIcon>
