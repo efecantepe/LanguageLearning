@@ -17,6 +17,7 @@ let globalUser = JSON.parse(localStorage.getItem('user'))
 const listOfUrl = urlList.urlList
 const createQuery = urlList.createQuery
 
+
 const UserInfo = ({ user }) => {
 
 
