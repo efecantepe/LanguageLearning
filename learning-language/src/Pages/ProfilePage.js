@@ -18,7 +18,7 @@ const createQuery = urlList.createQuery
 const UserInfo = ({user}) => {
 
 
-
+  
 
   const [name, setName] = useState("")
   const [surName, setSurname] = useState("")

@@ -53,7 +53,7 @@ router
     .route("/myInboxes")
     .get((req, res) => {
 
-        let myId = req.query.userid
+        let myId = req.query.id
 
         let values = [myId,]
         let sqlQuery = `Select * FROM inbox JOIN inbox_participants ON inbox.inbox_id = inbox_participants.inbox_id WHERE inbox_participants.user_id = ($1)`
@@ -99,6 +99,20 @@ router
 
         connection.query(sqlQuery, values)
         res.send(200)
+    })
+
+
+router
+    .route("/getPeople")
+    .post((req, res) => {
+
+
+        let minLevel = req.body.minLevel
+        let maxLevel = req.body.maxLevel
+        let language = req.body.language
+
+        // TODO
+
     })
 
 
