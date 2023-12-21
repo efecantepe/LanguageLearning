@@ -1,36 +1,23 @@
 import React, { useState } from 'react';
 import '../Css/Chat.css';
 
-import urllist from '../urllist';
-import axios  from 'axios';
-
-let globalUser = JSON.parse(localStorage.getItem('user'))
-
-const ChatCenterPanel = (message, chatMessages ,inbox_id) => {
-    
-
-
-    /*
-    fetchMessages().then((result) => {
-
-      setChatMessages(result)
+const ChatCenterPanel = () => {
+    const [message, setMessage] = useState('');
+    const [chatMessages, setChatMessages] = useState([]);
   
-    })
-    */
-
-
     const handleMessageChange = (e) => {
-      //setMessage(e.target.value);
+      setMessage(e.target.value);
     };
   
     const sendMessage = () => {
-      if(message.trim() !== '') {
-        
-
-        send_message(message, inbox_id);
-        
-        
-        //setMessage('');
+      if (message.trim() !== '') {
+        const newMessage = {
+          text: message,
+          sender: 'You',
+        };
+  
+        setChatMessages([...chatMessages, newMessage]);
+        setMessage('');
       }
     };
   
@@ -58,19 +45,4 @@ const ChatCenterPanel = (message, chatMessages ,inbox_id) => {
       </div>
     );
   };
-
-  async function send_message(message, inbox_id){
-
-    let obj = {
-
-      'inbox_id' : inbox_id,
-      'user_id' : globalUser.id,
-      'message' : message
-
-    }
-
-    
-
-  }
-
 export default ChatCenterPanel;

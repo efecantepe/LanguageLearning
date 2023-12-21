@@ -4,6 +4,7 @@ import '../Css/Chat.css';
 import ChatCenterPanel from '../Components/ChatCenterPanel';
 import urllist from '../urllist';
 import axios  from 'axios';
+import { List, ListItem, ListItemText, Typography, Divider,Avatar } from '@mui/material';
 
 let globalUser = JSON.parse(localStorage.getItem('user'))
 
@@ -140,6 +141,7 @@ const ChatPanel = () => {
   return (
     <div className="chat-grid">
       <LeftPanel inbox = {inbox} />
+      <ChatCenterPanel></ChatCenterPanel>
       <RightPanel peope = {people} />
     </div>
   );
