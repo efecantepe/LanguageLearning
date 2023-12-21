@@ -9,6 +9,7 @@ import sendRequest from '../axios';
 import axios from 'axios';
 import PopupTeacherLanguageContent from '../Components/PopupTeacherLanguageContent';
 import Popup from '../Components/PopupComponent';
+import TeacherLayout from '../Components/TeacherLayout';
 
 let globalUser = JSON.parse(localStorage.getItem('user'))
 
@@ -112,7 +113,7 @@ const TeacherProfile = () => {
   };
   
   return (
-    <MainLayout children={
+    <TeacherLayout children={
         <div>
             <Paper elevation={1} sx={{padding:2,}}>
                 <Typography variant="h4">Teacher Profile</Typography>
