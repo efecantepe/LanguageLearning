@@ -4,7 +4,12 @@
 }
 
 .test{
-    font-family: 'Agbalumo';
+    font-family: 'Agbalumo' !important;
+    text-align: center;
+    color: #9BB8CD;
+    font-size: 5ch;
+    padding: 0 !important;
+    margin: 0 !important;
 }
 
 .test2{
