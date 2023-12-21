@@ -1,6 +1,6 @@
 import React from 'react';
 import { styled } from '@mui/system';
-import { Container,Grid  } from '@mui/material';
+import { Container,Grid,Typography  } from '@mui/material';
 import NavigationBar from './NavigationBar';
 import '../Css/Components.css';
 import Header from './Header';
@@ -18,7 +18,13 @@ const MainLayout = ({ children }) => {
             {children}
           </Grid>
         </Grid>
+
       </Container>
+      <footer style={{ display: 'flex', justifyContent: 'center', marginTop:10 }}>
+        <Typography variant="body2" color="textSecondary">
+          &copy; 2023 Online Language Learning Platform
+        </Typography>
+      </footer>
     </div>
   );
 };
