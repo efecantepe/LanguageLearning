@@ -115,7 +115,7 @@ const TeacherProfile = () => {
     <MainLayout children={
         <div>
             <Paper elevation={1} sx={{padding:2,}}>
-                <Typography variant="h4">Learner Profile</Typography>
+                <Typography variant="h4">Teacher Profile</Typography>
                 <hr/>
                 <Grid container spacing={12}>
                     <Grid item xs={8} sm={6}>
@@ -126,7 +126,7 @@ const TeacherProfile = () => {
                     </Grid>
                 </Grid>
             </Paper>
-            <Popup open={isPopupOpen} onClose={closePopup} content={<PopupTeacherLanguageContent/>} actionText="Add Language" onAction={handleAction}/>
+            <Popup open={isPopupOpen} onClose={closePopup} content={<PopupTeacherLanguageContent/>} title={"Add Language"}/>
         </div>
         }/>
   );

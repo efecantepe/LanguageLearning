@@ -102,10 +102,6 @@ const ProfilePage = () => {
   const openPopup = () => { setPopupOpen(true);};
   const closePopup = () => { setPopupOpen(false);};
 
-  const handleAction = () => {
-    console.log('Action performed within the popup');
-    closePopup();
-  };
 
   const [user, setUser] = useState([]);
 
@@ -230,7 +226,7 @@ const ProfilePage = () => {
           </Grid>
         </Grid>
       </Paper>
-      <Popup open={isPopupOpen} onClose={closePopup} content={<PopupLanguageContent/>} actionText="Add Language" onAction={handleAction}/>
+      <Popup open={isPopupOpen} onClose={closePopup} title={"Add Language"} content={<PopupLanguageContent/>}/>
     </div>
     }/>
   );

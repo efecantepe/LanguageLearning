@@ -71,11 +71,6 @@ const ClassPage = () => {
         setPopupOpen(false);
     };
 
-    const handleAction = () => {
-        console.log('Action performed within the popup');
-        closePopup();
-    };
-
   return (
     <MainLayout children={
       <div>
@@ -130,7 +125,7 @@ const ClassPage = () => {
             </Paper>
         </div>
 
-        <Popup open={isPopupOpen} onClose={closePopup} title="Register Course" content={<PopupRegisterComponent/>} actionText="Register" onAction={handleAction}/>
+        <Popup open={isPopupOpen} onClose={closePopup} title="Register Course" content={<PopupRegisterComponent/>}/>
       </div>
     }/>
   );

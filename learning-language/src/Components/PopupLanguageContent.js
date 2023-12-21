@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Card, CardContent, Typography, Button, FormControl,MenuItem,Select,InputLabel  } from '@mui/material';
+import { Card, CardContent, Typography, Button, FormControl,MenuItem,Select,InputLabel,Box  } from '@mui/material';
 import Popup from './PopupComponent';
 import axios from 'axios';
 
@@ -48,12 +48,8 @@ const PopupLanguageContent = () => {
     
 
     return (
-        <Card variant="outlined" sx={{ display: 'inline-block', minWidth: 300 }}>
+        <Card variant="outlined" sx={{ display: 'inline-block', minWidth: 400 }}>
             <CardContent>
-                <Typography variant="h5" component="div">
-                Add Language
-                </Typography >
-                <hr/>
                 <FormControl fullWidth className='margin-top-1'>
                     <InputLabel>Language</InputLabel>
                     <Select value={selectedLanguage} onChange={handleLanguageChange} label="Language">
@@ -74,9 +70,9 @@ const PopupLanguageContent = () => {
                     ))}
                     </Select>
                 </FormControl>
-                
-                <Button onClick={() => sendLanguage()} > Add Language </Button>
-
+                <Box display="flex"  justifyContent="flex-end">
+                    <Button variant="contained" className='margin-top-1' onClick={() => sendLanguage()} > Add Language </Button>
+                </Box>
             </CardContent>
         </Card>
     );
