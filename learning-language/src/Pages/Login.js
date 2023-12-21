@@ -18,6 +18,7 @@ const Login = ({ onLogin }) => {
 
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
+    setError(null);
 
     console.log("Email", email)
     console.log("Password", password)
@@ -32,6 +33,22 @@ const Login = ({ onLogin }) => {
     }
 
     let url = urlList.createQuery("http://localhost:3000/login", obj)
+
+    try {
+      // Make the login request.
+      let response = await axios.get(url);
+
+      if (response.data.length === 0) {
+        setError('Incorrect email or password');
+      } else if (response.data.length === 1) {
+        // ... (existing code)
+
+      }
+    } catch (error) {
+      // Handle network errors or other issues with the request
+      setError('There was an error processing your request. Please try again.');
+      console.error('Login error:', error);
+    }
 
     let response = axios.get(url)
 
