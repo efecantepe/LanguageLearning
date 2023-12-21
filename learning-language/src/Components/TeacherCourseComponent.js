@@ -12,10 +12,11 @@ const TeacherCourseComponent = ({ course, onRegister }) => {
     const openPopup = () => { setPopupOpen(true);};
     const closePopup = () => { setPopupOpen(false);};
 
-    const handleAction = () => {
-        console.log('Action performed within the popup');
-        closePopup();
-    };
+    const closePopupAndRefresh = () => {
+        setPopupOpen(false)
+        window.location.reload();
+      };
+
     return (
         <Card variant="outlined" sx={{ display: 'inline-block', minWidth: 300 }}>
             <CardContent>
@@ -45,7 +46,7 @@ const TeacherCourseComponent = ({ course, onRegister }) => {
                 <Button variant="contained" onClick={openPopup}>
                 View
                 </Button>
-                <Popup open={isPopupOpen} onClose={closePopup} title={title} content={<TeacherCourseComponentContent course={course}/>}/>
+                <Popup open={isPopupOpen} onClose={closePopup} title={title} content={<TeacherCourseComponentContent onCloseAndRefresh={closePopupAndRefresh} course={course}/>}/>
             </CardContent>
         </Card>
     );

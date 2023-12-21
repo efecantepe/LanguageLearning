@@ -103,7 +103,7 @@ const TeacherClass = () => {
               </Grid>
             </Grid>
           </Typography>
-          <Box sx={{ display: 'flex', flexDirection: 'row', overflowX: 'auto', width:700 }}>
+          <Box sx={{ display: 'flex', flexDirection: 'row', overflowX: 'auto', width:600 }}>
           {activeCourses.map((course) => (
             <TeacherCourseComponent course={course} />
           ))}
@@ -116,7 +116,7 @@ const TeacherClass = () => {
           <Typography variant="h4" gutterBottom>
             Waiting Courses
           </Typography>
-          <Box sx={{ display: 'flex', flexDirection: 'row', overflowX: 'auto', width:700 }}>
+          <Box sx={{ display: 'flex', flexDirection: 'row', overflowX: 'auto', width:600 }}>
           {waitingCourses.map((course) => (
             <TeacherCourseComponent course={course}/>
           ))}
@@ -130,7 +130,7 @@ const TeacherClass = () => {
           <Typography variant="h4" gutterBottom>
             Finished Courses
           </Typography>
-          <Box sx={{ display: 'flex', flexDirection: 'row', overflowX: 'auto', width:700 }}>
+          <Box sx={{ display: 'flex', flexDirection: 'row', overflowX: 'auto', width:600}}>
           {finishedCourses.map((course) => (
             <TeacherCourseComponent course={course}/>
           ))}

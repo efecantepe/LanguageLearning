@@ -102,6 +102,11 @@ const ProfilePage = () => {
   const openPopup = () => { setPopupOpen(true);};
   const closePopup = () => { setPopupOpen(false);};
 
+  const closePopupAndRefresh = () => {
+    setPopupOpen(false)
+    window.location.reload();
+  };
+
 
   const [user, setUser] = useState([]);
 
@@ -226,7 +231,7 @@ const ProfilePage = () => {
           </Grid>
         </Grid>
       </Paper>
-      <Popup open={isPopupOpen} onClose={closePopup} title={"Add Language"} content={<PopupLanguageContent/>}/>
+      <Popup open={isPopupOpen} onClose={closePopup} title={"Add Language"} content={<PopupLanguageContent onCloseAndRefresh={closePopupAndRefresh}/>}/>
     </div>
     }/>
   );
