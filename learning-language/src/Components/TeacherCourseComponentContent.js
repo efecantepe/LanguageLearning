@@ -7,25 +7,21 @@ import urlList from '../urllist'
 
 const CourseComponentContent = ({ course, action, onAccept,onReject,onCancel }) => {
     //const { id, title, language, level, teacher, learner, registerDate, meetingDate, progress, homework, status, feedback, description } = course;
-    const [homeworkText, setHomeworkText] = useState('');
+    const [homework, setHomeworkText] = useState('');
     const [isTextFieldLocked, setIsTextFieldLocked] = useState(false);
+    const [studentSubmission, setStudentSubmission] = useState('');
+    const [isFeedbackDisabled, setIsFeedbackDisabled] = useState(true);
 
     const handleTextChange = (e) => {
         setHomeworkText(e.target.value);
     };
 
     const uploadHomework = async () => {
-        if (homeworkText.trim() !== '') {
-            const homeworkData = {
-                classId: course.classid,
-                homeworkText: homeworkText,
-            };
-
+        if (homework.trim() !== '') {
             try {
-                const response = await axios.post('YOUR_UPLOAD_ENDPOINT', homeworkData);
-                console.log('Homework uploaded:', response.data);
-                setHomeworkText(''); // Reset the text field after successful upload
-                setIsTextFieldLocked(true); // Lock the TextField after uploading
+                // Simulating the upload process
+                console.log('Homework uploaded:', homework);
+                setIsTextFieldLocked(true);
             } catch (error) {
                 console.error('Error uploading homework:', error);
             }
@@ -33,6 +29,58 @@ const CourseComponentContent = ({ course, action, onAccept,onReject,onCancel }) 
             console.error('Homework text is empty');
         }
     };
+
+    const deleteHomework = () => {
+        setHomeworkText('');
+        setIsTextFieldLocked(false);
+    };
+
+    const handleSubmissionChange = (e) => {
+        setStudentSubmission(e.target.value);
+        setIsFeedbackDisabled(false); // Enable feedback when there is a student submission
+    };
+
+    const submitFeedback = async () => {
+        if (studentSubmission.trim() !== '') {
+            try {
+                // Simulating the feedback submission
+                console.log('Feedback submitted:', studentSubmission);
+                setStudentSubmission('');
+                setIsFeedbackDisabled(true);
+            } catch (error) {
+                console.error('Error submitting feedback:', error);
+            }
+        } else {
+            console.error('Feedback text is empty');
+        }
+    };
+
+    const renderFeedbackSection = () => {
+        if (studentSubmission.trim() !== '') {
+            return (
+                <Typography color="textSecondary" gutterBottom>
+                    <TextField
+                        id="outlined-multiline-static"
+                        label="Student Submission"
+                        value={studentSubmission}
+                        onChange={handleSubmissionChange}
+                        disabled={isFeedbackDisabled}
+                        fullWidth
+                        multiline
+                        rows={2}
+                    />
+                    <Button
+                        variant="contained"
+                        onClick={isFeedbackDisabled ? null : submitFeedback}
+                    >
+                        {isFeedbackDisabled ? 'Feedback Submitted' : 'Submit Feedback'}
+                    </Button>
+                </Typography>
+            );
+        }
+        return null; // If no student submission, don't render the feedback section
+    };
+
 
 
     const renderButtons = (classid) => {
@@ -93,13 +141,12 @@ const CourseComponentContent = ({ course, action, onAccept,onReject,onCancel }) 
                 Registered Date: {course.classdate}
                 </Typography>
                 <Typography color="textSecondary" gutterBottom>
-                <TextField id="outlined-multiline-static" label="Homework" value={homeworkText} onChange={handleTextChange} disabled={isTextFieldLocked} fullWidth multiline rows={4} />
-                <Button variant="contained" onClick={uploadHomework}>Upload Homework</Button>
+                    <TextField id="outlined-multiline-static" label="Homework" value={homework} onChange={handleTextChange} disabled={isTextFieldLocked} fullWidth multiline rows={2} />
+                    <Button variant="contained" onClick={isTextFieldLocked ? deleteHomework : uploadHomework}>
+                        {isTextFieldLocked ? 'Delete Homework' : 'Upload Homework'}
+                    </Button>
                 </Typography>
-                <Typography color="textSecondary" gutterBottom>
-                Feedback: {"Feedback"}
-                </Typography>
-                <Typography color="textSecondary">{"SAD"}</Typography>
+                {renderFeedbackSection()}
                 {renderButtons(course.classid)}
             </CardContent>
         </Card>
