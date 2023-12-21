@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Card, CardContent, Typography, Button,Box } from '@mui/material';
+import { Card, CardContent, Typography, Button,Box, TextField } from '@mui/material';
 import Popup from './PopupComponent';
 import axios  from 'axios';
 import urlList from '../urllist'
@@ -7,31 +7,30 @@ import urlList from '../urllist'
 
 const CourseComponentContent = ({ course, action, onAccept,onReject,onCancel }) => {
     //const { id, title, language, level, teacher, learner, registerDate, meetingDate, progress, homework, status, feedback, description } = course;
-    const [homeworkFile, setHomeworkFile] = useState(null);
-    const handleFileChange = (e) => {
-        const file = e.target.files[0];
-        setHomeworkFile(file);
+    const [homeworkText, setHomeworkText] = useState('');
+    const [isTextFieldLocked, setIsTextFieldLocked] = useState(false);
+
+    const handleTextChange = (e) => {
+        setHomeworkText(e.target.value);
     };
 
     const uploadHomework = async () => {
-        if (homeworkFile) {
-            const formData = new FormData();
-            formData.append('homework', homeworkFile);
+        if (homeworkText.trim() !== '') {
+            const homeworkData = {
+                classId: course.classid,
+                homeworkText: homeworkText,
+            };
 
             try {
-                const response = await axios.post('YOUR_UPLOAD_ENDPOINT', formData, {
-                    headers: {
-                        'Content-Type': 'multipart/form-data',
-                    },
-                });
-                // Handle response or perform necessary actions after successful upload
+                const response = await axios.post('YOUR_UPLOAD_ENDPOINT', homeworkData);
                 console.log('Homework uploaded:', response.data);
+                setHomeworkText(''); // Reset the text field after successful upload
+                setIsTextFieldLocked(true); // Lock the TextField after uploading
             } catch (error) {
-                // Handle error during upload
                 console.error('Error uploading homework:', error);
             }
         } else {
-            console.error('No file selected');
+            console.error('Homework text is empty');
         }
     };
 
@@ -94,11 +93,8 @@ const CourseComponentContent = ({ course, action, onAccept,onReject,onCancel }) 
                 Registered Date: {course.classdate}
                 </Typography>
                 <Typography color="textSecondary" gutterBottom>
-                <input type="file" onChange={handleFileChange} />
-                    <Button variant="contained" onClick={uploadHomework}>
-                        Upload Homework
-                    </Button>
-
+                <TextField id="outlined-multiline-static" label="Homework" value={homeworkText} onChange={handleTextChange} disabled={isTextFieldLocked} fullWidth multiline rows={4} />
+                <Button variant="contained" onClick={uploadHomework}>Upload Homework</Button>
                 </Typography>
                 <Typography color="textSecondary" gutterBottom>
                 Feedback: {"Feedback"}
