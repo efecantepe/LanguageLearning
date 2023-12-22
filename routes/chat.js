@@ -104,19 +104,58 @@ router
     })
 
 
-router
+    router
     .route("/getPeople")
-    .post((req, res) => {
+    .get((req, res) => {
 
+        let minLevel = req.query.minLevel
+        let maxLevel = req.query.maxLevel
+        let languageName = req.query.languageName
 
-        let minLevel = req.body.minLevel
-        let maxLevel = req.body.maxLevel
-        let language = req.body.language
+        console.log(minLevel , "   ", maxLevel, "    ", languageName)
 
-        // TODO
+        let sqlQuery = `WITH CombinedUser AS (
+                        SELECT Teacher.*, 'teacher' as user_type FROM Teacher
+                    
+                        UNION
+                    
+                        SELECT * , 'learner ' FROM Learner
+                     ) ,CombinedLanguagase AS (
+                        SELECT * FROM teacherlanguages
+                    
+                        UNION
+                    
+                        SELECT *  FROM learnerlanguages
+                     )
+                      SELECT CombinedLanguagase.teacherid , CombinedUser.teacherName, CombinedUser.surname, CombinedUser.user_type FROM CombinedUser , CombinedLanguagase, Level a, Level b, Level c
+                                        WHERE CombinedLanguagase.languageName = ($1)
+                                            AND CombinedLanguagase.level = a.level
+                                            AND b.level = ($2) AND c.level = ($3)
+                                            AND a.rank >= b.rank AND a.rank <= c.rank
+                                            AND CombinedUser.teacherId = CombinedLanguagase.teacherid;`
+        
+        let values = [languageName, minLevel, maxLevel,]
+
+        console.log(values)
+
+        try{
+
+            let respond = connection.query(sqlQuery, values)
+
+            respond.then((result) => {
+
+                console.log(result.rows)
+
+                res.send(result.rows)
+            })
+
+        }catch(e){
+
+            console.log(e)
+
+        }
 
     })
-
 
 function createInboxId(){
     const unixTime = Math.floor(Date.now() / 1000).toString(); // Get current Unix time in seconds

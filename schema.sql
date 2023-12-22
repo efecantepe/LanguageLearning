@@ -302,4 +302,28 @@ ORDER BY
     u.userName;
 
 
+WITH CombinedUser AS (
+    SELECT Teacher.*, 'teacher' as user_type FROM Teacher
+
+    UNION
+
+    SELECT * , 'learner ' FROM Learner
+) ,CombinedLanguagase AS (
+    SELECT * FROM teacherlanguages
+
+    UNION
+
+    SELECT *  FROM learnerlanguages
+)
+    SELECT CombinedLanguagase.teacherid , CombinedUser.teacherName, CombinedUser.surname FROM CombinedUser , CombinedLanguagase, Level a, Level b, Level c
+                                WHERE CombinedLanguagase.languageName = ($1)
+                                    AND CombinedLanguagase.level = a.level
+                                    AND b.level = ($2) AND c.level = ($3)
+                                    AND a.rank >= b.rank AND a.rank <= c.rank
+                                    AND CombinedUser.teacherId = CombinedLanguagase.teacherid;
+
+
+
+
+
 
