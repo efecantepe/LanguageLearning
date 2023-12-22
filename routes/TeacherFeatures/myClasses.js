@@ -214,5 +214,48 @@ router.post('/sendClassRequest', async (req, res) => {
     }
  });
 
+ router.post('/addHomework',  (req, res) => {
+
+    let sqlQuery = 'INSERT INTO homeworksinclass VALUES ( ($1) , ($2), ($3), ($4))'
+    let values = [req.body.classid, req.body.teacherid, req.body.learnerid, req.body.homeworksdescription] 
+
+    console.log(values)
+
+    let result = connection.query(sqlQuery, values)
+
+    res.send(200)
+
+ })
+
+ router.post("/deleteHomework", (req, res) => {
+
+    let sqlQuery = 'Delete FROM homeworksinclass WHERE classid = ($1)'
+    let values = [req.body.classid,] 
+
+    console.log(values)
+
+    let result = connection.query(sqlQuery, values)
+
+    res.send(200)
+
+ })
+
+ router.get("/getHomework", (req, res) => {
+
+    let obj = {
+
+        classid : req.query.id
+
+    }
+
+    let sqlQuery = "Select homeworkdescription FROM homeworksinclass WHERE classid = ($1)"
+    let values = [req.query.id]
+
+    connection.query(sqlQuery, values).then((result) => {
+        res.send(result.rows)
+    })
+
+
+ })
 
 module.exports = router 

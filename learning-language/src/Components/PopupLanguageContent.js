@@ -41,10 +41,6 @@ const PopupLanguageContent = ({onCloseAndRefresh}) => {
       const handleLevelChange = (event) => {
         setSelectedLevel(event.target.value);
       };
-
-
-    
-
     
 
     return (

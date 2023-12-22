@@ -3,6 +3,7 @@ import { Card, CardContent, Typography, Button,Box, TextField } from '@mui/mater
 import Popup from './PopupComponent';
 import axios  from 'axios';
 import urlList from '../urllist'
+import urllist from '../urllist';
 
 
 const CourseComponentContent = ({ course, action, onAccept,onReject,onCancel }) => {
@@ -16,11 +17,29 @@ const CourseComponentContent = ({ course, action, onAccept,onReject,onCancel }) 
         setHomeworkText(e.target.value);
     };
 
+
+
+
     const uploadHomework = async () => {
         if (homework.trim() !== '') {
             try {
                 // Simulating the upload process
                 console.log('Homework uploaded:', homework);
+
+                console.log(course)
+
+                let obj = {
+
+                    classid : course.classid,
+                    teacherid : course.teacherid,
+                    learnerid : course.learnerid,
+                    homeworksdescription : homework
+
+                }
+
+                axios.post("http://localhost:3000/teacher/myClasses/addHomework", obj)
+
+
                 setIsTextFieldLocked(true);
             } catch (error) {
                 console.error('Error uploading homework:', error);
@@ -31,6 +50,13 @@ const CourseComponentContent = ({ course, action, onAccept,onReject,onCancel }) 
     };
 
     const deleteHomework = () => {
+
+        let obj = {
+            classid : course.classid,
+        }
+
+        axios.post("http://localhost:3000/teacher/myClasses/deleteHomework", obj)
+
         setHomeworkText('');
         setIsTextFieldLocked(false);
     };

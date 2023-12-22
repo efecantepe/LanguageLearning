@@ -51,6 +51,12 @@ const TeacherNavigation = () => {
           </ListItemIcon>
           <ListItemText>Courses</ListItemText>
         </MenuItem>
+        <MenuItem onClick={() => handleLinkClick('/TeacherHomework')} className='link-style'>
+          <ListItemIcon>
+            <ClassIcon />
+          </ListItemIcon>
+          <ListItemText>Homework</ListItemText>
+        </MenuItem>
         <MenuItem onClick={() => handleLinkClick('/chat')} className='link-style'>
           <ListItemIcon>
             <ChatIcon />

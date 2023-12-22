@@ -25,7 +25,6 @@ const TeacherHome = () => {
             <Typography variant="body1">
               There will be two main user types on the platform: students and teachers. All user types will need to register to access the unique features.
             </Typography>
-            {/* Add more details about the registration process */}
           </section>
 
           <section>
@@ -35,7 +34,6 @@ const TeacherHome = () => {
             <Typography variant="body1">
               Users must provide specific information during the registration process, including personal details, language proficiency levels, and optional biography or communication preferences.
             </Typography>
-            {/* Describe the required information for students and teachers */}
           </section>
 
           <section>
@@ -45,7 +43,6 @@ const TeacherHome = () => {
             <Typography variant="body1">
               Users can interact, search for and add friends, communicate via chat, enroll in appropriate courses, track their language learning progress, and receive feedback from teachers.
             </Typography>
-            {/* Include details about the chat system, course enrollment, and progress tracking */}
           </section>
 
           <section>
@@ -55,7 +52,6 @@ const TeacherHome = () => {
             <Typography variant="body1">
               Administrators will have access to all chats and courses, along with the ability to manage and edit user profiles.
             </Typography>
-            {/* Describe the admin's role and access privileges */}
           </section>
         </Paper>
       </Container>

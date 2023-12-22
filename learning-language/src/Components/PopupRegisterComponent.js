@@ -80,24 +80,6 @@ const PopupRegisterComponent = ({ onCloseAndRefresh }) => {
     }
 
 
-    
-    /*
-    const addLanguageDataContent = [
-        {language: 'English'},
-        {language: 'French'},
-        {language: 'Spanish'},
-        {language: 'Turkish'},
-      ];
-      const addLevelDataContent = [
-        {level: 'A1'},
-        {level: 'A2'},
-        {level: 'B1'},
-        {level: 'B2'},
-        {level: 'C1'},
-        {level: 'C2'},
-      ];
-      */
-
     return (
         <Card variant="outlined" sx={{ display: 'inline-block', minWidth: 300 }}>
             <CardContent>
@@ -148,7 +130,7 @@ const PopupRegisterComponent = ({ onCloseAndRefresh }) => {
                 <FormControl fullWidth className='margin-top-1'>
                 <LocalizationProvider  dateAdapter={AdapterDayjs}>
                     <DemoContainer components={['DatePicker']} >
-                        <DatePicker value={selectedDate} onChange={handleDateChange} label="Basic date picker" />
+                        <DatePicker value={selectedDate} onChange={handleDateChange} views={['year', 'month', 'day']} label="Basic date picker" />
                     </DemoContainer>
                 </LocalizationProvider>
                 </FormControl>
@@ -194,20 +176,13 @@ export default PopupRegisterComponent;
 
 
 function handleClick(selectedLanguage, selectedMinLevel, selectedMaxLevel, selectedTeacher, selectedDate){
-
     let data = {
-
         "language" : selectedLanguage,
         "minLevel" : selectedMinLevel,
         "maxLevel" : selectedMaxLevel,
         "learnerid" : globalUser.id,
         "teacherid" : selectedTeacher,
         "date" : selectedDate
-
     }
-
-
-
     axios.post("http://localhost:3000/learner/myClasses/addClass", data)
-
 }

@@ -11,7 +11,7 @@ router
 
         let sqlQuery = `INSERT INTO class (languageName, learnerid, teacherid, classlevel, classDate) 
                                     VALUES (($1), ($2), ($3), ($4), ($5))`
-
+                                    
         let values = [language, learnerid, teacherid, maxLevel, date]
 
         console.log(values)

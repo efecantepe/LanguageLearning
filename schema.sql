@@ -103,7 +103,7 @@ CREATE TABLE IF NOT EXISTS homeworksInClass(
     teacherId varchar(50),
     learnerId varchar(50),
     homeworkDescription varchar(1000),
-    dueDate date,
+    point FLOAT,
 
     FOREIGN KEY (learnerId) references Learner(learnerId),
     FOREIGN KEY (teacherId) references Teacher(teacherId),
@@ -188,6 +188,8 @@ INSERT INTO Gender VALUES
                        ('Male'),
                        ('Female'),
                        ('Other');
+
+
 
 /*
 INSERT INTO learnerLanguages VALUES
@@ -278,4 +280,6 @@ WHERE
 ORDER BY
     ul.level DESC,
     u.userName;
+
+
 
