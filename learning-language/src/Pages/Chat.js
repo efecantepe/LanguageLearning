@@ -162,6 +162,10 @@ const RightPanel = () => {
         setSelectedMaxLevel(event.target.value)
     }
 
+    const getColorForUserType = (userType) => {
+      return userType === 'teacher' ? 'green' : 'red';
+    };
+
   return (
     <div className="right-panel">
       <Typography variant="h6" gutterBottom>
@@ -201,7 +205,7 @@ const RightPanel = () => {
       <List>
         {teachers.map((person) => (
           <React.Fragment key={person.teacherid}>
-          <ListItem onClick={(person) => addContact(person) } button>
+          <ListItem button sx={{backgroundColor:getColorForUserType(person.user_type)}}>
           <Avatar sx={{color:'MintCream', bgcolor: getColorForLetter(person.teachername.charAt(0)) }}> {person.teachername.charAt(0)} </Avatar>
             <ListItemText primary={person.teachername} sx={{ paddingLeft: 2 }} />
           </ListItem>
