@@ -92,7 +92,7 @@ CREATE TABLE IF NOT EXISTS homeworksInClass(
     teacherId varchar(50),
     learnerId varchar(50),
     homeworkDescription varchar(1000),
-    dueDate date,
+    point FLOAT,
 
     FOREIGN KEY (learnerId) references Learner(learnerId),
     FOREIGN KEY (teacherId) references Teacher(teacherId),
@@ -182,6 +182,8 @@ INSERT INTO Gender VALUES
                        ('Female'),
                        ('Other');
 
+
+
 /*
 INSERT INTO learnerLanguages VALUES
                         ('French', 'a18fbf9acca53f39a929', 'A1' ),
@@ -198,6 +200,8 @@ SELECT teacherLanguages.teacherid ,teacherName, surname FROM teacher_name_surnam
 
 CREATE SEQUENCE class_seq START 1;
 */
+
+
 
 
 

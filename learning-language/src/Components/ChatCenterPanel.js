@@ -9,7 +9,9 @@ let globalUser = JSON.parse(localStorage.getItem('user'))
 const ChatCenterPanel = (props) => {
     const [message, setMessage] = useState('');
     const [chatMessages, setChatMessages] = useState([]);
-    
+    const [added, setAdded] = useState(false)
+
+
     console.log("Props Equal to ", props)
 
     
@@ -27,14 +29,18 @@ const ChatCenterPanel = (props) => {
         
       })
 
-    }, [props.inbox_id])
+    }, [props.inbox_id], added)
 
     const handleMessageChange = (e) => {
       setMessage(e.target.value);
     };
   
     const sendMessage = () => {
-        message_sender(props.inbox_id, message)
+        
+        message_sender(props.inbox_id, message).then((result) => {
+          setAdded(!added)
+        } )
+        
     }
   
     return (

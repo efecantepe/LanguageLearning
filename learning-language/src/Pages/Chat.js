@@ -274,7 +274,7 @@ const ChatPanel = () => {
   return (
     <div className="chat-grid">
       <LeftPanel parentLeftPanelCallBack = { (inbox_id) => setInboxIdLeftPanel(inbox_id)}/>
-      <ChatCenterPanel inbox_id = {inbox_id} ></ChatCenterPanel>
+      <ChatCenterPanel parentLeftPanelCallBack = {(inbox_id) => setInboxIdLeftPanel(inbox_id)} inbox_id = {inbox_id} ></ChatCenterPanel>
       <RightPanel peope = {people} />
     </div>
   );

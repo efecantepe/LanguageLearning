@@ -5,8 +5,8 @@ import TeacherCourseComponentContent from './TeacherCourseComponentContent';
 import axios  from 'axios';
 import urlList from '../urllist'
 
-const TeacherCourseComponent = ({ course, onRegister }) => {
-    const { id, title, language, level, teacher, learner, registerDate, meetingDate, progress, homework, status, feedback, description } = course;
+const TeacherCourseComponent = ({ course, homework }) => {
+    const { id, title, language, level, teacher, learner, registerDate, meetingDate, progress, status, feedback, description } = course;
     
     const [isPopupOpen, setPopupOpen] = useState(false);
     const openPopup = () => { setPopupOpen(true);};

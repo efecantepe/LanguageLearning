@@ -8,7 +8,6 @@ import PopupRegisterComponent from '../Components/PopupRegisterComponent';
 import TeacherCourseComponent from '../Components/TeacherCourseComponent';
 import urllist from '../urllist';
 import axios  from 'axios';
-import TeacherLayout from '../Components/TeacherLayout';
 
 let globalUser = JSON.parse(localStorage.getItem('user'))
 
@@ -86,7 +85,7 @@ const TeacherClass = () => {
     };
 
   return (
-    <TeacherLayout children={
+    <MainLayout children={
       <div>
         <div>
         <Paper>
@@ -103,7 +102,7 @@ const TeacherClass = () => {
               </Grid>
             </Grid>
           </Typography>
-          <Box sx={{ display: 'flex', flexDirection: 'row', overflowX: 'auto', width:600 }}>
+          <Box sx={{ display: 'flex', flexDirection: 'row', overflowX: 'auto', width:700 }}>
           {activeCourses.map((course) => (
             <TeacherCourseComponent course={course} />
           ))}
@@ -116,7 +115,7 @@ const TeacherClass = () => {
           <Typography variant="h4" gutterBottom>
             Waiting Courses
           </Typography>
-          <Box sx={{ display: 'flex', flexDirection: 'row', overflowX: 'auto', width:600 }}>
+          <Box sx={{ display: 'flex', flexDirection: 'row', overflowX: 'auto', width:700 }}>
           {waitingCourses.map((course) => (
             <TeacherCourseComponent course={course}/>
           ))}
@@ -130,7 +129,7 @@ const TeacherClass = () => {
           <Typography variant="h4" gutterBottom>
             Finished Courses
           </Typography>
-          <Box sx={{ display: 'flex', flexDirection: 'row', overflowX: 'auto', width:600}}>
+          <Box sx={{ display: 'flex', flexDirection: 'row', overflowX: 'auto', width:700 }}>
           {finishedCourses.map((course) => (
             <TeacherCourseComponent course={course}/>
           ))}
