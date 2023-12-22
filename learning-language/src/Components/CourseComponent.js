@@ -24,9 +24,6 @@ const CourseComponent = ({ course, onRegister }) => {
                 Language: {course.languagename} - {course.classlevel}
                 </Typography>
                 <Typography color="textSecondary" gutterBottom>
-                Status: {course.classstatus}
-                </Typography>
-                <Typography color="textSecondary" gutterBottom>
                 Meeting Date: {course.classdate}
                 </Typography>
                 <Button variant="contained" onClick={openPopup}>

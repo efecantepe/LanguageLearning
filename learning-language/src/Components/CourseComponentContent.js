@@ -23,25 +23,19 @@ const CourseComponentContent = ({ course, action }) => {
                 {title}
                 </Typography>
                 <Typography color="textSecondary" gutterBottom>
-                Course ID: {id}
+                Course ID: {course.classid}
                 </Typography>
                 <Typography color="textSecondary" gutterBottom>
-                Teacher: {teacher}
+                Teacher: {course.teachername}
                 </Typography>
                 <Typography color="textSecondary" gutterBottom>
-                Learner: {learner}
+                Language: {course.languagename}, {course.classlevel}
                 </Typography>
                 <Typography color="textSecondary" gutterBottom>
-                Language: {language}, {level}
+                Meeting Date: {course.classdate}
                 </Typography>
                 <Typography color="textSecondary" gutterBottom>
-                Status: {status}
-                </Typography>
-                <Typography color="textSecondary" gutterBottom>
-                Meeting Date: {meetingDate}
-                </Typography>
-                <Typography color="textSecondary" gutterBottom>
-                Registered Date: {registerDate}
+                Registered Date: {course.creationtime}
                 </Typography>
 
             </CardContent>
