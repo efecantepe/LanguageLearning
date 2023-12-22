@@ -161,36 +161,36 @@ const RightPanel = () => {
         People List
       </Typography>
       <FormControl fullWidth className='margin-top-1'>
-                    <InputLabel>Language</InputLabel>
-                    <Select value={selectedLanguage} onChange={handleLanguageChange} label="Language">
-                    {languages.map((data, index) => (
-                        <MenuItem key={index} value={data.languagename}>
-                        {data.languagename}
-                        </MenuItem>
-                    ))}
-                    </Select>
-                </FormControl>
-                <FormControl fullWidth className='margin-top-1'>  
-                    <InputLabel>Min Level</InputLabel>
-                    <Select value={selectedMinLevel} onChange={handleMinLevelChange} label="Min Level">
-                    {levels.map((data, index) => (
-                        <MenuItem key={index} value={data.level}>
-                        {data.level}
-                        </MenuItem>
-                    ))}
-                    </Select>
-                </FormControl>
-                
-                <FormControl fullWidth className='margin-top-1'>  
-                    <InputLabel>Max Level</InputLabel>
-                    <Select value={selectedMaxLevel} onChange={handleMaxLevelChange} label="Max Level">
-                    {levels.map((data, index) => (
-                        <MenuItem key={index} value={data.level}>
-                        {data.level}
-                        </MenuItem>
-                    ))}
-                    </Select>
-                </FormControl>
+        <InputLabel>Language</InputLabel>
+        <Select value={selectedLanguage} onChange={handleLanguageChange} label="Language">
+        {languages.map((data, index) => (
+            <MenuItem key={index} value={data.languagename}>
+            {data.languagename}
+            </MenuItem>
+        ))}
+        </Select>
+    </FormControl>
+    <FormControl fullWidth className='margin-top-1'>  
+        <InputLabel>Min Level</InputLabel>
+        <Select value={selectedMinLevel} onChange={handleMinLevelChange} label="Min Level">
+        {levels.map((data, index) => (
+            <MenuItem key={index} value={data.level}>
+            {data.level}
+            </MenuItem>
+        ))}
+        </Select>
+    </FormControl>
+    
+    <FormControl fullWidth className='margin-top-1'>  
+        <InputLabel>Max Level</InputLabel>
+        <Select value={selectedMaxLevel} onChange={handleMaxLevelChange} label="Max Level">
+        {levels.map((data, index) => (
+            <MenuItem key={index} value={data.level}>
+            {data.level}
+            </MenuItem>
+        ))}
+        </Select>
+    </FormControl>
       <List>
         {peopleList.map((person) => (
           <React.Fragment key={person.id}>
