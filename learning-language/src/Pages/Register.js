@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import urlList from '../urllist';
 import sendRequest from '../axios';
 import axios from 'axios';
-import { Container,Grid,TextField,FormControl,MenuItem,Select,InputLabel,Box,Button  } from '@mui/material';
+import { Container,Grid,TextField,FormControl,MenuItem,Select,InputLabel,Box,Button,Snackbar  } from '@mui/material';
 import '../Css/Components.css';
 import Header from '../Components/Header'
 
@@ -15,7 +15,58 @@ const Register = () => {
   const [password, setPassword] = useState('');
   const [userType, setRole] = useState('');
   const [gender, setGender] = useState('');
+  const [notification, setNotification] = useState({ open: false, message: '', severity: 'success' });
 
+  const handleNotificationClose = () => {
+    setNotification({ ...notification, open: false });
+  };
+
+  const showNotification = (message, severity) => {
+    setNotification({ open: true, message, severity });
+  };
+
+  const isValidEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const RegisterSubmit = async (username, name, surname, email, password, gender, userType) => {
+    username = username.trim();
+    name = name.trim();
+    surname = surname.trim();
+    email = email.trim();
+    password = password.trim();
+    gender = gender.trim();
+    userType = userType.trim();
+
+    if (!username || !name || !surname || !email || !password || !gender || !userType) {
+      showNotification('Please fill in all fields.', 'error');
+      return;
+    }
+
+    if (!isValidEmail(email)) {
+      showNotification('Please enter a valid email address.', 'error');
+      return;
+    }
+
+    try {
+      const obj = {
+        username,
+        name,
+        surname,
+        email,
+        password,
+        gender,
+        user_type: userType
+      };
+
+      await axios.post('http://localhost:3000/register', obj);
+      showNotification('Registration successful!', 'success');
+    } catch (error) {
+      showNotification('Registration failed. Please try again.', 'error');
+      console.error('Error during registration:', error);
+    }
+  };
 
   return (
 
@@ -51,7 +102,7 @@ const Register = () => {
                     <Button variant="contained" href='/login' >
                         Login
                     </Button>
-                    <Button type="submit" variant="contained" color='success' onClick={()=>RegisterSubmit(userName,name,surname,email,password,gender,userType)}>
+                    <Button type="submit" variant="contained" color='success' onClick={() => RegisterSubmit(userName, name, surname, email, password, gender, userType)}>
                         Register
                     </Button>
                 </Box>
@@ -59,27 +110,16 @@ const Register = () => {
             </div>
           </Grid>
         </Grid>
+        <Snackbar
+          open={notification.open}
+          autoHideDuration={6000}
+          onClose={handleNotificationClose}
+          message={notification.message}
+          severity={notification.severity}
+        />
       </Container>
     </div>
   );
 };
-
-async function RegisterSubmit(username,name,surname,email,password,gender,userType){
-  
-  console.log(username, "   ",name, "   ",surname, "   ",email, "    ",password, "    ",gender,"    ",userType);
-
-
-  let obj ={
-    username:username,
-    name:name,
-    surname:surname,
-    email:email,
-    password:password,
-    gender:gender,
-    user_type:userType
-  }
-
-  axios.post('http://localhost:3000/register',obj);
-}
 
 export default Register;
