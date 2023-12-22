@@ -165,6 +165,7 @@ CREATE TABLE IF NOT EXISTS teacherLanguages(
 );
 
 ALTER TABLE Level ADD rank INT;
+ALTER TABLE homeworksInClass ADD point FLOAT;
 
 
 CREATE VIEW teacher_name_surname AS

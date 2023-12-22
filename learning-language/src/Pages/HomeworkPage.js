@@ -54,7 +54,7 @@ async function fetchWaitHomeworks(){
     id : globalUser.id
   }
 
-  let url = urllist.createQuery("http://localhost:3000/teacher/myClasses/waitingHomeworks", user)
+  let url = urllist.createQuery("http://localhost:3000/learner/myClasses/waitingHomeworks", user)
   
   let result = await axios.get(url)
 
