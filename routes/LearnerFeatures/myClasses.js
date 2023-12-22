@@ -168,11 +168,17 @@ router
             res.send(result)
 
         })
-
-
-
-
 })
+
+router
+    .route("/submit")
+    .post((req, res) => {
+
+        let values = [req.body.homeworkid, req.body.submission]
+        let sqlQuery = `Update homeworksinclass Set submission = ($2) WHERE homework_id = ($1)`
+
+        connection.query(sqlQuery, values)
+    })
 
 
 

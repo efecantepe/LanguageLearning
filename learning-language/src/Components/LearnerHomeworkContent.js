@@ -1,12 +1,24 @@
 import React, { useState } from 'react';
 import { Card, CardContent, Typography, Button,Slider,Box,TextField  } from '@mui/material';
 import Popup from './PopupComponent';
+import axios  from 'axios';
+
 
 const LearnerHomeworkContent = ({ homework }) => {
 
     const [submissionText, setSubmissionText] = useState('');
 
     const handleSubmission = () => {
+
+        let obj = {
+
+            homeworkid : homework.homework_id,
+            submission : submissionText
+        }
+
+        axios.post("http://localhost:3000/learner/myClasses/submit", obj)
+
+
         console.log('Submitted:', submissionText);
     };
 
