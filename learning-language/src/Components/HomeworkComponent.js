@@ -20,21 +20,21 @@ const HomeworkComponent = ({ homework }) => {
                 Course ID: {homework.classid}
                 </Typography>
                 <Typography color="textSecondary" gutterBottom>
-                Teacher: {homework.teachername}
+                Teacher: {homework.teacherid}
                 </Typography>
                 <Typography color="textSecondary" gutterBottom>
-                Learner: {homework.learnername}
+                Learner: {homework.learnerid}
                 </Typography>
                 <Typography color="textSecondary" gutterBottom>
-                Homework: {homework.homeworktext}
+                Homework: {homework.homeworkdescription}
                 </Typography>
                 <Typography color="textSecondary" gutterBottom>
                 Submission: {homework.submission}
                 </Typography>
                 <Typography color="textSecondary" gutterBottom>
-                Grade: {homework.grade}
+                Grade: {homework.point}
                 </Typography>
-                <Button variant="contained">
+                <Button variant="contained" onClick={openPopup}>
                 View
                 </Button>
                 <Popup open={isPopupOpen} onClose={closePopup} content={<TeacherHomeworkContent homework={homework}/>}/>

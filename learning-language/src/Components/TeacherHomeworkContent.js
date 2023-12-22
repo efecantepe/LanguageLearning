@@ -4,7 +4,7 @@ import Popup from './PopupComponent';
 
 const TeacherHomeworkContent = ({ homework }) => {
 
-        const [grade, setGrade] = React.useState(50); // Initial grade value
+        const [grade, setGrade] = React.useState(50);
       
         const handleChange = (event, newValue) => {
           if (typeof newValue === 'number') {
@@ -13,31 +13,26 @@ const TeacherHomeworkContent = ({ homework }) => {
         };
       
         const mapGradeToValue = (grade) => {
-          // Map the grade (0-100) to the slider's value (0-100)
           return grade;
         };
     return (
         <Card variant="outlined" sx={{ display: 'inline-block', minWidth: 300 }}>
             <CardContent>
-                <Typography color="textSecondary" gutterBottom>
+            <Typography color="textSecondary" gutterBottom>
                 Course ID: {homework.classid}
                 </Typography>
                 <Typography color="textSecondary" gutterBottom>
-                Teacher: {homework.teachername}
+                Teacher: {homework.teacherid}
                 </Typography>
                 <Typography color="textSecondary" gutterBottom>
-                Learner: {homework.learnername}
+                Learner: {homework.learnerid}
                 </Typography>
                 <Typography color="textSecondary" gutterBottom>
-                Homework: {homework.homeworktext}
+                Homework: {homework.homeworkdescription}
                 </Typography>
                 <Typography color="textSecondary" gutterBottom>
                 Submission: {homework.submission}
                 </Typography>
-                <Typography color="textSecondary" gutterBottom>
-                Grade: {homework.grade}
-                </Typography>
-
                 <Box sx={{ width: 250 }}>
       <Typography id="grade-slider" gutterBottom>
         Grade: {grade}
