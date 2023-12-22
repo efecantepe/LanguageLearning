@@ -38,9 +38,17 @@ async function assignHomeworkToClass(classId, homeworkDescription, dueDate) {
    return executeQuery(query);
 }
 
+async function selectDateRangedClass() {
+   const query = `
+   SELECT * FROM class
+   WHERE classDate BETWEEN $1 AND $2;
+   `
+}
+
 module.exports = {
    getClassRequests,
    acceptClassRequest,
    rejectClassRequest,
    assignHomeworkToClass,
+   selectDateRangedClass
 };

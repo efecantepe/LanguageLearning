@@ -29,8 +29,6 @@ app.get('/', (req, res) => {
     res.send('Hello World')
 })
 
-
-
 async function doWork(){
 
     const res = await connection.query('Select * from language')
@@ -39,6 +37,85 @@ async function doWork(){
     console.log(res)
 
 }
+
+app.get('/classesInRange', async (req, res) => {
+    try {
+        const { startDate, endDate } = req.query;
+        const classes = await pool.query(
+            "SELECT * FROM class WHERE classDate BETWEEN $1 AND $2",
+            [startDate, endDate]
+        );
+        res.json(classes.rows);
+    } catch (err) {
+        console.error(err.message);
+    }
+});
+
+app.get('/searchTeachers', async (req, res) => {
+    try {
+        const { name } = req.query;
+        const teachers = await pool.query(
+            "SELECT * FROM teacher WHERE teacherName LIKE $1",
+            [`%${name}%`]
+        );
+        res.json(teachers.rows);
+    } catch (err) {
+        console.error(err.message);
+    }
+});
+
+app.get('/sortedUsers', async (req, res) => {
+    try {
+        const { languageName, minLevel, maxLevel } = req.query;
+        const users = await pool.query(
+            `SELECT
+                u.userName,
+                u.userType,
+                ul.languageName,
+                ul.level
+             FROM (
+                SELECT
+                    learnerName AS userName,
+                    'Learner' AS userType,
+                    learnerId
+                FROM
+                    Learner
+                UNION
+                SELECT
+                    teacherName AS userName,
+                    'Teacher' AS userType,
+                    teacherId
+                FROM
+                    Teacher
+             ) AS u
+             JOIN (
+                SELECT
+                    languageName,
+                    learnerId AS userId,
+                    level
+                FROM
+                    learnerLanguages
+                UNION
+                SELECT
+                    languageName,
+                    teacherid AS userId,
+                    level
+                FROM
+                    teacherLanguages
+             ) AS ul ON u.learnerId = ul.userId
+             WHERE
+                ul.languageName = $1
+                AND ul.level BETWEEN $2 AND $3
+             ORDER BY
+                ul.level DESC,
+                u.userName`,
+            [languageName, minLevel, maxLevel]
+        );
+        res.json(users.rows);
+    } catch (err) {
+        console.error(err.message);
+    }
+});
 
 //doWork()
 
