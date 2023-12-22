@@ -12,22 +12,6 @@ import TeacherLayout from '../Components/TeacherLayout';
 
 let globalUser = JSON.parse(localStorage.getItem('user'))
 
-
-/*
-const activeCoursesData = [
-    {id: 1, title: 'Sample Course', learner: 'Berkley Rush', registerDate: '12.12.2022', homework: 'Book 1 Reeding', feedback: 'Great Work!', teacher: 'Alex Hale', language: 'English', level: 'A1', status: 'Active', progress: '%20', meetingDate: '01.01.2023', description: 'Description for the sample course.'},
-
-    {id: 2, title: 'Sample Course', learner: 'Berkley Rush', registerDate: '12.12.2022', homework: 'Book 1 Reeding', feedback: 'Great Work!', teacher: 'Alex Hale', language: 'English', level: 'A1', status: 'Waiting', progress: '%20', meetingDate: '01.01.2023', description: 'Description for the sample course.'},
-    {id: 5, title: 'Sample Course', learner: 'Berkley Rush', registerDate: '12.12.2022', homework: 'Book 1 Reeding', feedback: 'Great Work!', teacher: 'Alex Hale', language: 'English', level: 'A1', status: 'Active', progress: '%20', meetingDate: '01.01.2023', description: 'Description for the sample course.'},
-    {id: 6, title: 'Sample Course', learner: 'Berkley Rush', registerDate: '12.12.2022', homework: 'Book 1 Reeding', feedback: 'Great Work!', teacher: 'Alex Hale', language: 'English', level: 'A1', status: 'Active', progress: '%20', meetingDate: '01.01.2023', description: 'Description for the sample course.'}
-];
-
-const finishedCoursesData = [
-    {id: 3, title: 'Sample Course', learner: 'Berkley Rush', registerDate: '12.12.2022', homework: 'Book 1 Reeding', feedback: 'Great Work!', teacher: 'Alex Hale', language: 'English', level: 'A1', status: 'Finished', progress: '%20', meetingDate: '01.01.2023', description: 'Description for the sample course.'},
-    {id: 4, title: 'Sample Course', learner: 'Berkley Rush', registerDate: '12.12.2022', homework: 'Book 1 Reeding', feedback: 'Great Work!', teacher: 'Alex Hale', language: 'English', level: 'A1', status: 'Finished', progress: '%20', meetingDate: '01.01.2023', description: 'Description for the sample course.'}
-];
-*/   
-
 const TeacherClass = () => {
     const [activeCourses, setActiveCourses] = useState([]);
     const [finishedCourses, setFinishedCourses] = useState([]);
