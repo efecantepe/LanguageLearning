@@ -120,7 +120,10 @@ const RightPanel = () => {
 
         else{
             setIsDisabled(false)
-            fetchTeachers(selectedLanguage, selectedMinLevel, selectedMaxLevel).then((result) => {
+            fetchPeople(selectedLanguage, selectedMinLevel, selectedMaxLevel).then((result) => {
+
+                console.log(result)
+
                 result.data.map((index, key) => {
                     console.log(index , "    ", key)
                 })
@@ -300,8 +303,10 @@ async function fetchInboxes(){
 
 }
 
-
+/*
 async function fetchPeople(minLevel, maxLevel, language){
+
+
 
   let obj = {
 
@@ -316,6 +321,7 @@ async function fetchPeople(minLevel, maxLevel, language){
   return result
 
 }
+*/
 
 async function sendMessage(){
 
@@ -334,6 +340,24 @@ async function fetchMessages(inbox_id){
 
   return result
 
+}
+
+async function fetchPeople(languageName, minLevel, maxLevel){
+  console.log(languageName, "   " ,minLevel, "   "  ,maxLevel)
+
+  let obj = {
+
+      'languageName' : languageName,
+      'minLevel' : minLevel,
+      'maxLevel' : maxLevel
+
+  }
+  let url = urllist.createQuery("http://localhost:3000/chat/getPeople", obj)
+  let result = await axios.get(url)
+  
+  console.log("Fetch People ", result)
+
+  return result;
 }
 
 
