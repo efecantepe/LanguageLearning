@@ -30,6 +30,10 @@ const Register = () => {
     return emailRegex.test(email);
   };
 
+  const refresh = () => {
+    window.location.reload();
+  };
+
   const RegisterSubmit = async (username, name, surname, email, password, gender, userType) => {
     username = username.trim();
     name = name.trim();
@@ -102,7 +106,7 @@ const Register = () => {
                     <Button variant="contained" href='/login' >
                         Login
                     </Button>
-                    <Button type="submit" variant="contained" color='success' onClick={() => RegisterSubmit(userName, name, surname, email, password, gender, userType)}>
+                    <Button type="submit" variant="contained" color='success' onClick={() => {RegisterSubmit(userName, name, surname, email, password, gender, userType)}}>
                         Register
                     </Button>
                 </Box>
