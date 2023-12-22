@@ -49,7 +49,7 @@ const LeftPanel = (props) => {
 
     fetchInboxes().then((result) => {
       
-      console.log(result)
+      console.log(" LEFT PANEL RESULT !!!!!", result)
       setInboxes(result.data)
 
 
@@ -105,6 +105,35 @@ const CenterPanel = (message, chatMessages, inbox_id) => {
 const RightPanel = () => {
 
     
+    function a(){
+
+        if(selectedLanguage === '' || selectedMinLevel === '' || selectedMaxLevel === ''){
+          setIsDisabled(true)
+      }
+
+      else{
+          setIsDisabled(false)
+          fetchPeople(selectedLanguage, selectedMinLevel, selectedMaxLevel).then((result) => {
+
+              console.log(result)
+
+              result.data.map((index, key) => {
+                  console.log(index , "    ", key)
+              })
+
+              if(result.data.length !== 0){
+
+                  console.log("ASJKDHASD RESULT DATA IS", result.data)
+
+
+                  setTeachers(result.data)
+              }
+          })
+      }
+
+
+    }
+
 
     const [selectedLanguage, setSelectedLanguage] = useState('');
     const [selectedMinLevel, setSelectedMinLevel] = useState('');
@@ -140,7 +169,7 @@ const RightPanel = () => {
             })
         }
 
-    }, [selectedLanguage, selectedMinLevel, selectedMaxLevel])
+    }, [])
 
 
     
@@ -205,14 +234,14 @@ const RightPanel = () => {
         </Select>
     </FormControl>
     <div style={{ textAlign: 'right' }}>
-      <Button variant="contained"className='margin-top-1'>
+      <Button onClick={a} variant="contained"className='margin-top-1'>
         Search
       </Button>
     </div>
       <List>
         {teachers.map((person) => (
           <React.Fragment key={person.teacherid}>
-          <ListItem  button sx={{backgroundColor:getColorForUserType(person.user_type)}}>
+          <ListItem onClick={() => addContact(person.teacherid)}  button sx={{backgroundColor:getColorForUserType(person.user_type)}}>
           <Avatar sx={{color:'MintCream', bgcolor: getColorForLetter(person.teachername.charAt(0)) }}> {person.teachername.charAt(0)} </Avatar>
             <ListItemText primary={person.teachername} sx={{ paddingLeft: 2 }} />
           </ListItem>
@@ -377,7 +406,7 @@ async function fetchPeople(languageName, minLevel, maxLevel){
 
 function addContact(person){
 
-  console.log("Person is Person")
+  console.log("Person is ", person)
 
   let obj = {
 
@@ -389,5 +418,7 @@ function addContact(person){
   axios.post("http://localhost:3000/chat/createInbox", obj)
 
 }
+
+
 
 export default ChatPanel;
