@@ -129,6 +129,10 @@ const RightPanel = () => {
                 })
 
                 if(result.data.length !== 0){
+
+                    console.log("ASJKDHASD RESULT DATA IS", result.data)
+
+
                     setTeachers(result.data)
                 }
             })
@@ -195,11 +199,11 @@ const RightPanel = () => {
         </Select>
     </FormControl>
       <List>
-        {peopleList.map((person) => (
-          <React.Fragment key={person.id}>
+        {teachers.map((person) => (
+          <React.Fragment key={person.teacherid}>
           <ListItem button>
-          <Avatar sx={{color:'MintCream', bgcolor: getColorForLetter(person.name.charAt(0)) }}> {person.name.charAt(0)} </Avatar>
-            <ListItemText primary={person.name} sx={{ paddingLeft: 2 }} />
+          <Avatar sx={{color:'MintCream', bgcolor: getColorForLetter(person.teachername.charAt(0)) }}> {person.teachername.charAt(0)} </Avatar>
+            <ListItemText primary={person.teachername} sx={{ paddingLeft: 2 }} />
           </ListItem>
           <Divider />
         </React.Fragment>
