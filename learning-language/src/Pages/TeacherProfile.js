@@ -21,11 +21,10 @@ const createQuery = urlList.createQuery
 const UserInfo = ({ user }) => {
 
 
-  const [name, setName] = useState("")
-  const [surName, setSurname] = useState("")
-  const [email, setEmail] = useState("")
-  const [gender, setGender] = useState("")
-  const [pronunciation, setPronunciation ] = useState("")
+  const [name, setName] = useState(globalUser.name)
+  const [surName, setSurname] = useState(globalUser.surname)
+  const [email, setEmail] = useState(globalUser.email)
+  const [gender, setGender] = useState(globalUser.gender)
 
   const handleNameChange = (event) => {
     setName(event.target.value);
@@ -66,10 +65,10 @@ const UserInfo = ({ user }) => {
           <Stack component="form" sx={{width: '25ch',}} spacing={2} noValidateautoComplete="off">
               <Typography variant="h6">Profile Information</Typography>
               <Avatar sx={{ bgcolor: deepOrange[500] }}>J</Avatar>
-              <TextField onChange={handleNameChange} label="Name" defaultValue={user.name} variant="filled" />
-              <TextField onChange={handleSurnameChange} label="Surname" defaultValue={user.name} variant="filled" />
-              <TextField onChange={handleEmailChange} label="Email" defaultValue={user.email} variant="filled" />
-              <TextField onChange={handleGenderChange} label="Gender" defaultValue={user.gender} variant="filled" />
+              <TextField onChange={handleNameChange} label="Name" defaultValue={globalUser.name} variant="filled" />
+              <TextField onChange={handleSurnameChange} label="Surname" defaultValue={globalUser.surname} variant="filled" />
+              <TextField onChange={handleEmailChange} label="Email" defaultValue={globalUser.email} variant="filled" />
+              <TextField onChange={handleGenderChange} label="Gender" defaultValue={globalUser.gender} variant="filled" />
               <Button onClick={() => updateInfo()} variant="contained">Update</Button>
           </Stack>
       </Paper>
