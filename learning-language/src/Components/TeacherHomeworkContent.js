@@ -1,17 +1,20 @@
 import React, { useState } from 'react';
-import { Card, CardContent, Typography, Button,Slider  } from '@mui/material';
+import { Card, CardContent, Typography, Button,Slider,Box  } from '@mui/material';
 import Popup from './PopupComponent';
-
 
 const TeacherHomeworkContent = ({ homework }) => {
 
-    export default function NonLinearSlider() {
-        const [grade, setGrade] = React.useState(10);
+        const [grade, setGrade] = React.useState(50); // Initial grade value
       
-        const handleGrade = (event, newValue) => {
+        const handleChange = (event, newValue) => {
           if (typeof newValue === 'number') {
-            setValue(newValue);
+            setGrade(newValue);
           }
+        };
+      
+        const mapGradeToValue = (grade) => {
+          // Map the grade (0-100) to the slider's value (0-100)
+          return grade;
         };
     return (
         <Card variant="outlined" sx={{ display: 'inline-block', minWidth: 300 }}>
@@ -36,22 +39,19 @@ const TeacherHomeworkContent = ({ homework }) => {
                 </Typography>
 
                 <Box sx={{ width: 250 }}>
-                    <Typography id="non-linear-slider" gutterBottom>
-                        Storage: {valueLabelFormat(calculateValue(value))}
-                    </Typography>
-                    <Slider
-                        value={grade}
-                        min={5}
-                        step={1}
-                        max={30}
-                        scale={calculateValue}
-                        getAriaValueText={valueLabelFormat}
-                        valueLabelFormat={valueLabelFormat}
-                        onChange={handleGrade}
-                        valueLabelDisplay="auto"
-                        aria-labelledby="non-linear-slider"
-                    />
-                    </Box>
+      <Typography id="grade-slider" gutterBottom>
+        Grade: {grade}
+      </Typography>
+      <Slider
+        value={grade}
+        min={0}
+        step={1}
+        max={100}
+        onChange={handleChange}
+        valueLabelDisplay="auto"
+        aria-labelledby="grade-slider"
+      />
+    </Box>
                 <Button variant="contained">
                 Give Grade
                 </Button>
