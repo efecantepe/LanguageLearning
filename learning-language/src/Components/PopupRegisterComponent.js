@@ -80,24 +80,6 @@ const PopupRegisterComponent = ({ onCloseAndRefresh }) => {
     }
 
 
-    
-    /*
-    const addLanguageDataContent = [
-        {language: 'English'},
-        {language: 'French'},
-        {language: 'Spanish'},
-        {language: 'Turkish'},
-      ];
-      const addLevelDataContent = [
-        {level: 'A1'},
-        {level: 'A2'},
-        {level: 'B1'},
-        {level: 'B2'},
-        {level: 'C1'},
-        {level: 'C2'},
-      ];
-      */
-
     return (
         <Card variant="outlined" sx={{ display: 'inline-block', minWidth: 300 }}>
             <CardContent>
