@@ -12,6 +12,7 @@ let globalUser = JSON.parse(localStorage.getItem('user'))
 
 const HomeworkPage = () => {
   const [waitingHomeworks, setWaitingHomeworks] = useState([]);
+  const [finishedHomeworks, setFinishedHomeworks] = useState([]);
   
   useEffect(() => {
     fetchWaitHomeworks().then((result) => {
@@ -19,8 +20,15 @@ const HomeworkPage = () => {
       if(result.length !== 0){
         setWaitingHomeworks(result)
       }
-      
     })
+    
+    fetchFinishedHomeworks().then((result) => {
+    
+        if(result.length !== 0){
+          setFinishedHomeworks(result)
+        }
+        
+      })
 }, [])
 
 
@@ -39,6 +47,21 @@ const HomeworkPage = () => {
           </Typography>
           <Box sx={{ display: 'flex', flexDirection: 'row', overflowX: 'auto', width:600 }}>
           {waitingHomeworks.map((homework) => (
+            <LearnerHomework homework={homework} />
+          ))}
+          </Box>
+
+          <Typography variant="h6" gutterBottom>
+            <Grid container >
+              <Grid item xs={6} className='margin-top-1'>
+              <Box sx={{ display: 'flex', justifyContent: 'flex-start', padding:1}}>
+                Finished Homeworks
+              </Box>
+              </Grid> 
+            </Grid>
+          </Typography>
+          <Box sx={{ display: 'flex', flexDirection: 'row', overflowX: 'auto', width:600 }}>
+          {finishedHomeworks.map((homework) => (
             <LearnerHomework homework={homework} />
           ))}
           </Box>
@@ -62,5 +85,20 @@ async function fetchWaitHomeworks(){
 
   return result.data.rows
 }
+
+async function fetchFinishedHomeworks(){
+
+    let user = {
+      id : globalUser.id
+    }
+  
+    let url = urllist.createQuery("http://localhost:3000/learner/myClasses/finishedHomeworks", user)
+    
+    let result = await axios.get(url)
+  
+    console.log("--------" , result.data)
+  
+    return result.data.rows
+  }
 
 export default HomeworkPage;
