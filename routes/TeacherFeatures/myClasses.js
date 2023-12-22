@@ -273,10 +273,16 @@ router.post('/sendClassRequest', async (req, res) => {
 
      })
 
-
-
-
 })
+
+router
+    .route("/updatePoint")
+    .post((req, res) => {
+
+        let values = [req.body.homeworkid, req.body.point]
+        let sqlQuery = "Update homeworksinclass SET point = ($2) WHERE homework_id = ($1)"
+        connection.query(sqlQuery, values)
+    })
 
 
 module.exports = router 

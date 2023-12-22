@@ -214,8 +214,18 @@ CREATE SEQUENCE class_seq START 1;
 ALTER TABLE class ADD COLUMN last_updated TIMESTAMP DEFAULT NOW();
 ALTER TABLE homeworksInClass ADD COLUMN submission varchar(500) DEFAULT null;
 
+-- Add a serial column named 'serial_column' as the primary key to the existing table 'your_table'
+ALTER TABLE homeworksInClass
+ADD COLUMN homework_id SERIAL PRIMARY KEY;
+
+
+
 CREATE VIEW waitingHomework AS(
     Select * FROM homeworksInClass WHERE homeworksInClass.submission is null
+);
+
+CREATE VIEW finishedhomework AS(
+    Select * FROM homeworksInClass WHERE homeworksInClass.point is not null
 );
 
 

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Card, CardContent, Typography, Button,Slider,Box  } from '@mui/material';
 import Popup from './PopupComponent';
+import axios  from 'axios';
 
 const TeacherHomeworkContent = ({ homework }) => {
 
@@ -11,6 +12,20 @@ const TeacherHomeworkContent = ({ homework }) => {
             setGrade(newValue);
           }
         };
+
+        function handleClick(){
+
+          console.log(homework)
+
+          let obj = {
+            point : grade,
+            homeworkid : homework.homework_id
+          }
+
+          axios.post("http://localhost:3000/teacher/myClasses/updatePoint", obj)  
+
+        }
+
       
         const mapGradeToValue = (grade) => {
           return grade;
@@ -47,7 +62,7 @@ const TeacherHomeworkContent = ({ homework }) => {
         aria-labelledby="grade-slider"
       />
     </Box>
-                <Button variant="contained">
+                <Button onClick={handleClick} variant="contained">
                 Give Grade
                 </Button>
 
