@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Typography,
   FormControl,
@@ -11,6 +11,7 @@ import {
   Paper,
 } from '@mui/material';
 import axios from 'axios';
+import urllist from '../urllist';
 import Header from '../Components/Header';
 
 const AdminPage = () => {
@@ -29,10 +30,38 @@ const AdminPage = () => {
   const [studentsCount, setStudentsCount] = useState(0);
   const [gradeAverage, setGradeAverage] = useState(0);
   const [speakingGradeAverage, setSpeakingGradeAverage] = useState(0);
+  
+  useEffect(() => {
+
+    fetchLanguages().then((result => {
+      setLanguages(result.data)
+    }))
+
+    fetchLevels().then((result) => {
+        setLevels(result.data)
+    })
+
+  }, [])
+
+
 
   const handleGenerateReport = () => {
-    //fetchStudentsCount();
-    //fetchGradeAverage();
+  
+    let obj = {
+      language : selectedLanguage,
+      level : selectedLevel
+    }
+
+    let url = urllist.createQuery("http://localhost:3000/admin", obj)
+
+    console.log(url)
+
+    axios.get("http://localhost:3000/admin").then((result) => {
+
+      console.log(result)
+
+    })
+  
   };
 
   return (
@@ -106,5 +135,15 @@ const AdminPage = () => {
     </div>
   );
 };
+
+async function fetchLevels(){
+  let result = await axios.get("http://localhost:3000/learner/requests/getLevels")
+  return result;
+} 
+
+async function fetchLanguages(){
+  let result = await axios.get("http://localhost:3000/learner/requests/getLanguages")
+  return result;
+}
 
 export default AdminPage;

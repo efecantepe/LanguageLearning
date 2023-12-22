@@ -117,6 +117,29 @@ app.get('/sortedUsers', async (req, res) => {
     }
 });
 
+app.get("/admin", (req, res) => {
+
+    let language = req.params.language
+    let level = req.params.level
+
+    let values = [language, level]
+
+    let query = `
+    SELECT
+       COUNT(DISTINCT c.learnerId) AS totalStudents,
+       AVG(h.grade) AS homeworkGradeAverage
+    FROM class c
+    LEFT JOIN homeworksInClass h ON c.classId = h.classId
+    WHERE c.languageName = ($1) AND c.classLevel = ($2);
+ `;
+
+ connection.query(query, values).then((result) => {
+
+    result.send(result)
+
+ })
+
+})
 //doWork()
 
 /* 
