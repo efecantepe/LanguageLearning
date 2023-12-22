@@ -4,7 +4,7 @@ import Popup from './PopupComponent';
 import axios  from 'axios';
 
 
-const LearnerHomeworkContent = ({ homework }) => {
+const LearnerHomeworkContent = ({ homework,onCloseAndRefresh }) => {
 
     const [submissionText, setSubmissionText] = useState('');
 
@@ -47,7 +47,7 @@ const LearnerHomeworkContent = ({ homework }) => {
                     rows={2}
                     margin="normal"
                 />
-                <Button variant="contained" onClick={handleSubmission}>
+                <Button variant="contained" onClick={() =>{handleSubmission();onCloseAndRefresh()}}>
                 Submit
                 </Button>
 

@@ -3,7 +3,7 @@ import { Card, CardContent, Typography, Button,Slider,Box  } from '@mui/material
 import Popup from './PopupComponent';
 import axios  from 'axios';
 
-const TeacherHomeworkContent = ({ homework }) => {
+const TeacherHomeworkContent = ({ homework,onCloseAndRefresh }) => {
 
         const [grade, setGrade] = React.useState(50);
       
@@ -62,7 +62,7 @@ const TeacherHomeworkContent = ({ homework }) => {
         aria-labelledby="grade-slider"
       />
     </Box>
-                <Button onClick={handleClick} variant="contained">
+                <Button onClick={() =>{handleClick();onCloseAndRefresh()}} variant="contained">
                 Give Grade
                 </Button>
 

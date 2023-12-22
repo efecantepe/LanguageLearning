@@ -96,7 +96,7 @@ const AddHomework = ({ onCloseAndRefresh }) => {
           fullWidth
           margin="normal"
         />
-        <Button variant="contained" onClick={sendHomework}>
+        <Button variant="contained" onClick={() =>{sendHomework();onCloseAndRefresh()}}>
           Send Homework
         </Button>
       </CardContent>

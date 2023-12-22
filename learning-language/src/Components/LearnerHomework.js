@@ -12,6 +12,10 @@ const LearnerHomework = ({ homework }) => {
     const [isPopupOpen, setPopupOpen] = useState(false);
     const openPopup = () => { setPopupOpen(true);};
     const closePopup = () => { setPopupOpen(false);};
+    const closePopupAndRefresh = () => {
+        setPopupOpen(false)
+        window.location.reload();
+      };
 
     return (
         <Card variant="outlined" sx={{ display: 'inline-block', minWidth: 300 }}>
@@ -37,7 +41,8 @@ const LearnerHomework = ({ homework }) => {
                 <Button variant="contained" onClick={openPopup}>
                 View
                 </Button>
-                <Popup open={isPopupOpen} onClose={closePopup} content={<LearnerHomeworkContent homework={homework}/>}/>
+                <Popup open={isPopupOpen} onClose={closePopup} content={<LearnerHomeworkContent homework={homework} 
+                onCloseAndRefresh={closePopupAndRefresh}/>}/>
             </CardContent>
         </Card>
     );
