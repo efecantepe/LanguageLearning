@@ -201,7 +201,7 @@ const RightPanel = () => {
       <List>
         {teachers.map((person) => (
           <React.Fragment key={person.teacherid}>
-          <ListItem button>
+          <ListItem onClick={(person) => addContact(person) } button>
           <Avatar sx={{color:'MintCream', bgcolor: getColorForLetter(person.teachername.charAt(0)) }}> {person.teachername.charAt(0)} </Avatar>
             <ListItemText primary={person.teachername} sx={{ paddingLeft: 2 }} />
           </ListItem>

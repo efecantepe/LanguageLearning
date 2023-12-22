@@ -301,7 +301,7 @@ ORDER BY
     ul.level DESC,
     u.userName;
 
-
+/*
 WITH CombinedUser AS (
     SELECT Teacher.*, 'teacher' as user_type FROM Teacher
 
@@ -321,7 +321,7 @@ WITH CombinedUser AS (
                                     AND b.level = ($2) AND c.level = ($3)
                                     AND a.rank >= b.rank AND a.rank <= c.rank
                                     AND CombinedUser.teacherId = CombinedLanguagase.teacherid;
-
+*/
 
 
 
