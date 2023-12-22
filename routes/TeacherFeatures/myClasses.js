@@ -176,7 +176,7 @@ router
         console.log(req.body.classid)
 
         let values = [req.body.classid,]
-        let sqlQuery = "UPDATE class SET classstatus = 'rejected' WHERE classid = ($1) "
+        let sqlQuery = "Delete from class WHERE classid = ($1) "
 
         let result = connection.query(sqlQuery, values)
 
