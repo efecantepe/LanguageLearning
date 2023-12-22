@@ -104,6 +104,8 @@ const CenterPanel = (message, chatMessages, inbox_id) => {
 
 const RightPanel = () => {
 
+    
+
     const [selectedLanguage, setSelectedLanguage] = useState('');
     const [selectedMinLevel, setSelectedMinLevel] = useState('');
     const [selectedMaxLevel, setSelectedMaxLevel] = useState('');
@@ -205,7 +207,7 @@ const RightPanel = () => {
       <List>
         {teachers.map((person) => (
           <React.Fragment key={person.teacherid}>
-          <ListItem button sx={{backgroundColor:getColorForUserType(person.user_type)}}>
+          <ListItem  button sx={{backgroundColor:getColorForUserType(person.user_type)}}>
           <Avatar sx={{color:'MintCream', bgcolor: getColorForLetter(person.teachername.charAt(0)) }}> {person.teachername.charAt(0)} </Avatar>
             <ListItemText primary={person.teachername} sx={{ paddingLeft: 2 }} />
           </ListItem>
@@ -368,5 +370,19 @@ async function fetchPeople(languageName, minLevel, maxLevel){
   return result;
 }
 
+function addContact(person){
+
+  console.log("Person is Person")
+
+  let obj = {
+
+    user1 : globalUser.id,
+    user2 : person
+
+  }
+
+  axios.post("http://localhost:3000/chat/createInbox", obj)
+
+}
 
 export default ChatPanel;
