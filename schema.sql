@@ -2,6 +2,7 @@ DROP TABLE IF EXISTS homeworksInClass;
 DROP TABLE IF EXISTS class;
 DROP TABLE IF EXISTS learnerLanguages;
 DROP TABLE IF EXISTS targetLanguages;
+DROP TABLE IF EXISTS teacherLanguages;
 DROP TABLE IF EXISTS Learner ;
 DROP TABLE IF EXISTS Teacher;
 
@@ -56,6 +57,16 @@ CREATE TABLE IF NOT EXISTS learnerLanguages(
     level varchar(50),
     FOREIGN KEY (languageName) references Language(languageName),
     FOREIGN KEY (learnerId) references Learner(learnerId),
+    FOREIGN KEY (level) references Level(level)
+);
+
+/* teacher languages table*/
+CREATE TABLE IF NOT EXISTS teacherLanguages(
+    languageName varchar(50),
+    teacherId varchar(50),
+    level varchar(50),
+    FOREIGN KEY (languageName) references Language(languageName),
+    FOREIGN KEY (teacherId) references Teacher(teacherId),
     FOREIGN KEY (level) references Level(level)
 );
 
@@ -159,10 +170,6 @@ ALTER TABLE Level ADD rank INT;
 CREATE VIEW teacher_name_surname AS
     SELECT teacherid, teacherName, surname FROM teacher;
 
-
-
-
-
 INSERT INTO Language VALUES
                     ('English'),
                     ('French'),
@@ -199,5 +206,76 @@ SELECT teacherLanguages.teacherid ,teacherName, surname FROM teacher_name_surnam
 CREATE SEQUENCE class_seq START 1;
 */
 
+/*class last updated trigger*/
+ALTER TABLE class ADD COLUMN last_updated TIMESTAMP DEFAULT NOW();
 
+CREATE OR REPLACE FUNCTION update_last_updated_column()
+RETURNS TRIGGER AS $$
+BEGIN
+    NEW.last_updated = NOW();
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER update_class_last_updated
+BEFORE UPDATE ON class
+FOR EACH ROW
+EXECUTE FUNCTION update_last_updated_column();
+
+/*contraint to ensure class is in the future*/
+ALTER TABLE class ADD CONSTRAINT class_date_future CHECK (classDate > NOW());
+
+/*only one assign*/
+ALTER TABLE learnerLanguages ADD CONSTRAINT unique_language UNIQUE (learnerId, languageName);
+
+/*using range*/
+SELECT * FROM class
+WHERE classDate BETWEEN '2023-01-01' AND '2023-12-31';
+
+/*using like to search users, might delete*/
+SELECT * FROM teacher
+WHERE teacherName LIKE '%eyl%';
+
+/*sorting users in the chat screen, complex query*/
+SELECT
+    u.userName,
+    u.userType,
+    ul.languageName,
+    ul.level
+FROM (
+    SELECT
+        learnerName AS userName,
+        'Learner' AS userType,
+        learnerId
+    FROM
+        Learner
+    UNION
+    SELECT
+        teacherName AS userName,
+        'Teacher' AS userType,
+        teacherId
+    FROM
+        Teacher
+) AS u
+JOIN (
+    SELECT
+        languageName,
+        learnerId AS userId,
+        level
+    FROM
+        learnerLanguages
+    UNION
+    SELECT
+        languageName,
+        teacherid AS userId,
+        level
+    FROM
+        teacherLanguages
+) AS ul ON u.learnerId = ul.userId
+WHERE
+    ul.languageName = 'English'
+    AND ul.level BETWEEN 'A1' AND 'C1'
+ORDER BY
+    ul.level DESC,
+    u.userName;
 

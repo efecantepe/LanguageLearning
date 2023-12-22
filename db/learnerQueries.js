@@ -41,9 +41,64 @@ async function enrollInClass(learnerId, classId) {
    return executeQuery(query);
 }
 
+async function searchTeachers() {
+   const query = `
+   SELECT * FROM teacher
+   WHERE teacherName LIKE $1; 
+   `
+}
+
+async function sortUsers() { 
+   const query = `
+    SELECT
+        u.userName,
+        u.userType,
+        ul.languageName,
+        ul.level
+    FROM (
+        SELECT
+            learnerName AS userName,
+            'Learner' AS userType,
+            learnerId
+        FROM
+            Learner
+        UNION
+        SELECT
+            teacherName AS userName,
+            'Teacher' AS userType,
+            teacherId
+        FROM
+            Teacher
+    ) AS u
+    JOIN (
+        SELECT
+            languageName,
+            learnerId AS userId,
+            level
+        FROM
+            learnerLanguages
+        UNION
+        SELECT
+            languageName,
+            teacherid AS userId,
+            level
+        FROM
+            teacherLanguages
+    ) AS ul ON u.learnerId = ul.userId
+    WHERE
+        ul.languageName = $1
+        AND ul.level BETWEEN $2 AND $3
+    ORDER BY
+        ul.level DESC,
+        u.userName;
+`};
+
+
 module.exports = {
    addNewLearner,
    updateLearnerDetails,
    getLearnerDetails,
    enrollInClass,
+   searchTeachers,
+   sortUsers,
 };
