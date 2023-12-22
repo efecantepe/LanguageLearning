@@ -105,6 +105,35 @@ const CenterPanel = (message, chatMessages, inbox_id) => {
 const RightPanel = () => {
 
     
+    function search(){
+
+        if(selectedLanguage === '' || selectedMinLevel === '' || selectedMaxLevel === ''){
+          setIsDisabled(true)
+      }
+
+      else{
+          setIsDisabled(false)
+          fetchPeople(selectedLanguage, selectedMinLevel, selectedMaxLevel).then((result) => {
+
+              console.log(result)
+
+              result.data.map((index, key) => {
+                  console.log(index , "    ", key)
+              })
+
+              if(result.data.length !== 0){
+
+                  console.log("ASJKDHASD RESULT DATA IS", result.data)
+
+
+                  setTeachers(result.data)
+              }
+          })
+      }
+
+
+    }
+
 
     const [selectedLanguage, setSelectedLanguage] = useState('');
     const [selectedMinLevel, setSelectedMinLevel] = useState('');
@@ -140,7 +169,7 @@ const RightPanel = () => {
             })
         }
 
-    }, [selectedLanguage, selectedMinLevel, selectedMaxLevel])
+    }, [])
 
 
     
@@ -384,5 +413,7 @@ function addContact(person){
   axios.post("http://localhost:3000/chat/createInbox", obj)
 
 }
+
+
 
 export default ChatPanel;
