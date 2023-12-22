@@ -4,7 +4,7 @@ import Popup from './PopupComponent';
 import CourseComponentContent from './CourseComponentContent';
 
 
-const CourseComponent = ({ course, onRegister }) => {
+const HomeworkComponent = ({ homework }) => {
 
     
     const [isPopupOpen, setPopupOpen] = useState(false);
@@ -14,36 +14,31 @@ const CourseComponent = ({ course, onRegister }) => {
     return (
         <Card variant="outlined" sx={{ display: 'inline-block', minWidth: 300 }}>
             <CardContent>
-                <Typography variant="h5" component="div">
-                {"Something"}
-                </Typography>
-                <hr/>
                 <Typography color="textSecondary" gutterBottom>
-                Course ID: {course.classid}
+                Course ID: {homework.classid}
                 </Typography>
                 <Typography color="textSecondary" gutterBottom>
-                Teacher: {course.teachername}
+                Teacher: {homework.teachername}
                 </Typography>
                 <Typography color="textSecondary" gutterBottom>
-                Language: {course.languagename} - {course.classlevel}
+                Learner: {homework.learnername}
                 </Typography>
                 <Typography color="textSecondary" gutterBottom>
-                Status: {course.classstatus}
+                Homework: {homework.homeworktext}
                 </Typography>
                 <Typography color="textSecondary" gutterBottom>
-                Meeting Date: {course.classdate}
+                Submission: {homework.submission}
                 </Typography>
                 <Typography color="textSecondary" gutterBottom>
-                Progress: {"100%"}
+                Grade: {homework.grade}
                 </Typography>
-                <Typography color="textSecondary">{"Something"}</Typography>
-                <Button variant="contained" onClick={openPopup}>
+                <Button variant="contained">
                 View
                 </Button>
-                <Popup open={isPopupOpen} onClose={closePopup} title={'My Course'} content={<CourseComponentContent course={course}/>}/>
+                <Popup open={isPopupOpen} onClose={closePopup} title={'My Course'} content={<CourseComponentContent course={homework}/>}/>
             </CardContent>
         </Card>
     );
 };
   
-export default CourseComponent;
+export default HomeworkComponent;

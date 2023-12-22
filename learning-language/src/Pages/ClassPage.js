@@ -10,23 +10,9 @@ import urlList from '../urllist'
 
 let globalUser = JSON.parse(localStorage.getItem('user'))
 
-// Bunlari silme burda bir sıkıntı var.
-const activeCoursesData = [
-    {id: 1, title: 'Sample Course', teacher: 'Alex Hale', language: 'English', level: 'A1', status: 'Active', progress: '%20', meetingDate: '01.01.2023', description: 'Description for the sample course.'},
-    {id: 2, title: 'Sample Course', teacher: 'Alex Hale', language: 'English', level: 'A1', status: 'Active', progress: '%20', meetingDate: '01.01.2023', description: 'Description for the sample course.'},
-    {id: 5, title: 'Sample Course', teacher: 'Alex Hale', language: 'English', level: 'A1', status: 'Active', progress: '%20', meetingDate: '01.01.2023', description: 'Description for the sample course.'},
-    {id: 6, title: 'Sample Course', teacher: 'Alex Hale', language: 'English', level: 'A1', status: 'Active', progress: '%20', meetingDate: '01.01.2023', description: 'Description for the sample course.'}
-];
-
-const finishedCoursesData = [
-    {id: 3, title: 'Sample Course', teacher: 'Alex Hale', language: 'English', level: 'A1', status: 'Active', progress: '%20', meetingDate: '01.01.2023', description: 'Description for the sample course.'},
-    {id: 4, title: 'Sample Course', teacher: 'Alex Hale', language: 'English', level: 'A1', status: 'Active', progress: '%20', meetingDate: '01.01.2023', description: 'Description for the sample course.'}
-];
-
-
 const ClassPage = () => {
-    const [activeCourses, setActiveCourses] = useState([activeCoursesData]);
-    const [finishedCourses, setFinishedCourses] = useState([finishedCoursesData]);
+    const [activeCourses, setActiveCourses] = useState([]);
+    const [finishedCourses, setFinishedCourses] = useState([]);
     const [waitingCourses, setWaitingCourses] = useState([])
 
     
