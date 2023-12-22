@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Card, CardContent, Typography, Button } from '@mui/material';
 import Popup from './PopupComponent';
-import CourseComponentContent from './CourseComponentContent';
+import TeacherHomeworkContent from './TeacherHomeworkContent'
 
 
 const HomeworkComponent = ({ homework }) => {
@@ -35,7 +35,7 @@ const HomeworkComponent = ({ homework }) => {
                 <Button variant="contained">
                 View
                 </Button>
-                <Popup open={isPopupOpen} onClose={closePopup} title={'My Course'} content={<CourseComponentContent course={homework}/>}/>
+                <Popup open={isPopupOpen} onClose={closePopup} content={<TeacherHomeworkContent homework={homework}/>}/>
             </CardContent>
         </Card>
     );
