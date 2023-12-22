@@ -14,10 +14,6 @@ const CourseComponent = ({ course, onRegister }) => {
     return (
         <Card variant="outlined" sx={{ display: 'inline-block', minWidth: 300 }}>
             <CardContent>
-                <Typography variant="h5" component="div">
-                {"Something"}
-                </Typography>
-                <hr/>
                 <Typography color="textSecondary" gutterBottom>
                 Course ID: {course.classid}
                 </Typography>
@@ -33,7 +29,6 @@ const CourseComponent = ({ course, onRegister }) => {
                 <Typography color="textSecondary" gutterBottom>
                 Meeting Date: {course.classdate}
                 </Typography>
-                <Typography color="textSecondary">{"Something"}</Typography>
                 <Button variant="contained" onClick={openPopup}>
                 View
                 </Button>

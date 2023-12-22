@@ -6,7 +6,7 @@ import urlList from '../urllist'
 import urllist from '../urllist';
 
 
-const CourseComponentContent = ({ course, action, onAccept,onReject,onCancel }) => {
+const CourseComponentContent = ({ course, onCloseAndRefresh }) => {
     //const { id, title, language, level, teacher, learner, registerDate, meetingDate, progress, homework, status, feedback, description } = course;
     const [homework, setHomeworkText] = useState('');
     const [isTextFieldLocked, setIsTextFieldLocked] = useState(false);
@@ -23,7 +23,6 @@ const CourseComponentContent = ({ course, action, onAccept,onReject,onCancel }) 
     const uploadHomework = async () => {
         if (homework.trim() !== '') {
             try {
-                // Simulating the upload process
                 console.log('Homework uploaded:', homework);
 
                 console.log(course)
@@ -104,7 +103,7 @@ const CourseComponentContent = ({ course, action, onAccept,onReject,onCancel }) 
                 </Typography>
             );
         }
-        return null; // If no student submission, don't render the feedback section
+        return null;
     };
 
 
@@ -113,10 +112,10 @@ const CourseComponentContent = ({ course, action, onAccept,onReject,onCancel }) 
         if (course.classstatus == 'waiting') {
             return (
                 <Box sx={{display: 'flex', justifyContent: 'space-between', width: '100%',}}>
-                    <Button variant="contained" color='success' onClick={ () => accept(classid)}>
+                    <Button variant="contained" color='success' onClick={ () => {accept(classid);onCloseAndRefresh();}}>
                         Accept
                     </Button>
-                    <Button variant="contained" color='error' onClick={() => reject(classid)}>
+                    <Button variant="contained" color='error' onClick={() => {reject(classid);onCloseAndRefresh();}}>
                         Reject
                     </Button>
                 </Box>
@@ -138,15 +137,11 @@ const CourseComponentContent = ({ course, action, onAccept,onReject,onCancel }) 
     return (
         <Card variant="outlined" sx={{ display: 'inline-block', minWidth: 300 }}>
             <CardContent>
-                <Typography variant="h5" component="div">
-                {"S"}
-                </Typography>
-                <hr/>
                 <Typography color="textSecondary" gutterBottom>
                 Course ID: {course.classid}
                 </Typography>
                 <Typography color="textSecondary" gutterBottom>
-                Teacher: {"Eylol Bedem"}
+                Teacher: {course.teachername}
                 </Typography>
                 <Typography color="textSecondary" gutterBottom>
                 Learner: {course.learnername}
@@ -161,18 +156,8 @@ const CourseComponentContent = ({ course, action, onAccept,onReject,onCancel }) 
                 Meeting Date: {course.classdate}
                 </Typography>
                 <Typography color="textSecondary" gutterBottom>
-                Progress: {"100%"}
-                </Typography>
-                <Typography color="textSecondary" gutterBottom>
                 Registered Date: {course.classdate}
                 </Typography>
-                <Typography color="textSecondary" gutterBottom>
-                    <TextField id="outlined-multiline-static" label="Homework" value={homework} onChange={handleTextChange} disabled={isTextFieldLocked} fullWidth multiline rows={2} />
-                    <Button variant="contained" onClick={isTextFieldLocked ? deleteHomework : uploadHomework}>
-                        {isTextFieldLocked ? 'Delete Homework' : 'Upload Homework'}
-                    </Button>
-                </Typography>
-                {renderFeedbackSection()}
                 {renderButtons(course.classid)}
             </CardContent>
         </Card>

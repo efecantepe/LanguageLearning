@@ -20,15 +20,11 @@ const TeacherCourseComponent = ({ course, homework }) => {
     return (
         <Card variant="outlined" sx={{ display: 'inline-block', minWidth: 300 }}>
             <CardContent>
-                <Typography variant="h5" component="div">
-                {"Couse Title IS EMPTY"}
-                </Typography>
-                <hr/>
                 <Typography color="textSecondary" gutterBottom>
                 Course ID: {course.classid}
                 </Typography>
                 <Typography color="textSecondary" gutterBottom>
-                Learner: {course.learname}
+                Learner: {course.learnername}
                 </Typography>
                 <Typography color="textSecondary" gutterBottom>
                 Language: {course.languagename} , {course.classlevel}
@@ -39,10 +35,6 @@ const TeacherCourseComponent = ({ course, homework }) => {
                 <Typography color="textSecondary" gutterBottom>
                 Meeting Date: {course.classdate}
                 </Typography>
-                <Typography color="textSecondary" gutterBottom>
-                Progress: {"100%"}
-                </Typography>
-                <Typography color="textSecondary">{"DESCRIPTION IS EMPTY"}</Typography>
                 <Button variant="contained" onClick={openPopup}>
                 View
                 </Button>
