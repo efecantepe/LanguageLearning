@@ -141,9 +141,6 @@ const CourseComponentContent = ({ course, onCloseAndRefresh }) => {
                 Course ID: {course.classid}
                 </Typography>
                 <Typography color="textSecondary" gutterBottom>
-                Teacher: {course.teachername}
-                </Typography>
-                <Typography color="textSecondary" gutterBottom>
                 Learner: {course.learnername}
                 </Typography>
                 <Typography color="textSecondary" gutterBottom>
