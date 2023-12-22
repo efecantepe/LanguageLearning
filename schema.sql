@@ -324,6 +324,29 @@ WITH CombinedUser AS (
 */
 
 
+-- Create the trigger function
+CREATE OR REPLACE FUNCTION update_inbox_trigger()
+RETURNS TRIGGER AS $$
+BEGIN
+    -- Update the inbox table with the last message and user_id
+    UPDATE inbox
+    SET
+        last_message = NEW.message,
+        last_sent_user_id = NEW.user_id
+    WHERE inbox_id = NEW.inbox_id;
+
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+-- Create the trigger
+CREATE TRIGGER after_insert_messages
+AFTER INSERT
+ON messages
+FOR EACH ROW
+EXECUTE FUNCTION update_inbox_trigger();
+
+Select COUNT(*) as languageCount FROM learnerlanguages WHERE languagename = 'English'
 
 
 

@@ -51,9 +51,7 @@ const LeftPanel = (props) => {
       
       console.log(" LEFT PANEL RESULT !!!!!", result)
       setInboxes(result.data)
-
-
-
+      
     })
 
   }, [])
@@ -80,7 +78,6 @@ const LeftPanel = (props) => {
           </React.Fragment>
         ))}
       </List>
-      <h2>Previous Messages</h2>
     </div>
   );
 

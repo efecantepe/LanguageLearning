@@ -140,6 +140,27 @@ app.get("/admin", (req, res) => {
  })
 
 })
+
+app.get("/admin/languageCount", (req, res) => {
+
+    let language = req.params.language
+
+    let sqlQuery = `Select COUNT(*) FROM learnerlanguages WHERE languagename = $1`
+
+    let values = [language,]
+
+    connection.query(sqlQuery, values).then((result) => {
+
+        console.log(result)
+
+        res.send(result)
+
+    })
+
+
+
+})
+
 //doWork()
 
 /* 

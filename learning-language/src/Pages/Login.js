@@ -61,7 +61,8 @@ const Login = ({ onLogin }) => {
               id: data.learnerid,
               name : data.learnername,
               surname : data.surname,
-              email : data.email
+              email : data.email,
+              gender: data.gender
 
             }
 
@@ -75,10 +76,11 @@ const Login = ({ onLogin }) => {
 
             let obj = {
 
-              id: data.teacherid,
-              name : data.teachername,
+              id: data.learnerid,
+              name : data.learnername,
               surname : data.surname,
-              email : data.email
+              email : data.email,
+              gender: data.gender
 
             }
 
