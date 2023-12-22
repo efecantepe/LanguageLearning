@@ -44,6 +44,12 @@ const NavigationBar = () => {
           </ListItemIcon>
           <ListItemText>Courses</ListItemText>
         </MenuItem>
+        <MenuItem onClick={() => handleLinkClick('/Homework')} className='link-style'>
+          <ListItemIcon>
+            <ClassIcon />
+          </ListItemIcon>
+          <ListItemText>Homework</ListItemText>
+        </MenuItem>
         <MenuItem onClick={() => handleLinkClick('/chat')} className='link-style'>
           <ListItemIcon>
             <ChatIcon />

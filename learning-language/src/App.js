@@ -12,6 +12,7 @@ import Friend from './Pages/Friend'
 import Chat from './Pages/Chat';
 import TeacherHomework from './Pages/TeacherHomework';
 import AdminPage from './Pages/Admin';
+import HomeworkPage from './Pages/HomeworkPage';
 
 
 const App = () => {
@@ -32,6 +33,7 @@ const App = () => {
         <Route exact path='/Friend' element = {<Friend/>}/>
         <Route exact path='/chat' element = {<Chat/>}/>
         <Route exact path='/TeacherHomework' element = {<TeacherHomework/>}/>
+        <Route exact path='/Homework' element = {<HomeworkPage/>}/>
         <Route exact path='/admin' element = {<AdminPage/>}/>
       </Routes>
     </BrowserRouter>
