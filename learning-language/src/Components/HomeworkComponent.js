@@ -6,6 +6,8 @@ import TeacherHomeworkContent from './TeacherHomeworkContent'
 
 const HomeworkComponent = ({ homework }) => {
 
+    console.log("Homework is ", homework)
+
     
     const [isPopupOpen, setPopupOpen] = useState(false);
     const openPopup = () => { setPopupOpen(true);};
