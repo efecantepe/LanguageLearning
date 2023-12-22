@@ -258,4 +258,25 @@ router.post('/sendClassRequest', async (req, res) => {
 
  })
 
+ router
+ .route("/waitingHomeworks")
+ .get((req, res) => {
+
+     let values = [req.query.id]
+
+     let sqlQuery = `Select * From waitinghomework WHERE teacherid = ($1)`
+
+
+     connection.query(sqlQuery, values).then((result) => {
+
+         res.send(result)
+
+     })
+
+
+
+
+})
+
+
 module.exports = router 

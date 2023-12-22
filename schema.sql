@@ -191,6 +191,8 @@ INSERT INTO Gender VALUES
 
 
 
+
+
 /*
 INSERT INTO learnerLanguages VALUES
                         ('French', 'a18fbf9acca53f39a929', 'A1' ),
@@ -210,6 +212,13 @@ CREATE SEQUENCE class_seq START 1;
 
 /*class last updated trigger*/
 ALTER TABLE class ADD COLUMN last_updated TIMESTAMP DEFAULT NOW();
+ALTER TABLE homeworksInClass ADD COLUMN submission varchar(500) DEFAULT null;
+
+CREATE VIEW waitingHomework AS(
+    Select * FROM homeworksInClass WHERE homeworksInClass.submission is null
+);
+
+
 
 CREATE OR REPLACE FUNCTION update_last_updated_column()
 RETURNS TRIGGER AS $$

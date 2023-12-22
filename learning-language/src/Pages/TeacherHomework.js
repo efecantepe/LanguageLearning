@@ -5,6 +5,7 @@ import AddHomework from '../Components/AddHomework';
 import Popup from '../Components/PopupComponent';
 import TeacherLayout from '../Components/TeacherLayout';
 import HomeworkComponent from '../Components/HomeworkComponent';
+import urllist from '../urllist';
 
 let globalUser = JSON.parse(localStorage.getItem('user'))
 
@@ -77,9 +78,16 @@ const TeacherHomework = () => {
 async function fetchWaitHomeworks(){
 
   let user = {
-    learnerid : globalUser.id
+    id : globalUser.id
   }
 
+  let url = urllist.createQuery("http://localhost:3000/teacher/myClasses/waitingHomeworks", user)
+  
+  let result = await axios.get(url)
+
+  console.log("--------" , result.data)
+
+  return result.data.rows
 }
 
 export default TeacherHomework;
