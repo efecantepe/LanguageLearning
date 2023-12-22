@@ -168,12 +168,33 @@ router
             res.send(result)
 
         })
-
-
-
-
 })
 
+router
+    .route("/submit")
+    .post((req, res) => {
 
+        let values = [req.body.homeworkid, req.body.submission]
+        let sqlQuery = `Update homeworksinclass Set submission = ($2) WHERE homework_id = ($1)`
+
+        connection.query(sqlQuery, values)
+    })
+
+router
+    .route("/finishedHomeworks")
+    .get((req, res) => {
+   
+        let values = [req.query.id]
+   
+        let sqlQuery = `Select * From finishedhomework WHERE learnerid = ($1)`
+   
+   
+        connection.query(sqlQuery, values).then((result) => {
+   
+            res.send(result)
+   
+        })
+   
+   })
 
 module.exports = router 

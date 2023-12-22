@@ -284,5 +284,21 @@ router
         connection.query(sqlQuery, values)
     })
 
+router
+    .route("/finishedHomeworks")
+    .get((req, res) => {
+   
+        let values = [req.query.id]
+   
+        let sqlQuery = `Select * From finishedhomework WHERE teacherid = ($1)`
+   
+   
+        connection.query(sqlQuery, values).then((result) => {
+   
+            res.send(result)
+   
+        })
+   
+   })
 
 module.exports = router 
