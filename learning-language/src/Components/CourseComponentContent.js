@@ -41,21 +41,8 @@ const CourseComponentContent = ({ course, action }) => {
                 Meeting Date: {meetingDate}
                 </Typography>
                 <Typography color="textSecondary" gutterBottom>
-                Progress: {progress}
-                </Typography>
-                <Typography color="textSecondary" gutterBottom>
                 Registered Date: {registerDate}
                 </Typography>
-                {homework ? (
-                <div>
-                    <Typography color="textSecondary" gutterBottom>
-                    Homework: {homework}
-                    </Typography>
-                    <TextField label="Submit Homework" value={submissionText} onChange={handleSubmissionChange} multiline rows={2} fullWidth margin="normal" />
-                    <button onClick={handleSubmission}>Submit</button>
-                </div>
-                ) : null}
-                {grade && <Typography color="textSecondary">Grade: {grade}</Typography>}
 
             </CardContent>
         </Card>

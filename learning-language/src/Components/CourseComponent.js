@@ -33,9 +33,6 @@ const CourseComponent = ({ course, onRegister }) => {
                 <Typography color="textSecondary" gutterBottom>
                 Meeting Date: {course.classdate}
                 </Typography>
-                <Typography color="textSecondary" gutterBottom>
-                Progress: {"100%"}
-                </Typography>
                 <Typography color="textSecondary">{"Something"}</Typography>
                 <Button variant="contained" onClick={openPopup}>
                 View

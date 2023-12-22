@@ -42,10 +42,6 @@ const UserInfo = ({user}) => {
     setGender(event.target.value);
   };
 
-  const handlePronunciationChange = (event) => {
-    setPronunciation(event.target.value);
-  };
-
 
 
   const updateInfo = () => {
@@ -56,7 +52,6 @@ const UserInfo = ({user}) => {
       "surname" : surName,
       "gender" : gender,
       "email" : email,
-      "pronunciation" : pronunciation
     }
 
     console.log(user)
@@ -74,7 +69,6 @@ const UserInfo = ({user}) => {
               <TextField onChange={handleSurnameChange} label="Surname" defaultValue={user.name} variant="filled" />
               <TextField onChange={handleEmailChange} label="Email" defaultValue={user.email} variant="filled" />
               <TextField onChange={handleGenderChange} label="Gender" defaultValue={user.gender} variant="filled" />
-              <TextField onChange={handlePronunciationChange} label="Pronunciation" defaultValue={user.pronunciation} variant="filled" />
               <Button onClick={() => updateInfo()} variant="contained">Update</Button>
           </Stack>
       </Paper>
