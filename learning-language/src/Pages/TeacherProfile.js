@@ -59,6 +59,14 @@ const UserInfo = ({ user }) => {
     
     axios.put("http://localhost:3000/teacher/myProfile/updateInfo", user).then((result) => {
 
+        let obj = {
+          "id" : globalUser.id,
+          "name" : name,
+          "surname" : surName,
+          "gender" : gender,
+          "email" : email,
+        }
+
         localStorage.setItem('user', JSON.stringify(obj))
 
 
