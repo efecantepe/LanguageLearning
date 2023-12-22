@@ -25,7 +25,7 @@ const TeacherHomework = () => {
     fetchFinishedHomeworks().then((result) => {
     
       if(result.length !== 0){
-        setWaitingHomeworks(result)
+        setFinishedHomeworks(result)
       }
     })
 }, [])
