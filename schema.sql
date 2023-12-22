@@ -226,7 +226,7 @@ CREATE VIEW waitingHomework AS(
 );
 
 CREATE VIEW finishedhomework AS(
-    Select * FROM homeworksInClass WHERE homeworksInClass.point is not null
+    Select * FROM homeworksInClass WHERE homeworksInClass.submission is not null
 );
 
 
