@@ -1,7 +1,7 @@
 import React, { useState} from 'react';
 import { useEffect } from 'react';
 import '../Css/Chat.css'; 
-import { List, ListItem, ListItemText, Divider,Avatar,Typography, FormControl,MenuItem,Select,InputLabel } from '@mui/material';
+import { List, ListItem, ListItemText, Divider,Avatar,Typography, FormControl,MenuItem,Select,InputLabel,Button } from '@mui/material';
 import ChatCenterPanel from '../Components/ChatCenterPanel';
 import urllist from '../urllist';
 import axios  from 'axios';
@@ -204,6 +204,11 @@ const RightPanel = () => {
         ))}
         </Select>
     </FormControl>
+    <div style={{ textAlign: 'right' }}>
+      <Button variant="contained"className='margin-top-1'>
+        Search
+      </Button>
+    </div>
       <List>
         {teachers.map((person) => (
           <React.Fragment key={person.teacherid}>
