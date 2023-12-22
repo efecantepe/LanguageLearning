@@ -38,6 +38,8 @@ router
 
             let participantsValues = [inboxid, user1, user2]
 
+            console.log(participantsValues)
+
             let inboxResult = connection.query(participantQuery, participantsValues)
 
             inboxResult.then((result) => {
